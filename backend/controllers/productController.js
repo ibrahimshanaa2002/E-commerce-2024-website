@@ -42,7 +42,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // arrivals
 const newArrivals = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 }).limit(4);
+    const products = await Product.find().sort({ createdAt: -1 }).limit(14);
 
     res.status(200).json(products);
   } catch (err) {
