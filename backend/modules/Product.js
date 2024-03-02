@@ -1,21 +1,16 @@
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
+// Define schema for product
 const ProductModel = mongoose.Schema(
   {
-    title: { type: String},
+    title: { type: String },
     desc: { type: String },
     img: { type: String },
-    categories: { type: Array },
     size: { type: Array },
     color: { type: Array },
+    brand: { type: String },
     newprice: { type: Number },
     oldprice: { type: Number },
-    sex: {
-      type: String,
-      enum: ["Men", "Women", "Kids"],
-    },
-    totalQuantitySold: { type: Number, default: 0 }
   },
   {
     timestamps: true,
@@ -23,4 +18,20 @@ const ProductModel = mongoose.Schema(
 );
 
 const Product = mongoose.model("Product", ProductModel);
-module.exports = Product;
+
+// Define schema for user's cart
+const CartItemSchema = mongoose.Schema({
+  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+  quantity: { type: Number, default: 1 },
+  size: { type: String }, // Assuming user selects only one size
+  color: { type: String }, // Assuming user selects only one color
+});
+
+const CartSchema = mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Assuming you have a User model
+  items: [CartItemSchema],
+});
+
+const Cart = mongoose.model("Cart", CartSchema);
+
+module.exports = { Product, Cart };
