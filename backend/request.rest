@@ -21,16 +21,7 @@ POST http://localhost:4001/api/product/addproduct
 Content-Type: application/json
 
     {
-  "title": "girt Product",
-  "desc": "This is a sample product for girl collection summer collections.",
-  "img": "https://firebasestorage.googleapis.com/v0/b/upload-images-c99c6.appspot.com/o/image%2F968096af-e919-4231-b431-e964702a46db_girl.png?alt=media&token=f038ac85-533d-4e1b-a000-a6de99adce91",
-  "categories": ["Sample Category"],
-  "size": ["S", "M", "L"],
-  "color": ["Red", "Blue", "Green"],
-  "newprice": 43.99,
-  "oldprice": 69.99,
-  "sex": "Men",
-  "totalQuantitySold": 0
+
 }
 
 

@@ -4,6 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router-dom"
 import "./Navbar.css"
 const Navbar = () => {
   // useStates
@@ -35,7 +36,7 @@ const Navbar = () => {
             <IoMdArrowDropdown size={20} />
           </li>
           <li>On Sale</li>
-          <li>New Arrivals</li>
+          <Link to={'/newArrivals'}>New Arrivals</Link>
           <li>Brands</li>
         </ul>
         {/* searchBar */}

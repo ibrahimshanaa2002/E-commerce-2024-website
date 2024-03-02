@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import ProductCard from '../Cards/ProductCard';
 import { ProductContext } from '../../context/productContext/productContextProvider';
+import { Link } from 'react-router-dom';
 
 const NewArrivals = () => {
   const { newArrivals } = useContext(ProductContext); // Destructure newArrivals from context
@@ -19,9 +20,9 @@ const NewArrivals = () => {
             oldprice={item.oldprice} /> // Pass each product to ProductCard
           ))}
         </div>
-        <div className="px-16 py-3 rounded-full hover:bg-gray-500 hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black">
+        <Link to={'/newArrivals'} className="px-16 py-3 rounded-full hover:bg-gray-500 hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black">
           View All
-        </div>
+        </Link>
       </div>
     </div>
   );
