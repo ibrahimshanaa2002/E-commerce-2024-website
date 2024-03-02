@@ -1,0 +1,40 @@
+POST http://localhost:4001/api/user/signup
+Content-Type: application/json
+
+{
+    "username": "ibrahim-sh0",
+    "email": "ibrahimsh0@example.com",
+    "password": "123"
+}
+
+###
+POST http://localhost:4001/api/user/login
+Content-Type: application/json
+
+{
+    "username": "ibrahim123",
+    "password": "123"
+}
+
+###
+POST http://localhost:4001/api/product/addproduct
+Content-Type: application/json
+
+    {
+  "title": "girt Product",
+  "desc": "This is a sample product for girl collection summer collections.",
+  "img": "https://firebasestorage.googleapis.com/v0/b/upload-images-c99c6.appspot.com/o/image%2F968096af-e919-4231-b431-e964702a46db_girl.png?alt=media&token=f038ac85-533d-4e1b-a000-a6de99adce91",
+  "categories": ["Sample Category"],
+  "size": ["S", "M", "L"],
+  "color": ["Red", "Blue", "Green"],
+  "newprice": 43.99,
+  "oldprice": 69.99,
+  "sex": "Men",
+  "totalQuantitySold": 0
+}
+
+
+
+###
+GET http://localhost:4001/api/product/allProducts
+Content-Type: application/json
