@@ -71,7 +71,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center p-4">
       <form className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3">
         <h1 className="font-bold text-2xl text-blue-500 py-7 text-center">
           Add New Product Here
