@@ -1,18 +1,18 @@
 import React from "react";
 import Banner from "../components/banner/Banner";
 import Navbar from "../components/navBar/Navbar";
-import Hero from "../Pages/Hero/Hero";
 import Footer from "../components/Footer/Footer";
+import NewArrivalsPage from "../Pages/newArrivals/NewArrivalsPage";
 
-const Layout = () => {
+const LayoutArriivals = () => {
   return (
     <div>
       <Banner />
       <Navbar />
-      <Hero />
+      <NewArrivalsPage />
       <Footer />
     </div>
   );
 };
 
-export default Layout;
+export default LayoutArriivals;

@@ -121,7 +121,7 @@ const ProductCard = (props) => {
         to={`/product/${props._id}`}
         className=" flex flex-col items-start justify-between w-full h-full border border-gray-200 rounded-lg overflow-hidden "
       >
-        <div className="w-full img-hover-zoom ">
+        <div className="w-full flex img-hover-zoom h-full">
           <img
             src={props.img}
             className="w-full h-full object-cover "
@@ -129,8 +129,10 @@ const ProductCard = (props) => {
           />
         </div>
 
-        <div className="p-4 flex flex-col items-start justify-between h-1/3 ">
-          <div className="text-sm sm:text-base md:text-lg ">{props.title}</div>
+        <div className="p-4 flex flex-col items-start justify-between h-full">
+          <div className="text-sm sm:text-base md:text-lg font-bold ">
+            {props.title}
+          </div>
           <div className="text-sm sm:text-base md:text-lg ">{props.desc}</div>
 
           <div className="flex items-center mb-2">

@@ -4,9 +4,10 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginSignup from "./Pages/Hero/loginSignup/LoginSignup";
 import Layout from "./Layout/Layout";
-import LayoutArriivals from "./Layout/LayoutArriivals";
+import LayoutArrivals from "./Layout/LayoutArrivals";
 import Product from "./Pages/product/Product";
 import LayoutAdmin from "./Layout/LayoutAdmin";
+import LayoutAllProducts from "./Layout/LayoutAllProducts";
 library.add(fas);
 
 function App() {
@@ -14,10 +15,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />} />
-        <Route path="/authentication"  element={<LoginSignup/>} />
-        <Route path="/newArrivals" element={<LayoutArriivals/>}/>
-        <Route path="/product/:productId" element={<Product/>}/>
-        <Route path="/admin" element={<LayoutAdmin/>}/>
+        <Route path="/authentication" element={<LoginSignup />} />
+        <Route path="/newArrivals" element={<LayoutArrivals />} />
+        <Route path="/product/:productId" element={<Product />} />
+        <Route path="/allProducts" element={<LayoutAllProducts />} />
+        <Route path="/admin" element={<LayoutAdmin />} />
       </Routes>
     </BrowserRouter>
   );
