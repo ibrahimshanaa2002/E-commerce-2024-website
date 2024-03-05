@@ -11,6 +11,8 @@ const AddProduct = () => {
   const [desc, setDesc] = useState("");
   const [newprice, setNewPrice] = useState("");
   const [oldprice, setOldPrice] = useState("");
+  const [color, setColor] = useState([]);
+  const [size, setSize] = useState([]);
   const [uploading, setUploading] = useState(false);
 
   const handleClick = (e) => {
@@ -50,6 +52,8 @@ const AddProduct = () => {
         desc,
         newprice,
         oldprice,
+        color,
+        size,
         img: img,
       })
       .then((response) => {
@@ -58,6 +62,8 @@ const AddProduct = () => {
         setDesc("");
         setNewPrice("");
         setOldPrice("");
+        setColor([]);
+        setSize([]);
         setImgFile("");
       })
       .catch((error) => {
@@ -118,6 +124,21 @@ const AddProduct = () => {
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
             placeholder="Description"
+            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="text"
+            value={size.join(" ")} // Joining array into a string
+            onChange={(e) => setSize(e.target.value.split(" "))} // Splitting string into an array
+            placeholder="Sizes (separated by space)"
+            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
+          />
+
+          <input
+            type="text"
+            value={color.join(" ")} // Joining array into a string
+            onChange={(e) => setColor(e.target.value.split(" "))} // Splitting string into an array
+            placeholder="Colors (separated by space)"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
           <input

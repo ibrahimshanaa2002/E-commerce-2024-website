@@ -5,13 +5,25 @@ const Sale = require("../modules/Sale")
 // addproduct
 const addProduct = asyncHandler(async (req, res) => {
   try {
-    const newProduct = new Product(req.body);
+    // Split color and size strings into arrays
+    const colors = req.body.color.map(colorString => colorString.split(' ').map(color => color.trim()));
+    const sizes = req.body.size.map(sizeString => sizeString.split(' ').map(size => size.trim()));
+
+    // Create a new product instance with split color and size arrays
+    const newProduct = new Product({
+      ...req.body,
+      color: colors.flat(), // Flatten the array to remove nested arrays
+      size: sizes.flat() // Flatten the array to remove nested arrays
+    });
+
+    // Save the product to the database
     const savedProduct = await newProduct.save();
     res.status(200).json(savedProduct);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // updateProduct
 
