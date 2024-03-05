@@ -16,16 +16,8 @@ Content-Type: application/json
     "password": "123"
 }
 
-###
-POST http://localhost:4001/api/product/addproduct
-Content-Type: application/json
-
-    {
-
-}
-
 
 
 ###
-GET http://localhost:4001/api/product/allProducts
+GET http://localhost:4001/api/product/styles
 Content-Type: application/json

@@ -109,6 +109,31 @@ const allProducts = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+const seasons = asyncHandler(async(req, res) => {
+  try {
+    // Fetch all products
+    const products = await Product.find();
+
+    // Check if any product has a defined season
+    const hasSeason = products.some(product => product.season);
+
+    // Extract unique seasons from all products if they exist
+    let seasons;
+    if (hasSeason) {
+      seasons = [...new Set(products.map(product => product.season))];
+    } else {
+      // Define all seasons as the default
+      seasons = ["winter", "summer", "spring", "fall"];
+    }
+
+    // Send the array of seasons to the frontend
+    res.json(seasons);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 
 module.exports = {
   addProduct,
@@ -117,4 +142,5 @@ module.exports = {
   newArrivals,
   topSelling,
   allProducts,
+  seasons
 };

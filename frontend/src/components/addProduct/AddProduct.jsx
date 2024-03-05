@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { IoCloudUploadOutline } from "react-icons/io5";
@@ -13,7 +13,23 @@ const AddProduct = () => {
   const [oldprice, setOldPrice] = useState("");
   const [color, setColor] = useState([]);
   const [size, setSize] = useState([]);
+  const [category, setCategory] = useState("");
+  const [seasons, setSeasons] = useState([]);
+  const [selectedSeason, setSelectedSeason] = useState(""); // State for selected season
+  const [style, setStyle] = useState("");
+  const [sex, setSex] = useState([]);
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    // Fetch available seasons from the backend
+    axios.get('http://localhost:4001/api/product/seasons')
+      .then(response => {
+        setSeasons(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching seasons:', error);
+      });
+  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -54,6 +70,8 @@ const AddProduct = () => {
         oldprice,
         color,
         size,
+        category,
+        season: selectedSeason, // Pass selected season
         img: img,
       })
       .then((response) => {
@@ -64,6 +82,8 @@ const AddProduct = () => {
         setOldPrice("");
         setColor([]);
         setSize([]);
+        setCategory("");
+        setSelectedSeason(""); // Reset selected season
         setImgFile("");
       })
       .catch((error) => {
@@ -139,6 +159,39 @@ const AddProduct = () => {
             value={color.join(" ")} // Joining array into a string
             onChange={(e) => setColor(e.target.value.split(" "))} // Splitting string into an array
             placeholder="Colors (separated by space)"
+            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="Category"
+            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
+          />
+          <select
+            value={selectedSeason} // Bind selected season to the select element
+            onChange={(e) => setSelectedSeason(e.target.value)} // Update selected season when changed
+            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
+          >
+            <option value="" className="focus:outline-none focus:border-blue-500">Select a Season</option>
+            {seasons.map((season) => (
+              <option key={season} value={season}>
+                {season}
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            value={style}
+            onChange={(e) => setStyle(e.target.value)}
+            placeholder="Style"
+            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="text"
+            value={sex.join(" ")} // Joining array into a string
+            onChange={(e) => setSex(e.target.value.split(" "))} // Splitting string into an array
+            placeholder="Sex (separated by space)"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
           <input

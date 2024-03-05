@@ -1,5 +1,5 @@
 const express = require("express");
-const { addProduct, updatedProduct, deleteProduct, newArrivals, topSelling, allProducts } = require("../controllers/productController");
+const { addProduct, updatedProduct, deleteProduct, newArrivals, topSelling, allProducts, seasons, styles } = require("../controllers/productController");
 const router = express.Router();
 
 
@@ -9,4 +9,7 @@ router.delete("/:id",deleteProduct)
 router.get("/newArrivals",newArrivals)
 router.get("/topSelling",topSelling)
 router.get("/allProducts",allProducts)
+router.get('/seasons', seasons);
+
+
 module.exports = router;
