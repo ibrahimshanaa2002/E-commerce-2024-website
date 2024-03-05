@@ -8,6 +8,7 @@ import LayoutArrivals from "./Layout/LayoutArrivals";
 import Product from "./Pages/product/Product";
 import LayoutAdmin from "./Layout/LayoutAdmin";
 import LayoutAllProducts from "./Layout/LayoutAllProducts";
+import LayoutProduct from './Layout/LayoutProduct';
 library.add(fas);
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Route path="/" element={<Layout />} />
         <Route path="/authentication" element={<LoginSignup />} />
         <Route path="/newArrivals" element={<LayoutArrivals />} />
-        <Route path="/product/:productId" element={<Product />} />
+        <Route path="/product/:productId" element={<LayoutProduct />} />
         <Route path="/allProducts" element={<LayoutAllProducts />} />
         <Route path="/admin" element={<LayoutAdmin />} />
       </Routes>

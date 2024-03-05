@@ -49,7 +49,7 @@ const Product = () => {
 
   return (
     <div className="main w-full h-screen flex justify-around gap-6 p-10 ">
-      <div className="left-container w-1/2 h-1/2 flex justify-center gap-6">
+      <div className="left-container w-1/2  flex justify-center gap-6">
         <div className="big-image img-hover-zoom ">
           <img
             src={product.img}
@@ -57,7 +57,7 @@ const Product = () => {
             className="h-full hover:cursor-pointer"
           />
         </div>
-        <div className="column-img h-full justify-between  flex flex-col overflow-auto gap-6">
+        <div className="column-img px-2 h-full justify-between  flex flex-col overflow-auto gap-3">
           <img
             src={product.img}
             alt=""
@@ -85,7 +85,7 @@ const Product = () => {
           />
         </div>
       </div>
-      <div className="right-container w-1/2 h-1/2">
+      <div className="right-container w-1/2 h-full flex flex-col  justify-center">
         <h1 className="text-5xl font-extrabold uppercase title">
           {product.title}
         </h1>

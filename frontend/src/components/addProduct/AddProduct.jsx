@@ -16,18 +16,22 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(""); // State for selected season
+  const [selectedColor, setSelectedColor] = useState(""); // State for selected color
+  const [colorInput, setColorInput] = useState(""); // State for manual color input
+  const [colorOptions] = useState(["#FF0000", "#00FF00", "#0000FF"]); // Predefined color options
   const [style, setStyle] = useState("");
   const [sex, setSex] = useState([]);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     // Fetch available seasons from the backend
-    axios.get('http://localhost:4001/api/product/seasons')
-      .then(response => {
+    axios
+      .get("http://localhost:4001/api/product/seasons")
+      .then((response) => {
         setSeasons(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching seasons:', error);
+      .catch((error) => {
+        console.error("Error fetching seasons:", error);
       });
   }, []);
 
@@ -149,7 +153,7 @@ const AddProduct = () => {
           <input
             type="text"
             value={size.join(" ")} // Joining array into a string
-            onChange={(e) => setSize(e.target.value.split(" "))} // Splitting string into an array
+            onChange={(e) => setSize(e.target.value.split(","))} // Splitting string into an array
             placeholder="Sizes (separated by space)"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
@@ -157,7 +161,7 @@ const AddProduct = () => {
           <input
             type="text"
             value={color.join(" ")} // Joining array into a string
-            onChange={(e) => setColor(e.target.value.split(" "))} // Splitting string into an array
+            onChange={(e) => setColor(e.target.value.split(","))} // Splitting string into an array
             placeholder="Colors (separated by space)"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
@@ -173,7 +177,12 @@ const AddProduct = () => {
             onChange={(e) => setSelectedSeason(e.target.value)} // Update selected season when changed
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           >
-            <option value="" className="focus:outline-none focus:border-blue-500">Select a Season</option>
+            <option
+              value=""
+              className="focus:outline-none focus:border-blue-500"
+            >
+              Select a Season
+            </option>
             {seasons.map((season) => (
               <option key={season} value={season}>
                 {season}
