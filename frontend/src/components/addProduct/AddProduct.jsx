@@ -20,7 +20,7 @@ const AddProduct = () => {
   const [colorInput, setColorInput] = useState(""); // State for manual color input
   const [colorOptions] = useState(["#FF0000", "#00FF00", "#0000FF"]); // Predefined color options
   const [style, setStyle] = useState("");
-  const [sex, setSex] = useState(["men","women","kids"]);
+  const [sex, setSex] = useState(["Men","Women","Kids"]);
   const [selectedSex, setSelectedSex] = useState("");
   const [uploading, setUploading] = useState(false);
 

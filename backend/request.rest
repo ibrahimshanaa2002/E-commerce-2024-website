@@ -21,7 +21,14 @@ Content-Type: application/json
 ###
 GET http://localhost:4001/api/product/allProducts
 Content-Type: application/json
-
 ###
 
-DELETE http://localhost:4001/api/product/product/65e382b82549a5e9892c2064
+PUT http://localhost:4001/api/product/65e380e52549a5e9892c204e
+Content-Type: application/json
+
+{
+  "title": "Updated Title",
+  "desc": "Updated Description",
+  "newprice": 99.99,
+  "oldprice": 79.99
+}
