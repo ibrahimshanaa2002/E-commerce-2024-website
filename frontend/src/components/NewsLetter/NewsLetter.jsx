@@ -25,7 +25,7 @@ const NewsLetter = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 

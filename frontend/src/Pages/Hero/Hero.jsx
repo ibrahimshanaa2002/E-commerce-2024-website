@@ -10,10 +10,11 @@ const Hero = () => {
   return (
     <div className="w-full ">
       <Welcome />
-   
+
       <NewArrivals />
       <hr className="py-4 mt-8 m-8" />
       <TopSelling />
+      <hr className="py-4 mt-8 m-8" />
       <Browse />
       <HappyCustomers />
     </div>
