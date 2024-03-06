@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
+
 import { FaCheck } from "react-icons/fa";
 import { RiStarSFill } from "react-icons/ri";
 import "./Product.css";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/productContext/productContextProvider";
+import Loader from "../../components/Loader/Loader";
 const convertColorToHex = (colorName) => {
   const tempColor = document.createElement("div");
   tempColor.style.color = colorName;
@@ -44,7 +46,11 @@ const Product = () => {
   };
 
   if (!product) {
-    return <div>Loading...</div>; // Or you can return a loading spinner or component
+    return (
+      <div className="h-screen flex w-full justify-center items-center">
+        <Loader />
+      </div>
+    ); // return a loading spinner or component
   }
 
   return (

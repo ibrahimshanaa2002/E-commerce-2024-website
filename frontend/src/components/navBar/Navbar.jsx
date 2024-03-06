@@ -28,9 +28,11 @@ const Navbar = () => {
             size={20}
             className="md:hidden"
           />
+          <Link to={"/"}>
           <h1 className="lg:text-3xl md:text-2xl text-lg font-extrabold">
             SHOP.CO
           </h1>
+          </Link>
         </div>
         <ul className="md:flex items-center justify-center gap-6 w-full hidden">
           <li>

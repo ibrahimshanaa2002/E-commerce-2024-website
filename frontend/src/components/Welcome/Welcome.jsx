@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
-import "./Welcome.css"
-import StatisticCard from "../Cards/StaticCard/StaticCard"
+import "./Welcome.css";
+import StatisticCard from "../Cards/StaticCard/StaticCard";
 import personImage from "../../assets/Background/bg-persons.png";
 import Brand1 from "../../assets/Brands/Brand1.png";
 import Brand2 from "../../assets/Brands/Brand2.png";
 import Brand3 from "../../assets/Brands/Brand3.png";
 import Brand4 from "../../assets/Brands/Brand4.png";
 import Brand5 from "../../assets/Brands/Brand5.png";
+import { Link } from "react-router-dom";
 
 const Welcome = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
@@ -23,10 +24,7 @@ const Welcome = () => {
     };
   }, []);
 
-  const brands = useMemo(
-    () => [Brand1, Brand2, Brand3, Brand4, Brand5],
-    []
-  );
+  const brands = useMemo(() => [Brand1, Brand2, Brand3, Brand4, Brand5], []);
 
   return (
     <>
@@ -40,30 +38,37 @@ const Welcome = () => {
             designed to bring out your individuality and cater to your sense of
             style.
           </p>
-          <span className="flex justify-center items-center xl:w-[20%] sm:w-full bg-black hover:bg-orange-500 text-white font-semibold p-5 rounded-full cursor-pointer duration-300">
-            Shop Now
-          </span>
+          <Link to={"/allproducts"}>
+            <span className="flex justify-center items-center xl:w-[20%] sm:w-full bg-black hover:bg-orange-500 text-white font-semibold p-5 rounded-full cursor-pointer duration-300">
+              Shop Now
+            </span>
+          </Link>
         </div>
         <div className="w-[50%] static-cards">
           <StatisticCard />
         </div>
       </div>
-<div className="mobile flex flex-col-reverse">
-      <div className="brands flex flex-row bg-black justify-around h-full w-full flex-wrap align-center items-center gap-8 p-6 ">
-        {brands.map((brand, index) => (
-          <img key={index} src={brand} alt={`Brand ${index}`} className="h-10 brand" />
-        ))}
-      </div>
+      <div className="mobile flex flex-col-reverse">
+        <div className="brands flex flex-row bg-black justify-around h-full w-full flex-wrap align-center items-center gap-8 p-6 ">
+          {brands.map((brand, index) => (
+            <img
+              key={index}
+              src={brand}
+              alt={`Brand ${index}`}
+              className="h-10 brand"
+            />
+          ))}
+        </div>
 
-      {/* Lazy load the image for small screens */}
-      {isSmallScreen && (
-        <img
-          src={personImage}
-          alt=""
-          className="personImage w-full"
-          loading="lazy"
-        />
-      )}
+        {/* Lazy load the image for small screens */}
+        {isSmallScreen && (
+          <img
+            src={personImage}
+            alt=""
+            className="personImage w-full"
+            loading="lazy"
+          />
+        )}
       </div>
     </>
   );
