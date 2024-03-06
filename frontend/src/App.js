@@ -9,6 +9,7 @@ import LayoutAdmin from "./Layout/LayoutAdmin";
 import LayoutAllProducts from "./Layout/LayoutAllProducts";
 import LayoutProduct from './Layout/LayoutProduct';
 import { useEffect } from "react";
+import LayoutCart from "./Layout/LayoutCart";
 library.add(fas);
 
 function ScrollToTop() {
@@ -28,11 +29,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />} />
         <Route path="/authentication" element={<LoginSignup />} />
-        
         <Route path="/newArrivals" element={<LayoutArrivals />} />
         <Route path="/product/:productId" element={<LayoutProduct />} />
         <Route path="/allProducts" element={<LayoutAllProducts />} />
         <Route path="/admin" element={<LayoutAdmin />} />
+        <Route path="/Cart" element={<LayoutCart />} />
       </Routes>
     </BrowserRouter>
   );
