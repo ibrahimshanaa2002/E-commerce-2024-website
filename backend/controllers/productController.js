@@ -28,28 +28,25 @@ const addProduct = asyncHandler(async (req, res) => {
 // updateProduct
 
 const updatedProduct = asyncHandler(async (req, res) => {
+  const productId = req.params.productId; 
+  const updateFields = req.body;  
+
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
+    const updatedProduct = await Product.findByIdAndUpdate(productId, updateFields, { new: true });
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
     res.status(200).json(updatedProduct);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: err.message });
   }
 });
-// delete
-const deleteProduct = asyncHandler(async (req, res) => {
-  try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.status(200).json("Product has been deleted...");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+
+
+
+
 
 // arrivals
 const newArrivals = asyncHandler(async (req, res) => {
@@ -101,6 +98,8 @@ const topSelling = asyncHandler(async (req, res) => {
   }
 });
 const allProducts = asyncHandler(async (req, res) => {
+  const productId = req.params
+  console.log(productId)
   try {
     const products = await Product.find();
 
@@ -109,38 +108,13 @@ const allProducts = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-const seasons = asyncHandler(async(req, res) => {
-  try {
-    // Fetch all products
-    const products = await Product.find();
-
-    // Check if any product has a defined season
-    const hasSeason = products.some(product => product.season);
-
-    // Extract unique seasons from all products if they exist
-    let seasons;
-    if (hasSeason) {
-      seasons = [...new Set(products.map(product => product.season))];
-    } else {
-      // Define all seasons as the default
-      seasons = ["winter", "summer", "spring", "fall"];
-    }
-
-    // Send the array of seasons to the frontend
-    res.json(seasons);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
 
 
 module.exports = {
   addProduct,
   updatedProduct,
-  deleteProduct,
   newArrivals,
   topSelling,
   allProducts,
-  seasons
+
 };

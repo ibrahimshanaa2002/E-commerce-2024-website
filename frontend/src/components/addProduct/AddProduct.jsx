@@ -14,26 +14,16 @@ const AddProduct = () => {
   const [color, setColor] = useState([]);
   const [size, setSize] = useState([]);
   const [category, setCategory] = useState("");
-  const [seasons, setSeasons] = useState([]);
+  const [seasons, setSeasons] = useState(["winter","summer","fall" ,"spring"]);
   const [selectedSeason, setSelectedSeason] = useState(""); // State for selected season
   const [selectedColor, setSelectedColor] = useState(""); // State for selected color
   const [colorInput, setColorInput] = useState(""); // State for manual color input
   const [colorOptions] = useState(["#FF0000", "#00FF00", "#0000FF"]); // Predefined color options
   const [style, setStyle] = useState("");
-  const [sex, setSex] = useState([]);
+  const [sex, setSex] = useState(["men","women","kids"]);
+  const [selectedSex, setSelectedSex] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    // Fetch available seasons from the backend
-    axios
-      .get("http://localhost:4001/api/product/seasons")
-      .then((response) => {
-        setSeasons(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching seasons:", error);
-      });
-  }, []);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -196,13 +186,23 @@ const AddProduct = () => {
             placeholder="Style"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
-          <input
-            type="text"
-            value={sex.join(" ")} // Joining array into a string
-            onChange={(e) => setSex(e.target.value.split(" "))} // Splitting string into an array
-            placeholder="Sex (separated by space)"
+          <select
+            value={selectedSex} // Bind selected season to the select element
+            onChange={(e) => setSelectedSex(e.target.value)} // Update selected season when changed
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
-          />
+          >
+            <option
+              value=""
+              className="focus:outline-none focus:border-blue-500"
+            >
+              Select a sex
+            </option>
+            {sex.map((sex) => (
+              <option key={sex} value={sex}>
+                {sex}
+              </option>
+            ))}
+          </select>
           <input
             type="number"
             value={newprice}

@@ -17,7 +17,7 @@ const Navbar = () => {
     setMobileNav(!mobileNav);
     console.log(mobileNav);
   };
-  const [open, setOpen] = useState(false);
+ 
 
   return (
     <div className="relative">
