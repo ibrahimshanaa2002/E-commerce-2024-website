@@ -1,6 +1,6 @@
 import React from "react";
 import "./Cart.css";
-import image from "../../assets/Browse/b1.png";
+import image from "../../assets/Brands/tshirt.jpg";
 import { FaTrashCan } from "react-icons/fa6";
 
 const Cart = () => {
@@ -10,13 +10,13 @@ const Cart = () => {
         <h1>Your Cart</h1>
       </div>
       <div className="full-container w-full flex">
-        <div className="left-side border-2 border-gray-400 w-1/2 flex flex-row">
-          <div className="cart-product">
-            <div className="main">
-              <div className="image">
+        <div className="left-side border-2 border-gray-400 w-1/2 h-screen flex flex-row">
+          <div className="cart-product w-full h-1/2">
+            <div className="main flex justify-around items-center h-1/2">
+              <div className="image w-1/2">
                 <img src={image} alt="" />
               </div>
-              <div className="information">
+              <div className="information w-1/2 flex flex-col justify-between">
                 <div className="title flex items-center justify-between">
                   <h1 className="font-bold text-2xl">Product Name</h1>
                   <FaTrashCan className="text-lg hover:text-red-600 cursor-pointer duration-200" />

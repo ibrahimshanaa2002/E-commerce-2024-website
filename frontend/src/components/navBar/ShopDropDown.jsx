@@ -8,7 +8,7 @@ import {
   MdLineStyle,
 } from "react-icons/md";
 
-const StaggeredDropDown = () => {
+const ShopDropDown = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -101,7 +101,7 @@ const Option = ({ text, Icon, setOpen, to, targetId }) => {
   );
 };
 
-export default StaggeredDropDown;
+export default ShopDropDown;
 
 const wrapperVariants = {
   open: {

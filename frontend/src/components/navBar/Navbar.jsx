@@ -5,10 +5,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
-import StaggeredDropDown from "./StaggeredDropDown";
-
+import ShopDropDown from "./ShopDropDown";
 import "./Navbar.css";
-const Navbar = () => {
+import CategoriesDropDown from "./CategoriesDropDown";
+
+function Navbar() {
   // useStates
   const [mobileNav, setMobileNav] = useState(false);
 
@@ -17,7 +18,6 @@ const Navbar = () => {
     setMobileNav(!mobileNav);
     console.log(mobileNav);
   };
- 
 
   return (
     <div className="relative">
@@ -29,18 +29,20 @@ const Navbar = () => {
             className="md:hidden"
           />
           <Link to={"/"}>
-          <h1 className="lg:text-3xl md:text-2xl text-lg font-extrabold">
-            SHOP.CO
-          </h1>
+            <h1 className="lg:text-3xl md:text-2xl text-lg font-extrabold">
+              SHOP.CO
+            </h1>
           </Link>
         </div>
         <ul className="md:flex items-center justify-center gap-6 w-full hidden">
           <li>
-            <StaggeredDropDown />
+            <ShopDropDown />
           </li>
           <li>On Sale</li>
           <Link to={"/newArrivals"}>New Arrivals</Link>
-          <li>Brands</li>
+          <li>
+            <CategoriesDropDown />
+          </li>
         </ul>
         {/* searchBar */}
         <div className="bg-gray-100 hidden sm:flex w-full px-2 py-1 ml-5 placeholder:text-[10px] rounded-full">
@@ -90,6 +92,6 @@ const Navbar = () => {
       )}
     </div>
   );
-};
+}
 
 export default Navbar;
