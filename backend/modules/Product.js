@@ -17,7 +17,7 @@ const ProductModel = mongoose.Schema(
     img: { type: String, required: true },
     categories: { type: String, required: true },
     size: { type: Array, required: true },
-    season: { type: String, enum: seasonEnum, default: () => defaultSeasons }, 
+    season: { type: String, enum: seasonEnum, default: () => defaultSeasons[0] }, 
     color: { type: Array, required: true },
     style: { type: String }, 
     newprice: { type: Number, required: true },

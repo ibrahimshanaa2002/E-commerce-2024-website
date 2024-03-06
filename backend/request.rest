@@ -19,5 +19,9 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:4001/api/product/styles
+GET http://localhost:4001/api/product/allProducts
 Content-Type: application/json
+
+###
+
+DELETE http://localhost:4001/api/product/product/65e382b82549a5e9892c2064
