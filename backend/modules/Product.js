@@ -12,21 +12,21 @@ const seasonEnum = {
 
 const ProductModel = mongoose.Schema(
   {
-    title: { type: String, required: true },
-    desc: { type: String, required: true },
-    img: { type: String, required: true },
-    categories: { type: String, required: true },
-    size: { type: Array, required: true },
+    title: { type: String},
+    desc: { type: String },
+    img: { type: String },
+    categories: { type: String },
+    size: { type: Array },
     season: { type: String, enum: seasonEnum, default: () => defaultSeasons[0],required:true }, 
-    color: { type: Array, required: true },
-    style: { type: String,required:true }, 
-    newprice: { type: Number, required: true },
-    oldprice: { type: Number, required: true },
-    quantity:{type:Number,required:true},
+    color: { type: Array},
+    style: { type: String }, 
+    newprice: { type: Number},
+    oldprice: { type: Number },
+    quantity:{type:Number},
     sex: {
       type: String,
       enum: ["Men", "Women", "Kids"],
-      required: true
+      required:true
     },
     totalQuantitySold: { type: Number, default: 0 }
   },

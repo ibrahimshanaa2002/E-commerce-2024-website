@@ -10,6 +10,9 @@ import LayoutAllProducts from "./Layout/LayoutAllProducts";
 import LayoutProduct from './Layout/LayoutProduct';
 import { useEffect } from "react";
 import LayoutCart from "./Layout/LayoutCart";
+import Women from "./Pages/Categories/Women";
+import Man from "./Pages/Categories/Man";
+import Kids from "./Pages/Categories/Kids";
 library.add(fas);
 
 function ScrollToTop() {
@@ -34,6 +37,9 @@ function App() {
         <Route path="/allProducts" element={<LayoutAllProducts />} />
         <Route path="/admin" element={<LayoutAdmin />} />
         <Route path="/Cart" element={<LayoutCart />} />
+        <Route path="/Women-Products" element={<Women/>}/>
+        <Route path="/Men-Products" element={<Man/>}/>
+        <Route path="/Kids-Product" element={<Kids/>}/>
       </Routes>
     </BrowserRouter>
   );

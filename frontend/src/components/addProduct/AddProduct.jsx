@@ -14,16 +14,20 @@ const AddProduct = () => {
   const [color, setColor] = useState([]);
   const [size, setSize] = useState([]);
   const [category, setCategory] = useState("");
-  const [seasons, setSeasons] = useState(["winter","summer","fall" ,"spring"]);
+  const [seasons, setSeasons] = useState([
+    "winter",
+    "summer",
+    "fall",
+    "spring",
+  ]);
   const [selectedSeason, setSelectedSeason] = useState(""); // State for selected season
   const [selectedColor, setSelectedColor] = useState(""); // State for selected color
   const [colorInput, setColorInput] = useState(""); // State for manual color input
   const [colorOptions] = useState(["#FF0000", "#00FF00", "#0000FF"]); // Predefined color options
   const [style, setStyle] = useState("");
-  const [sex, setSex] = useState(["Men","Women","Kids"]);
+  const [sex, setSex] = useState(["Men", "Women", "Kids"]);
   const [selectedSex, setSelectedSex] = useState("");
   const [uploading, setUploading] = useState(false);
-
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -65,6 +69,8 @@ const AddProduct = () => {
         color,
         size,
         category,
+        style,
+        sex :selectedSex,
         season: selectedSeason, // Pass selected season
         img: img,
       })
@@ -77,6 +83,7 @@ const AddProduct = () => {
         setColor([]);
         setSize([]);
         setCategory("");
+        setSex([])
         setSelectedSeason(""); // Reset selected season
         setImgFile("");
       })
