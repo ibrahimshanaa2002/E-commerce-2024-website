@@ -1,0 +1,55 @@
+.loop-slide {
+  overflow: hidden;
+}
+.loop-slide > div {
+  display: flex;
+  animation: slide-to-left 25s linear infinite;
+}
+.loop-slide > div > * {
+  min-width: calc(100% / 4);
+}
+@media only screen and (max-width: 600px) {
+  .Name {
+    font-size: 15px;
+  }
+  .user-desc {
+    font-size: 13px;
+  }
+  .date {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .loop-slide {
+    margin: 0;
+  }
+
+  .loop-slide > div > * {
+    min-width: 100%;
+  }
+  .cards-container {
+    width: 100vh;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .loop-slide > div > * {
+    min-width: 100%;
+  }
+  .cards-container {
+    width: 70%;
+  }
+  .loop-slide > div {
+    display: flex;
+    animation: slide-to-left 10s linear infinite;
+  }
+}
+
+@keyframes slide-to-left {
+  100% {
+    transform: translateX(calc(-100% * (4 / 2)));
+  }
+}
+.loop-slide > div:hover {
+  animation-play-state: paused;
+}
