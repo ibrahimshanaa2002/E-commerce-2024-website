@@ -32,3 +32,13 @@ Content-Type: application/json
   "newprice": 99.99,
   "oldprice": 79.99
 }
+
+###
+POST http://localhost:4001/api/user/SendMail
+Content-Type: application/json
+
+{
+    "Email" : "ibrahimkassim975@gmail.com",
+    "Subject" : "Hello",
+    "Text" :  "Hi there!"
+}
