@@ -1,5 +1,5 @@
 const express = require("express");
-const { addProduct, updatedProduct, deleteProduct, newArrivals, topSelling, allProducts } = require("../controllers/productController");
+const { addProduct, updatedProduct, newArrivals, topSelling, allProducts } = require("../controllers/productController");
 const Product = require("../modules/Product");
 const router = express.Router();
 

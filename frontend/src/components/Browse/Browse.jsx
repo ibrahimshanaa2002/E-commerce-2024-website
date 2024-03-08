@@ -12,7 +12,7 @@ const Browse = () => {
             BROWSE BY dress STYLE
           </div>
 
-          <div className="w-full dark:bg-gray-800">
+          <div className="w-full ">
             <div className="mx-auto px-4 md:px-8">
               <div className="mb-4 flex items-center justify-center  gap-8 sm:mb-8 md:mb-12"></div>
 

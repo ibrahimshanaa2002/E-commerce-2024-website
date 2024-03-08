@@ -42,3 +42,10 @@ Content-Type: application/json
     "Subject" : "Hello",
     "Text" :  "Hi there!"
 }
+###
+POST http://localhost:4001/api/user/SendMail
+Content-Type: application/json
+
+{
+  "Email": "recipient@example.com"
+}

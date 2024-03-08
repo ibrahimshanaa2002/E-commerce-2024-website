@@ -46,10 +46,10 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 //Email
-
+const sentence = "welcome to our shop"
 const SendMail = async (req, res, next) => {
   try {
-    const { Email, Subject, Text } = req.body;
+    const { Email } = req.body;
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       host: "smtp.gmail.com",
@@ -67,8 +67,8 @@ const SendMail = async (req, res, next) => {
     const mailOptions = {
       from: "shop.co.sh76@gmail.com",
       to: Email,
-      subject: Subject,
-      text: Text,
+      subject: "hello there",
+      text: sentence,
     };
 
     const info = await transporter.sendMail(mailOptions);
