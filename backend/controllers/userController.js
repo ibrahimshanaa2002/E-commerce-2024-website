@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../modules/user");
 const nodemailer = require("nodemailer");
+const { emailSubject, emailMessage } = require("./emailConfig");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -46,7 +47,7 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 //Email
-const sentence = "welcome to our shop"
+
 const SendMail = async (req, res, next) => {
   try {
     const { Email } = req.body;
@@ -56,19 +57,19 @@ const SendMail = async (req, res, next) => {
       port: 465,
       secure: true,
       auth: {
-        user: "ibrahim.shanaa122@gmail.com",
-        pass: "jyuz tamb clpp kmgm",
+        user: "shopcompass.sc@gmail.com",
+        pass: "ebwb owna blze kwmb",
       },
       tls: {
-        rejectUnauthorized: false
-      }
+        rejectUnauthorized: false,
+      },
     });
 
     const mailOptions = {
-      from: "shop.co.sh76@gmail.com",
+      from: "shopcompass.sc@gmail.com",
       to: Email,
-      subject: "hello there",
-      text: sentence,
+      subject: emailSubject,
+      text: emailMessage,
     };
 
     const info = await transporter.sendMail(mailOptions);

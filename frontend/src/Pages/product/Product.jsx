@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-
 import { FaCheck } from "react-icons/fa";
 import { RiStarSFill } from "react-icons/ri";
 import "./Product.css";
@@ -21,7 +20,6 @@ const Product = () => {
   const product = products.find((e) => e._id === productId);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [sizes, setSizes] = useState([]);
 
   const selectColor = (color) => {
     setSelectedColor(color);

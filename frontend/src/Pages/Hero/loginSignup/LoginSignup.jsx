@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Login from '../../../components/Login/Login';
 import Signup from '../../../components/Sigup/Signup';
-import Banner from '../../../components/banner/Banner';
+import Banner from '../../../components/Banner/Banner';
 const LoginSignup = () => {
 
     const [toggle,setToggle] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from './../components/navBar/Navbar';
-import Product from "../Pages/product/Product";
+import Product from "../Pages/Product/Product";
 import Footer from './../components/Footer/Footer';
 
 const LayoutProduct = () => {

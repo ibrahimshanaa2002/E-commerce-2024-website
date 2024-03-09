@@ -7,19 +7,19 @@ const Browse = () => {
   return (
     <div className="px-5 " id="browse-by-dress">
       <div className="w-full py-4 ">
-        <div className="flex flex-col items-center w-full px-5 py-5 h-full bg-[#F0F0F0] rounded-2xl ">
+        <div className="flex flex-col items-center w-full py-5 h-full ">
           <div className="text-4xl font-bold uppercase">
             BROWSE BY dress STYLE
           </div>
 
           <div className="w-full ">
-            <div className="mx-auto px-4 md:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">
               <div className="mb-4 flex items-center justify-center  gap-8 sm:mb-8 md:mb-12"></div>
 
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
                 <a
                   href="#"
-                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80"
+                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[30rem]"
                 >
                   <img
                     src={b1}
@@ -37,7 +37,7 @@ const Browse = () => {
 
                 <a
                   href="#"
-                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80"
+                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-[30rem]"
                 >
                   <img
                     src={b2}
@@ -55,7 +55,7 @@ const Browse = () => {
 
                 <a
                   href="#"
-                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80"
+                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-[30rem]"
                 >
                   <img
                     src={b3}
@@ -73,7 +73,7 @@ const Browse = () => {
 
                 <a
                   href="#"
-                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80"
+                  className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[30rem]"
                 >
                   <img
                     src={b4}

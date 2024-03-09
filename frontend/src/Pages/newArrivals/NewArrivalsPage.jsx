@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import ProductCard from "../../components/Cards/ProductCard";
 import { ProductContext } from "../../context/productContext/productContextProvider";
-import { Link } from "react-router-dom";
-import Loader from "./../../components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 
 const NewArrivalsPage = () => {
   const { newArrivals, loading } = useContext(ProductContext); // Destructure newArrivals from context
