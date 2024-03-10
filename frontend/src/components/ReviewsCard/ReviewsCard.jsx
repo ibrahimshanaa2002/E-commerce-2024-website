@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReviewsCardHeader from "./ReviewsCardHeader";
+import FeedBackSubmit from "./FeedBackSubmit";
 
 const ReviewsCard = () => {
   const [reviews, setReviews] = useState([]);
@@ -13,91 +14,44 @@ const ReviewsCard = () => {
     {
       _id: 1,
       date: "12.09.2019",
-      verifiedPurchase: true,
       name: "Carrie Brewer",
-      photo: `https://images.unsplash.com/photo-1508002366005-75a695ee2d17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=512&q=80`,
       rating: 4,
       title: "There's a reason they're number one",
-      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-      color: "black",
-    },
-    {
-      _id: 2,
-      date: "25.12.2020",
-      verifiedPurchase: false,
-      name: "John Doe",
-      photo: `https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=3&w=512&q=80`,
-      rating: 5,
-      title: "Excellent product!",
-      body: `I've been using this tumbler for a few months now, and it's been fantastic. It keeps my drinks cold for hours, and the build quality is top-notch. Highly recommended!`,
-      color: "silver",
+      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
     },
     {
       _id: 1,
       date: "12.09.2019",
-      verifiedPurchase: true,
       name: "Carrie Brewer",
-      photo: `https://images.unsplash.com/photo-1508002366005-75a695ee2d17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=512&q=80`,
       rating: 4,
       title: "There's a reason they're number one",
       body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-      color: "black",
-    },
-    {
-      _id: 2,
-      date: "25.12.2020",
-      verifiedPurchase: false,
-      name: "John Doe",
-      photo: `https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=3&w=512&q=80`,
-      rating: 5,
-      title: "Excellent product!",
-      body: `I've been using this tumbler for a few months now, and it's been fantastic. It keeps my drinks cold for hours, and the build quality is top-notch. Highly recommended!`,
-      color: "silver",
     },
     {
       _id: 1,
       date: "12.09.2019",
-      verifiedPurchase: true,
       name: "Carrie Brewer",
-      photo: `https://images.unsplash.com/photo-1508002366005-75a695ee2d17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=512&q=80`,
       rating: 4,
       title: "There's a reason they're number one",
       body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-      color: "black",
-    },
-    {
-      _id: 2,
-      date: "25.12.2020",
-      verifiedPurchase: false,
-      name: "John Doe",
-      photo: `https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=3&w=512&q=80`,
-      rating: 5,
-      title: "Excellent product!",
-      body: `I've been using this tumbler for a few months now, and it's been fantastic. It keeps my drinks cold for hours, and the build quality is top-notch. Highly recommended!`,
-      color: "silver",
     },
     {
       _id: 1,
       date: "12.09.2019",
-      verifiedPurchase: true,
       name: "Carrie Brewer",
-      photo: `https://images.unsplash.com/photo-1508002366005-75a695ee2d17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=512&q=80`,
       rating: 4,
       title: "There's a reason they're number one",
       body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-      color: "black",
     },
     {
-      _id: 2,
-      date: "25.12.2020",
-      verifiedPurchase: false,
-      name: "John Doe",
-      photo: `https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=3&w=512&q=80`,
-      rating: 5,
-      title: "Excellent product!",
-      body: `I've been using this tumbler for a few months now, and it's been fantastic. It keeps my drinks cold for hours, and the build quality is top-notch. Highly recommended!`,
-      color: "silver",
+      _id: 1,
+      date: "12.09.2019",
+      name: "Carrie Brewer",
+      rating: 4,
+      title: "There's a reason they're number one",
+      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
     },
+
     // Add more sample reviews as needed
   ];
 
@@ -151,31 +105,14 @@ const ReviewsCard = () => {
             <p className="mt-2 text-sm font-medium leading-5 text-gray-500">
               {review.date}
             </p>
-            <div className="mt-6 flex items-center space-x-1">
-              <p className="text-sm font-medium leading-5 capitalize text-gray-500">
-                Color: {review.color}
-              </p>
-              <span className="text-gray-500">&bull;</span>
-              {review.verifiedPurchase && (
-                <p className="text-sm font-medium leading-5 text-gray-500">
-                  Verified purchase
-                </p>
-              )}
-            </div>
-            <div className="space-y-1 h-32  ">
+
+            <div className="space-y-1 h-32 mt-6  space-x-1 ">
               <h3 className="font-semibold text-gray-800">{review.title}</h3>
               <p className="text-sm font-medium leading-5 text-gray-600">
                 {review.body}
               </p>
             </div>
             <div className="mt-8 flex items-center space-x-2">
-              <div className="flex flex-shrink-0 rounded-full border border-gray-200">
-                <img
-                  className="w-8 h-8 object-cover rounded-full"
-                  src={review.photo}
-                  alt=""
-                />
-              </div>
               <span className="text-sm font-semibold leading-5 text-gray-900">
                 {review.name}
               </span>
@@ -204,7 +141,11 @@ const ReviewsCard = () => {
         <div className="flex flex-col items-center w-full py-5  ">
           <h1 className="text-4xl font-bold uppercase">OUR HAPPY CUSTOMERS</h1>
         </div>
+
         <div className="px-4 sm:px-6 lg:px-8">
+          <div className="header">
+            <ReviewsCardHeader />
+          </div>
           <div className="py-5 mx-auto flex justify-center">
             {renderReviews()}
           </div>
@@ -220,6 +161,7 @@ const ReviewsCard = () => {
           </button>
         )}
       </div>
+      <FeedBackSubmit />
     </div>
   );
 };
