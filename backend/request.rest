@@ -44,3 +44,7 @@ Content-Type: application/json
 {
   "Email": "recipient@example.com"
 }
+###
+
+GET  http://localhost:4001/api/user/feedback
+Content-Type: application/json

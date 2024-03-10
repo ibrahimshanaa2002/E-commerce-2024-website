@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { IoIosClose } from "react-icons/io";
+
 import FeedBackSubmit from "./FeedBackSubmit";
 
 const ReviewsCardHeader = () => {
@@ -116,11 +118,11 @@ const ReviewsCardHeader = () => {
         </span>
         {isPopupOpen && (
           <div className="popup absolute bg-black/5 ">
+            {/* Your popup content goes here */}
             <div className="popup-content">
               <FeedBackSubmit/>
               <button onClick={() => setIsPopupOpen(false)}>Close</button>
             </div>
-            <div className="popup-overlay" onClick={() => setIsPopupOpen(false)}></div>
           </div>
         )}
       </div>
