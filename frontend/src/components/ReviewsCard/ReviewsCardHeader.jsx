@@ -116,7 +116,6 @@ const ReviewsCardHeader = () => {
         </span>
         {isPopupOpen && (
           <div className="popup absolute bg-black/5 ">
-            {/* Your popup content goes here */}
             <div className="popup-content">
               <FeedBackSubmit/>
               <button onClick={() => setIsPopupOpen(false)}>Close</button>

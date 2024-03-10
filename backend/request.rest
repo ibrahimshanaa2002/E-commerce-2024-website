@@ -34,14 +34,9 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:4001/api/user/SendMail
+GET  http://localhost:4001/api/product/allProducts
 Content-Type: application/json
 
-{
-    "Email" : "ibrahimkassim975@gmail.com",
-    "Subject" : "Hello",
-    "Text" :  "Hi there!"
-}
 ###
 POST http://localhost:4001/api/user/SendMail
 Content-Type: application/json

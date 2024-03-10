@@ -4,20 +4,22 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
-import cart from "../../assets/cart_icon.png"
 import { Link } from "react-router-dom";
 import ShopDropDown from "./ShopDropDown";
 import "./Navbar.css";
 import CategoriesDropDown from "./CategoriesDropDown";
+import SearchPopup from "./SearchPopup";
 
 function Navbar() {
-  // useStates
   const [mobileNav, setMobileNav] = useState(false);
+  const [isSearchPopupOpen, setSearchPopupOpen] = useState(false);
 
-  // functions
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
-    console.log(mobileNav);
+  };
+
+  const handleSearchIconClick = () => {
+    setSearchPopupOpen(!isSearchPopupOpen);
   };
 
   return (
@@ -45,9 +47,16 @@ function Navbar() {
             <CategoriesDropDown />
           </li>
         </ul>
-        {/* searchBar */}
         <div className="bg-gray-100 hidden sm:flex w-full px-2 py-1 ml-5 placeholder:text-[10px] rounded-full">
-          <IoSearchOutline size={30} className="text-gray-500" />
+          <IoSearchOutline
+            size={30}
+            className="text-gray-500 cursor-pointer"
+            onClick={handleSearchIconClick}
+          />
+          <div className="absolute">
+          {isSearchPopupOpen && <SearchPopup />}
+          </div>
+        
           <input
             className="bg-transparent border-none rounded-none w-full  outline-none px-4 "
             type="text"
@@ -56,7 +65,6 @@ function Navbar() {
             id=""
           />
         </div>
-        {/* end */}
         <div className="flex gap-4  items-center justify-center px-8 ">
           <div className="bg-gray-100 flex sm:hidden w-full px-2 placeholder:text-[6px] py-1 rounded-full">
             <IoSearchOutline size={30} className="text-gray-500" />
@@ -69,13 +77,14 @@ function Navbar() {
             />
           </div>
           <div className="relative ">
-            <FiShoppingCart  size={22} />
-            <div className="rounded-full bg-red-600 flex items-center justify-center  absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">0</div>
+            <FiShoppingCart size={22} />
+            <div className="rounded-full bg-red-600 flex items-center justify-center  absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">
+              0
+            </div>
           </div>
           <FaRegUserCircle size={22} />
         </div>
       </div>
-      {/* mobileNav */}
       {mobileNav && (
         <div>
           <ul

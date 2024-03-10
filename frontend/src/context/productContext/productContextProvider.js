@@ -28,6 +28,20 @@ const ProductContextProvider = (props) => {
   const filterProductsForwinter = () => {
     return products.filter((product) => product.season === "winter");
   };
+  const filterProductsForCasual = () => {
+    return products.filter((product) => product.style === "Casual");
+  };
+  const filterProductsForFormal = () => {
+    return products.filter((product) => product.season === "Formal");
+  };
+  const filterProductsForParty = () => {
+    return products.filter((product) => product.season === "Party");
+  };
+
+  const filterProductsForGym = () => {
+    return products.filter((product) => product.season === "Gym");
+  };
+
 
   useEffect(() => {
     const fetchNewArrivals = async () => {
@@ -71,6 +85,13 @@ const ProductContextProvider = (props) => {
     filterProductspring: filterProductspring,
     filterProductsForsummer: filterProductsForsummer,
     filterProductsForwinter: filterProductsForwinter,
+    filterProductsForCasual:filterProductsForCasual,
+    filterProductsForFormal:filterProductsForFormal,
+    filterProductsForParty:filterProductsForParty,
+    filterProductsForGym:filterProductsForGym
+
+
+
   };
 
   return (
