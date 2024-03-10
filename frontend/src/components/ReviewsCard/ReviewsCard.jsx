@@ -79,7 +79,7 @@ const ReviewsCard = () => {
     const reviewsToRender = showAllReviews ? reviews : reviews.slice(0, 4);
 
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4  ">
         {reviewsToRender.map((review) => (
           <div key={review._id} className=" rounded-md shadow-lg bg-white p-5 ">
             <div className="flex space-x-0.5">
@@ -132,11 +132,12 @@ const ReviewsCard = () => {
             </div>
           </div>
         ))}
+        
       </div>
     );
   };
   return (
-    <div className="px-5 ">
+    <div className="px-5 relative">
       <div className="w-full py-4 ">
         <div className="flex flex-col items-center w-full py-5  ">
           <h1 className="text-4xl font-bold uppercase">OUR HAPPY CUSTOMERS</h1>
@@ -161,7 +162,8 @@ const ReviewsCard = () => {
           </button>
         )}
       </div>
-      <FeedBackSubmit />
+   
+    
     </div>
   );
 };
