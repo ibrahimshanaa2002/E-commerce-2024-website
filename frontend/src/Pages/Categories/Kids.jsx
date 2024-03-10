@@ -23,7 +23,7 @@ const Kids = () => {
       <Navbar />
       <div className="w-full lg:pl-12 md:pl-4 pl-2 py-16">
         <div className="flex flex-col items-center w-full gap-8 px-5 h-full">
-          <div className="text-4xl font-bold">Man's Collection</div>
+          <div className="text-4xl font-bold">Kid's Collection</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
             {data.map((item) => (
               <ProductCard

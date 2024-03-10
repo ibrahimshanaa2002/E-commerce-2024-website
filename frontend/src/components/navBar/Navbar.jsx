@@ -4,6 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
+import cart from "../../assets/cart_icon.png"
 import { Link } from "react-router-dom";
 import ShopDropDown from "./ShopDropDown";
 import "./Navbar.css";
@@ -67,9 +68,11 @@ function Navbar() {
               id=""
             />
           </div>
-
-          <FiShoppingCart size={20} />
-          <FaRegUserCircle size={20} />
+          <div className="relative ">
+            <FiShoppingCart  size={22} />
+            <div className="rounded-full bg-red-600 flex items-center justify-center  absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">0</div>
+          </div>
+          <FaRegUserCircle size={22} />
         </div>
       </div>
       {/* mobileNav */}

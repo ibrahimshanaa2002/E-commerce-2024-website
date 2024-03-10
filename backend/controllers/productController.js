@@ -99,7 +99,7 @@ const topSelling = asyncHandler(async (req, res) => {
 });
 const allProducts = asyncHandler(async (req, res) => {
   const productId = req.params
-  console.log(productId)
+
   try {
     const products = await Product.find();
 
