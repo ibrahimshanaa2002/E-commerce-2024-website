@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { IoIosClose } from "react-icons/io";
+
 import FeedBackSubmit from "./FeedBackSubmit";
 
 const ReviewsCardHeader = () => {
@@ -115,13 +117,20 @@ const ReviewsCardHeader = () => {
           <h1>Write a Review</h1>
         </span>
         {isPopupOpen && (
-          <div className="popup absolute bg-black/5 ">
-            {/* Your popup content goes here */}
-            <div className="popup-content">
-              <FeedBackSubmit/>
-              <button onClick={() => setIsPopupOpen(false)}>Close</button>
+          <div className="popup fixed top-0 left-0 w-full h-full flex justify-center items-center">
+            <div
+              className="popup-overlay fixed top-0 left-0 w-full h-full bg-black opacity-50"
+              onClick={() => setIsPopupOpen(false)}
+            ></div>
+
+            <div className="popup-content bg-white p-6 rounded-lg shadow-lg z-50">
+              <div className="close flex justify-end items-center text-xl hover:text-orange-500 duration-300">
+                <button onClick={() => setIsPopupOpen(false)}>
+                  <IoIosClose />
+                </button>
+              </div>
+              <FeedBackSubmit />
             </div>
-            <div className="popup-overlay" onClick={() => setIsPopupOpen(false)}></div>
           </div>
         )}
       </div>

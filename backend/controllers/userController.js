@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../modules/user");
+const Rating = require("../modules/Rating");
 const nodemailer = require("nodemailer");
 const { emailSubject, emailMessage } = require("./emailConfig");
 
@@ -81,8 +82,35 @@ const SendMail = async (req, res, next) => {
   }
 };
 
+//Rating
+const saveFeedback = async (req, res) => {
+  try {
+    const { name, title, body, rating } = req.body; // Assuming review field corresponds to the "body" in your MongoDB schema
+
+    if (!body) {
+      return res
+        .status(400)
+        .json({ message: "Review text (body) is required" });
+    }
+
+    // Create a new Feedback document
+    const feedback = await Rating.create({
+      name,
+      title,
+      body: body, // Assuming review field corresponds to the "body" in your MongoDB schema
+      rating,
+    });
+
+    res.status(201).json({ message: "Feedback saved successfully", feedback });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to save feedback" });
+  }
+};
+
 module.exports = {
   registerUser,
   authUser,
   SendMail,
+  saveFeedback,
 };

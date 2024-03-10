@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
+import axios from "axios"; // Import Axios
 
 const labels = {
   0.5: "Useless",
@@ -25,6 +26,8 @@ const FeedBackSubmit = () => {
   const [hover, setHover] = useState(-1);
   const [review, setReview] = useState("");
   const [error, setError] = useState("");
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
 
   const handleReviewChange = (event) => {
     const text = event.target.value;
@@ -36,14 +39,33 @@ const FeedBackSubmit = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (review.length < 10) {
       setError("Text must be at least 10 characters");
     } else {
-      // Proceed with submitting the review
       setError("");
-      // You can perform further actions like sending the review data to the server
+      try {
+        const response = await axios.post(
+          "http://localhost:4001/api/user/feedback",
+          {
+            name: name,
+            title: title,
+            body: review, // Ensure "body" field is included with the review text
+            rating: value,
+          }
+        );
+        console.log("Feedback submitted successfully:", response.data);
+        setValue("");
+        setHover("");
+        setTitle("");
+        setName("");
+        setReview("");
+        // Handle success, reset form, show success message, etc.
+      } catch (error) {
+        console.error("Error submitting feedback:", error);
+        // Handle error, show error message, etc.
+      }
     }
   };
 
@@ -92,6 +114,8 @@ const FeedBackSubmit = () => {
             type="text"
             placeholder="Write your name"
             className="w-full outline-none text-gray-700 text-lg"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="flex justify-center border-2 py-2 px-6 rounded-xl w-1/2">
@@ -99,6 +123,8 @@ const FeedBackSubmit = () => {
             type="text"
             placeholder="Write your title"
             className="w-full outline-none text-gray-700 text-lg"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
       </form>

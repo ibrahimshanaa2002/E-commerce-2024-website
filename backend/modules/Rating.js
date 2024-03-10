@@ -1,11 +1,10 @@
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const RatingModel = mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true },
-    title: { type: String, required: true, unique: true },
-    body: { type: String, required: true },
+    name: { type: String, required: true },
+    title: { type: String, required: true },
+    body: { type: String },
     rating: { type: Number, default: 0, required: true },
   },
   {
