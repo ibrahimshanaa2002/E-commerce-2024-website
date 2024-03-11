@@ -1,18 +1,11 @@
-POST http://localhost:4001/api/user/signup
-Content-Type: application/json
 
-{
-    "username": "ibrahim-sh0",
-    "email": "ibrahimsh0@example.com",
-    "password": "123"
-}
 
 ###
 POST http://localhost:4001/api/user/login
 Content-Type: application/json
 
 {
-    "username": "ibrahim123",
+    "username": "faysal-nassars13",
     "password": "123"
 }
 
@@ -53,3 +46,23 @@ GET http://localhost:4001/api/user/feedback/count
 ###
 GET http://localhost:4001/api/user/feedback?dateRange=lastYear
 ###
+POST http://localhost:4001/api/cart/addToCart/:65ecf029853ac04006ff6c3f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWY2MDMzNGIzNDc1OGI5OTM0OTU3OCIsImlhdCI6MTcxMDE4NjY3NiwiZXhwIjoxNzEyNzc4Njc2fQ.DCSiUttTD-EniV_VaVkYhK7x_s6S4Y4Fe8TrwJIk2xI
+
+{
+    "quantity": 2,
+    "size": "xm",
+    "color": "red"
+}
+
+
+###
+POST http://localhost:4001/api/user/signup
+Content-Type: application/json
+
+{
+    "username": "faysal-nassars13",
+    "email": "faysalnassa3rs1@gmail.com",
+    "password": "123"
+}

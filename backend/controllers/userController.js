@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../modules/user");
 const Rating = require("../modules/Rating");
 const nodemailer = require("nodemailer");
+const {generateToken} = require("../config/generateToken")
 const { emailSubject, emailMessage } = require("./emailConfig");
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -24,6 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      token : generateToken(user._id)
     });
   } else {
     res.status(500).json({ message: "User registration failed" });
@@ -40,6 +42,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      token : generateToken(user._id)
     });
   } else {
     res.status(400);

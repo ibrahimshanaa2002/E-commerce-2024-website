@@ -5,13 +5,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ProductContextProvider from "./context/productContext/productContextProvider";
 import RatingContextProvider from "./context/ratingContext/ratingContextProvider";
+import { UserProvider } from "./context/userContext/userContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ProductContextProvider>
       <RatingContextProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </RatingContextProvider>
     </ProductContextProvider>
   </React.StrictMode>

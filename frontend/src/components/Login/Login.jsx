@@ -1,40 +1,39 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 import { IoIosEyeOff, IoMdEye } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
-const Login = ({handleToggle,handlepassword,showpassword}) => {
+import { UserContext } from "../../context/userContext/userContextProvider";
 
+const Login = ({ handleToggle, handlepassword, showpassword }) => {
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { loginUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const [username,setUserName] = useState("")
- 
-  const [password,setPassword] = useState("")
-  const [error,setError] = useState("")
-  const navigate = useNavigate()
-
-  
   const handleSubmit = async (event) => {
-    event.preventDefault();   
-  
+    event.preventDefault();
+
     try {
-  
       const response = await axios.post("http://localhost:4001/api/user/login", {
         username: username,
         password: password,
       });
-      console.log("User created:", response.data);
+      console.log("User logged in:", response.data);
+     const userData = response.data.username;
+      loginUser(userData)
       setUserName("");
       setPassword("");
-      setError(""); 
-      navigate("/authentication")
+      setError("");
+      navigate("/"); // Redirect to the /authentication route
     } catch (error) {
-      console.error("Error creating user:", error)
-      
+      console.error("Error logging in:", error);
+      setError(error.response.data.message || "Error logging in"); // Set the error message received from the server
     }
   };
 
- 
   return (
     <div className="">
       <div className="flex  items-center justify-around  w-full h-screen">
@@ -57,8 +56,8 @@ const Login = ({handleToggle,handlepassword,showpassword}) => {
                     <FaUser />
                   </div>
                   <input
-                  value={username}
-                  onChange={(e)=>{setUserName(e.target.value)}}
+                    value={username}
+                    onChange={(e) => { setUserName(e.target.value) }}
                     type="text"
                     placeholder="userName"
                     className="outline-none rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
@@ -74,21 +73,21 @@ const Login = ({handleToggle,handlepassword,showpassword}) => {
                     <FaLock />
                   </div>
                   <div className="flex items-center relative">
-                  <input
-                  value={password}
-                  onChange={(e)=>{setPassword(e.target.value)}}
-                    type={`${showpassword ? "text":"password"}`}
-                    placeholder="password"
-                    className="outline-none  rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
-                  />
-                  <div className="text-2xl cursor-pointer absolute right-0 duration-200 text-[#000700]">
-                    {
-                        showpassword?<IoIosEyeOff onClick={handlepassword}/>:<IoMdEye onClick={handlepassword}/>
-                    }
-                  </div>
+                    <input
+                      value={password}
+                      onChange={(e) => { setPassword(e.target.value) }}
+                      type={`${showpassword ? "text" : "password"}`}
+                      placeholder="password"
+                      className="outline-none  rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
+                    />
+                    <div className="text-2xl cursor-pointer absolute right-0 duration-200 text-[#000700]">
+                      {
+                        showpassword ? <IoIosEyeOff onClick={handlepassword} /> : <IoMdEye onClick={handlepassword} />
+                      }
+                    </div>
 
                   </div>
-               
+
                 </div>
               </div>
             </div>
@@ -113,7 +112,7 @@ const Login = ({handleToggle,handlepassword,showpassword}) => {
               Don't have an account?
             </h3>
             <h1 onClick={handleToggle} className="flex items-center justify-center py-2 ">
-               <span className="hover:font-semibold duration-300 cursor-pointer">Sign Up</span> 
+              <span className="hover:font-semibold duration-300 cursor-pointer">Sign Up</span>
             </h1>
           </div>
         </div>
