@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import FeedBackSubmit from "./FeedBackSubmit";
 import RatingContextProvider from "../../context/ratingContext/ratingContextProvider";
 import axios from "axios";
+import "./ReviewsCard.css";
 
 const ReviewsCardHeader = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
@@ -41,12 +42,12 @@ const ReviewsCardHeader = () => {
   };
 
   return (
-    <div className="main flex justify-between">
-      <div className="left-side flex gap-2 items-center justify-center">
+    <div className="main-rl flex justify-between ">
+      <div className="left-sides flex gap-2 items-center justify-center">
         <h1 className="text-2xl font-bold">All Reviews</h1>
-        <h2 className="text-gray-400">({ratingCount})</h2>
+        <h2 className="text-gray-400 text-lg font-semibold">({ratingCount})</h2>
       </div>
-      <div className="right-side flex gap-2 items-center justify-center">
+      <div className="right-sides flex gap-2 items-center justify-center">
         <span className="date-filter">
           <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -153,9 +154,6 @@ const ReviewsCardHeader = () => {
               </div>
               <div className="p-8">
                 <FeedBackSubmit />
-                <h1 className="flex justify-center items-center text-xl text-neutral-400 pointer-events-none">
-                  Review text must include at least 10 Characters
-                </h1>
               </div>
             </div>
           </div>
