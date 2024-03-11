@@ -1,23 +1,50 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { IoIosClose } from "react-icons/io";
-
+import { IoClose } from "react-icons/io5";
 import FeedBackSubmit from "./FeedBackSubmit";
+import RatingContextProvider from "../../context/ratingContext/ratingContextProvider";
+import axios from "axios";
 
 const ReviewsCardHeader = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
+  const [ratingCount, setRatingCount] = useState(0);
+
+  useEffect(() => {
+    const fetchRatingCount = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4001/api/user/feedback/count"
+        );
+        setRatingCount(response.data.count); // Update rating count state with data from the server
+      } catch (error) {
+        console.error("Error fetching rating count:", error);
+      }
+    };
+    fetchRatingCount(); // Call fetchRatingCount function on component mount
+  }, []);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
+  const handleFilterByDate = async (dateRange) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4001/api/user/feedback?dateRange=${dateRange}`
+      );
+      // Handle the filtered data, maybe update context or state with the filtered reviews
+    } catch (error) {
+      console.error("Error filtering reviews by date:", error);
+    }
+  };
+
   return (
     <div className="main flex justify-between">
       <div className="left-side flex gap-2 items-center justify-center">
         <h1 className="text-2xl font-bold">All Reviews</h1>
-        <h2 className="text-gray-400">(455)</h2>
+        <h2 className="text-gray-400">({ratingCount})</h2>
       </div>
       <div className="right-side flex gap-2 items-center">
         <span className="date-filter">
@@ -45,59 +72,51 @@ const ReviewsCardHeader = () => {
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <button
+                        onClick={() => handleFilterByDate('today')} // Call a function to filter by today's date
                         className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-full text-left'
                         )}
                       >
                         Today
-                      </a>
+                      </button>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <button
+                        onClick={() => handleFilterByDate('lastWeek')} // Call a function to filter by last week
                         className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-full text-left'
                         )}
                       >
                         Last Week
-                      </a>
+                      </button>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#"
+                      <button
+                        onClick={() => handleFilterByDate('lastMonth')} // Call a function to filter by last month
                         className={classNames(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'block px-4 py-2 text-sm w-full text-left'
                         )}
                       >
                         Last Month
-                      </a>
+                      </button>
                     )}
                   </Menu.Item>
                   <form method="POST" action="#">
                     <Menu.Item>
                       {({ active }) => (
                         <button
-                          type="submit"
+                          onClick={() => handleFilterByDate('lastYear')} // Call a function to filter by last year
                           className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block w-full px-4 py-2 text-left text-sm"
+                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                            'block w-full px-4 py-2 text-left text-sm'
                           )}
                         >
                           Last Year
@@ -117,11 +136,19 @@ const ReviewsCardHeader = () => {
           <h1>Write a Review</h1>
         </span>
         {isPopupOpen && (
-          <div className="popup absolute bg-black/5 ">
-            {/* Your popup content goes here */}
-            <div className="popup-content">
-              <FeedBackSubmit/>
-              <button onClick={() => setIsPopupOpen(false)}>Close</button>
+          <div className="popup fixed inset-0 flex items-center justify-center bg-black/50 z-50 px-5">
+            <div className="popup-content bg-white px-3  rounded-lg">
+              <div className="close-button flex justify-end hover:text-orange-500 duration-300">
+                <button className="mt-4" onClick={() => setIsPopupOpen(false)}>
+                  <IoClose />
+                </button>
+              </div>
+              <div className="p-8">
+                <FeedBackSubmit />
+                <h1 className="flex justify-center items-center text-xl text-neutral-400 pointer-events-none">
+                  Review text must include at least 10 Characters
+                </h1>
+              </div>
             </div>
           </div>
         )}

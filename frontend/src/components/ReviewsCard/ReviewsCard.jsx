@@ -1,88 +1,39 @@
-import React, { useState, useEffect } from "react";
+// Frontend.jsx
+
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ReviewsCardHeader from "./ReviewsCardHeader";
 import FeedBackSubmit from "./FeedBackSubmit";
+import { RatingContext } from "../../context/ratingContext/ratingContextProvider";
 
 const ReviewsCard = () => {
   const [reviews, setReviews] = useState([]);
   const [showAllReviews, setShowAllReviews] = useState(false);
-  const handleViewAllReviews = () => {
-    setShowAllReviews(!showAllReviews); // Toggle the state
-  };
-
-  const sampleReviews = [
-    {
-      _id: 1,
-      date: "12.09.2019",
-      name: "Carrie Brewer",
-      rating: 4,
-      title: "There's a reason they're number one",
-      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-    },
-    {
-      _id: 1,
-      date: "12.09.2019",
-      name: "Carrie Brewer",
-      rating: 4,
-      title: "There's a reason they're number one",
-      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-    },
-    {
-      _id: 1,
-      date: "12.09.2019",
-      name: "Carrie Brewer",
-      rating: 4,
-      title: "There's a reason they're number one",
-      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-    },
-    {
-      _id: 1,
-      date: "12.09.2019",
-      name: "Carrie Brewer",
-      rating: 4,
-      title: "There's a reason they're number one",
-      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-    },
-    {
-      _id: 1,
-      date: "12.09.2019",
-      name: "Carrie Brewer",
-      rating: 4,
-      title: "There's a reason they're number one",
-      body: `There's not much to say about YETI stainless steel tumblers that hasn't been said. There's a reason they're so highly rated. I filled mine with ice and water at 8:30am last week and drove to work sipping it. I left it in my car when I went into the office.`,
-    },
-
-    // Add more sample reviews as needed
-  ];
-
-  const fetchReviews = () => {
-    setReviews(sampleReviews);
-  };
+  const allRatings = useContext(RatingContext);
 
   useEffect(() => {
-    fetchReviews();
-  }, []);
+    setReviews(allRatings);
+  }, [allRatings]);
 
-  // useEffect(() => {
-  //   fetchReviews();
-  // }, []);
+  const handleViewAllReviews = () => {
+    setShowAllReviews(!showAllReviews);
+  };
 
-  // const fetchReviews = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4001/reviews");
-  //     setReviews(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching reviews:", error);
-  //   }
-  // };
   const renderReviews = () => {
-    const reviewsToRender = showAllReviews ? reviews : reviews.slice(0, 4);
+    const reviewsToRender = showAllReviews
+      ? reviews
+      : reviews
+      ? reviews.slice(0, 4)
+      : [];
 
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4  ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
         {reviewsToRender.map((review) => (
-          <div key={review._id} className=" rounded-md shadow-lg bg-white p-5 ">
-            <div className="flex space-x-0.5">
+          <div
+            key={review._id}
+            className="rounded-md shadow-lg bg-white p-5 flex flex-col"
+          >
+            <div className="flex space-x-0.5 mb-2">
               {[...Array(5)].map((_, index) => (
                 <svg
                   key={index}
@@ -102,17 +53,17 @@ const ReviewsCard = () => {
                 </svg>
               ))}
             </div>
-            <p className="mt-2 text-sm font-medium leading-5 text-gray-500">
+            <p className="text-sm font-medium leading-5 text-gray-500 mb-2">
               {review.date}
             </p>
 
-            <div className="space-y-1 h-32 mt-6  space-x-1 ">
-              <h3 className="font-semibold text-gray-800">{review.title}</h3>
-              <p className="text-sm font-medium leading-5 text-gray-600">
-                {review.body}
-              </p>
-            </div>
-            <div className="mt-8 flex items-center space-x-2">
+            <h3 className="font-semibold text-gray-800 mb-auto">
+              {review.title}
+            </h3>
+            <p className="text-sm font-medium leading-5 text-gray-600 flex-grow line-clamp-3">
+              {review.body}
+            </p>
+            <div className="mt-4 flex items-center space-x-2">
               <span className="text-sm font-semibold leading-5 text-gray-900">
                 {review.name}
               </span>
@@ -132,14 +83,13 @@ const ReviewsCard = () => {
             </div>
           </div>
         ))}
-        
       </div>
     );
   };
   return (
     <div className="px-5 relative">
-      <div className="w-full py-4 ">
-        <div className="flex flex-col items-center w-full py-5  ">
+      <div className="w-full py-4">
+        <div className="flex flex-col items-center w-full py-5">
           <h1 className="text-4xl font-bold uppercase">OUR HAPPY CUSTOMERS</h1>
         </div>
 
@@ -153,7 +103,7 @@ const ReviewsCard = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        {!showAllReviews && reviews.length > 4 && (
+        {!showAllReviews && reviews?.length > 4 && (
           <button
             onClick={handleViewAllReviews}
             className="mt-4 px-4 py-2 bg-black text-white rounded-3xl hover:bg-orange-500 duration-300"
@@ -162,8 +112,6 @@ const ReviewsCard = () => {
           </button>
         )}
       </div>
-   
-    
     </div>
   );
 };

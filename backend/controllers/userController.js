@@ -83,9 +83,10 @@ const SendMail = async (req, res, next) => {
 };
 
 //Rating
+// Update saveFeedback function to include timestamp
 const saveFeedback = async (req, res) => {
   try {
-    const { name, title, body, rating } = req.body; // Assuming review field corresponds to the "body" in your MongoDB schema
+    const { name, title, body, rating } = req.body;
 
     if (!body) {
       return res
@@ -93,12 +94,13 @@ const saveFeedback = async (req, res) => {
         .json({ message: "Review text (body) is required" });
     }
 
-    // Create a new Feedback document
+    // Create a new Feedback document with current timestamp
     const feedback = await Rating.create({
       name,
       title,
-      body: body, // Assuming review field corresponds to the "body" in your MongoDB schema
+      body,
       rating,
+      date: new Date(), // Include the current timestamp
     });
 
     res.status(201).json({ message: "Feedback saved successfully", feedback });
@@ -107,6 +109,7 @@ const saveFeedback = async (req, res) => {
     res.status(500).json({ message: "Failed to save feedback" });
   }
 };
+
 
 module.exports = {
   registerUser,

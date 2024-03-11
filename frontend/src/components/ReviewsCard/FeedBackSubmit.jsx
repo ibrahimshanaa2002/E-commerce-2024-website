@@ -73,7 +73,7 @@ const FeedBackSubmit = () => {
     review.length < 10 || review.length > 381 || error !== "";
 
   return (
-    <div className="bg-white px-10 rounded-xl">
+    <div className="bg-white rounded-xl">
       <h1 className="text-center text-2xl font-semibold text-gray-500">
         How would you rate your service with us?
       </h1>
@@ -141,7 +141,7 @@ const FeedBackSubmit = () => {
       <div className="button flex justify-center items-center py-3">
         <button
           type="submit"
-          className={`bg-green-500 text-green-50 font-semibold px-6 py-2 rounded-xl text-md ${
+          className={`bg-black hover:bg-orange-500 duration-300 text-green-50 font-semibold px-6 py-2 rounded-xl text-md ${
             isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSubmit}

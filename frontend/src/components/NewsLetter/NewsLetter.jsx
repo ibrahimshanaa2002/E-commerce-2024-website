@@ -33,7 +33,7 @@ const NewsLetter = () => {
     <div>
       <div className="sides flex justify-between items-center bg-black py-3 px-10 rounded-2xl mx-9">
         <div className="left-side text-5xl font-bold text-white">
-          <h1 className="">STAY UPTO DATE ABOUT</h1>
+          <h1 className="">STAY UP TO DATE ABOUT</h1>
           <h2>OUR LATEST OFFERS</h2>
         </div>
         <div className="right-side flex flex-col gap-2 w-1/3">
