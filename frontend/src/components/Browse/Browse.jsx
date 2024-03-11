@@ -8,12 +8,12 @@ const Browse = () => {
     <div className="px-5 " id="browse-by-dress">
       <div className="w-full py-4 ">
         <div className="flex flex-col items-center w-full py-5 h-full ">
-          <div className="text-4xl font-bold uppercase">
+          <div className="text-4xl font-bold uppercase text-center">
             BROWSE BY dress STYLE
           </div>
 
           <div className="w-full ">
-            <div className="mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="mb-4 flex items-center justify-center  gap-8 sm:mb-8 md:mb-12"></div>
 
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">

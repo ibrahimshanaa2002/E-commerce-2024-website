@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import axios from "axios"; // Import Axios
+import axios from "axios";
+import "./ReviewsCard.css";
 
 const labels = {
   0.5: "Useless",
@@ -28,11 +29,12 @@ const FeedBackSubmit = () => {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
+  const [submitted, setSubmitted] = useState(false); // State to manage submission success message
 
   const handleReviewChange = (event) => {
     const text = event.target.value;
-    if (text.length > 381) {
-      setError("Text must not exceed 381 characters");
+    if (text.length > 165) {
+      setError("Text must not exceed 165 characters");
     } else {
       setReview(text);
       setError("");
@@ -51,7 +53,7 @@ const FeedBackSubmit = () => {
           {
             name: name,
             title: title,
-            body: review, // Ensure "body" field is included with the review text
+            body: review,
             rating: value,
           }
         );
@@ -61,16 +63,15 @@ const FeedBackSubmit = () => {
         setTitle("");
         setName("");
         setReview("");
-        // Handle success, reset form, show success message, etc.
+        setSubmitted(true); // Set submitted state to true after successful submission
       } catch (error) {
         console.error("Error submitting feedback:", error);
-        // Handle error, show error message, etc.
       }
     }
   };
 
   const isButtonDisabled =
-    review.length < 10 || review.length > 381 || error !== "";
+    review.length < 10 || review.length > 165 || error !== "";
 
   return (
     <div className="bg-white rounded-xl">
@@ -105,51 +106,62 @@ const FeedBackSubmit = () => {
           )}
         </Box>
       </div>
-      <form
-        className="mt-8 mb-8 flex gap-2 justify-center"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex justify-center border-2 py-2 px-6 rounded-xl w-1/2">
-          <input
-            type="text"
-            placeholder="Write your name"
-            className="w-full outline-none text-gray-700 text-lg"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="flex justify-center border-2 py-2 px-6 rounded-xl w-1/2">
-          <input
-            type="text"
-            placeholder="Write your title"
-            className="w-full outline-none text-gray-700 text-lg"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-      </form>
-      <div className="flex justify-center border-2 py-2 px-6 rounded-xl">
-        <input
-          type="text"
-          placeholder="Write your review"
-          className="w-full outline-none text-gray-700 text-lg"
-          value={review}
-          onChange={handleReviewChange}
-        />
-      </div>
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      <div className="button flex justify-center items-center py-3">
-        <button
-          type="submit"
-          className={`bg-black hover:bg-orange-500 duration-300 text-green-50 font-semibold px-6 py-2 rounded-xl text-md ${
-            isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          onClick={handleSubmit}
-          disabled={isButtonDisabled}
+      {!submitted ? ( // Render form if not submitted
+        <form
+          className="twoinputs mt-8 mb-2 flex gap-2 justify-center"
+          onSubmit={handleSubmit}
         >
-          Send
-        </button>
-      </div>
+          <div className="flex justify-center border-2 py-2 px-6 rounded-xl w-full">
+            <input
+              type="text"
+              placeholder="Write your name"
+              className="w-full outline-none text-gray-700 text-lg"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-center border-2 py-2 px-6 rounded-xl w-full">
+            <input
+              type="text"
+              placeholder="Write your title"
+              className="w-full outline-none text-gray-700 text-lg"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-center border-2 py-2 px-6 rounded-xl h-44">
+            <textarea
+              placeholder="Write your review"
+              className="w-full outline-none text-gray-700 text-lg resize-none"
+              value={review}
+              onChange={handleReviewChange}
+            />
+          </div>
+          {error && <p className="text-red-500 text-center">{error}</p>}
+          <div className="button flex justify-center items-center py-3">
+            <button
+              type="submit"
+              className={`bg-black hover:bg-orange-500 duration-300 text-green-50 font-semibold px-6 py-2 rounded-xl text-md ${
+                isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={handleSubmit}
+              disabled={isButtonDisabled}
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      ) : (
+        // Render success message if submitted
+        <div className="success-message flex flex-col justify-center items-center py-8">
+          <h2 className="text-xl font-semibold text-green-500 mb-4">
+            Thank you for your feedback!
+          </h2>
+          <p className="text-gray-700">
+            Your feedback has been successfully submitted.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

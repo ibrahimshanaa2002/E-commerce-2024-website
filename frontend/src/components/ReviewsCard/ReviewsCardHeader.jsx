@@ -46,7 +46,7 @@ const ReviewsCardHeader = () => {
         <h1 className="text-2xl font-bold">All Reviews</h1>
         <h2 className="text-gray-400">({ratingCount})</h2>
       </div>
-      <div className="right-side flex gap-2 items-center">
+      <div className="right-side flex gap-2 items-center justify-center">
         <span className="date-filter">
           <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -73,10 +73,12 @@ const ReviewsCardHeader = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={() => handleFilterByDate('today')} // Call a function to filter by today's date
+                        onClick={() => handleFilterByDate("today")} // Call a function to filter by today's date
                         className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm w-full text-left'
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm w-full text-left"
                         )}
                       >
                         Today
@@ -86,10 +88,12 @@ const ReviewsCardHeader = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={() => handleFilterByDate('lastWeek')} // Call a function to filter by last week
+                        onClick={() => handleFilterByDate("lastWeek")} // Call a function to filter by last week
                         className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm w-full text-left'
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm w-full text-left"
                         )}
                       >
                         Last Week
@@ -99,10 +103,12 @@ const ReviewsCardHeader = () => {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={() => handleFilterByDate('lastMonth')} // Call a function to filter by last month
+                        onClick={() => handleFilterByDate("lastMonth")} // Call a function to filter by last month
                         className={classNames(
-                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                          'block px-4 py-2 text-sm w-full text-left'
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm w-full text-left"
                         )}
                       >
                         Last Month
@@ -113,10 +119,12 @@ const ReviewsCardHeader = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <button
-                          onClick={() => handleFilterByDate('lastYear')} // Call a function to filter by last year
+                          onClick={() => handleFilterByDate("lastYear")} // Call a function to filter by last year
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block w-full px-4 py-2 text-left text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block w-full px-4 py-2 text-left text-sm"
                           )}
                         >
                           Last Year
