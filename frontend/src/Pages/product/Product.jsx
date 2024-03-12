@@ -54,7 +54,6 @@ const Product = () => {
       }
       const userData = JSON.parse(localStorage.getItem("user"));
       const userToken = userData ? userData.token : null; 
-      console.log(userToken);
       if (!userToken) {
         window.location.href = "/authentication";
         return;
