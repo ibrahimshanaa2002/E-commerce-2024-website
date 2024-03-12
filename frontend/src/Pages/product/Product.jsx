@@ -5,13 +5,15 @@ import "./Product.css";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/productContext/productContextProvider";
 import Loader from "../../components/Loader/Loader";
+import axios from "axios";
+import { UserContext } from "../../context/userContext/userContextProvider";
+
 const convertColorToHex = (colorName) => {
   const tempColor = document.createElement("div");
   tempColor.style.color = colorName;
   document.body.appendChild(tempColor);
   const computedColor = window.getComputedStyle(tempColor).color;
   document.body.removeChild(tempColor);
-  // Convert the computed color value to hexadecimal
   return computedColor;
 };
 const Product = () => {
@@ -20,6 +22,8 @@ const Product = () => {
   const product = products.find((e) => e._id === productId);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [ error ,setError] = useState("")
+  const { user } = useContext(UserContext);
 
   const selectColor = (color) => {
     setSelectedColor(color);
@@ -33,7 +37,7 @@ const Product = () => {
     return color.toLowerCase() === "white";
   };
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const incrementCount = () => {
     setCount(count + 1);
   };
@@ -42,7 +46,41 @@ const Product = () => {
       setCount(count - 1);
     }
   };
+  const addToCart = async () => {
+    try {
+      if (!selectedColor || !selectedSize || count <= 0) {
+        setError("Please select color, size, and quantity");
+        return;
+      }
+      const userData = JSON.parse(localStorage.getItem("user"));
+      const userToken = userData ? userData.token : null; 
+      console.log(userToken);
+      if (!userToken) {
+        window.location.href = "/authentication";
+        return;
+      }
+      const data = {
+        quantity: count,
+        size: selectedSize,
+        color: selectedColor
+      };
+      const response = await axios.post(
+        `http://localhost:4001/api/cart/addToCart/${productId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            "Content-Type": "application/json"
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
 
+    }
+  };
+  
+  
   if (!product) {
     return (
       <div className="h-screen flex w-full justify-center items-center">
@@ -53,7 +91,9 @@ const Product = () => {
 
   return (
     <div className="main w-full h-screen flex justify-around gap-6 p-10 ">
+   
       <div className="left-container w-1/2  flex justify-center gap-6">
+     
         <div className="big-image img-hover-zoom ">
           <img
             src={product.img}
@@ -90,6 +130,7 @@ const Product = () => {
         </div>
       </div>
       <div className="right-container w-1/2 h-full flex flex-col  justify-center">
+      {error && <span className="text-red-400 underline">*{error}*</span>}
         <h1 className="text-5xl font-extrabold uppercase title">
           {product.title}
         </h1>
@@ -178,12 +219,13 @@ const Product = () => {
 
             <div className="positive">
               <button className="text-3xl" onClick={incrementCount}>
+                {/* this is the quantity */}
                 +
               </button>
             </div>
           </div>
-          <div className="Add-To-Cart-container w-[70%] bg-black text-white rounded-full gap-5 p-3 flex items-center justify-center hover:text-black hover:bg-orange-400 duration-300 cursor-pointer">
-            <button className="cart-button text-3xl">Add To Cart</button>
+          <div onClick={addToCart} className="Add-To-Cart-container w-[70%] bg-black text-white rounded-full gap-5 p-3 flex items-center justify-center hover:text-black hover:bg-orange-400 duration-300 cursor-pointer">
+            <button className="cart-button text-3xl" >Add To Cart</button>
           </div>
         </div>
       </div>

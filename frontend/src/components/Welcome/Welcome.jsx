@@ -34,7 +34,7 @@ const Welcome = () => {
         <div className="left-container flex justify-start flex-col xl:w-[50%] py-12 sm:w-full">
           {user ? (
             <h1 className="font-extrabold text-8xl xl:py-9 xl:w-[70%] flex sm:w-full pb-4 title">
-              Welcome, {user}!
+              Welcome, {user.username}!
             </h1>
           ) : (
             <h1 className="font-extrabold text-8xl xl:py-9 xl:w-[70%] flex sm:w-full pb-4 title">

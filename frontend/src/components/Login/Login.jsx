@@ -22,7 +22,7 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
         password: password,
       });
       console.log("User logged in:", response.data);
-     const userData = response.data.username;
+     const userData = response.data;
       loginUser(userData)
       setUserName("");
       setPassword("");
