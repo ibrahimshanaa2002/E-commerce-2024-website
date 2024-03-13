@@ -140,14 +140,14 @@ const Cart = () => {
               <h2 className="text-2xl  font-bold">${TOOTAL}</h2>
             </div>
             <div className="promo flex items-center gap-2">
-              <div class="relative w-[70%] py-5">
+              <div className="relative w-[70%] py-5">
                 <input
                   type="text"
-                  class="pl-10 pr-4 py-2 border rounded-3xl w-full bg-[#F0F0F0]"
+                  className="pl-10 pr-4 py-2 border rounded-3xl w-full bg-[#F0F0F0]"
                   placeholder="Enter your email"
                 />
                 <div
-                  class="absolute inset-y-0 left-0 pl-3  
+                  className="absolute inset-y-0 left-0 pl-3  
                     flex items-center  
                     pointer-events-none"
                 >

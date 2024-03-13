@@ -100,28 +100,28 @@ const getProductsInCart = asyncHandler(async (req, res) => {
 //     }
 // });
 
-// const getCartItemCount = asyncHandler(async (req, res) => {
-//     try {
-//         // Get the user ID from the request
-//         const userId = req.user._id;
+const getCartItemCount = asyncHandler(async (req, res) => {
+    try {
+        // Get the user ID from the request
+        const userId = req.user._id;
 
-//         // Find all cart items associated with the user ID
-//         const cartItems = await Cart.find({ userId });
+        // Find all cart items associated with the user ID
+        const cartItems = await Cart.find({ userId });
 
-//         // Count the number of items in the cart
-//         const itemCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
+        // Count the number of items in the cart
+        const itemCount = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0);
 
-//         // Return the count of items in the cart
-//         return res.status(200).json({ itemCount });
-//     } catch (error) {
-//         // Handle any errors
-//         console.error("Error fetching cart items:", error);
-//         return res.status(500).json({ message: "Internal server error" });
-//     }
-// });
+        // Return the count of items in the cart
+        return res.status(200).json({ itemCount });
+    } catch (error) {
+        // Handle any errors
+        console.error("Error fetching cart items:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+});
 module.exports = {
     addProductToCart,
     getProductsInCart,
     // deleteProductFromCart,
-    // getCartItemCount
+    getCartItemCount
 };
