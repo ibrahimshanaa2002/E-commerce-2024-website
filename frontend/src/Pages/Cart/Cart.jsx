@@ -1,186 +1,143 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Cart.css";
-import image from "../../assets/Brands/tshirt.jpg";
-import { FaTrashCan } from "react-icons/fa6";
+import { FaArrowRight, FaTrashCan } from "react-icons/fa6";
 import { MdOutlineDiscount } from "react-icons/md";
-import { FaArrowRight } from "react-icons/fa6";
+import { UserContext } from "../../context/userContext/userContextProvider";
+import axios from "axios";
 
 const Cart = () => {
+  const { user } = useContext(UserContext);
+  const [productsInCart, setProductsInCart] = useState([]);
+  const DISCOUNT_RATE = 0.2;
+  const DELEVARY = 15;
+
+  useEffect(() => {
+    const fetchProductsInCart = async () => {
+      try {
+        const userData = JSON.parse(localStorage.getItem("user"));
+        const userToken = userData ? userData.token : null;
+        const response = await axios.get(
+          "http://localhost:4001/api/cart/cart",
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
+
+        setProductsInCart(response.data.productsInCart);
+      } catch (error) {
+        console.error("Error fetching products in cart:", error);
+      }
+    };
+
+    fetchProductsInCart();
+  }, []);
+
+  // Function to calculate total cost for a product
+  const calculateTotalCost = (quantity, price) => {
+    return quantity * price;
+  };
+
+  // Calculate subtotal for all products in the cart
+  const subtotal = productsInCart.reduce(
+    (total, product) => total + calculateTotalCost(product.quantity, product.newprice),
+    0
+  );
+
+  const TOOTAL=subtotal - (subtotal *DISCOUNT_RATE) +DELEVARY;
+
   return (
     <div>
       <div className="title px-5 py-5">
-        <h1 className="text-5xl font-bold">Your Cart</h1>
+        {user ? (
+          <h1 className="text-5xl font-bold">
+            <span className="text-red-700">{user.username}'s</span> Cart
+          </h1>
+        ) : (
+          ""
+        )}
       </div>
-      <div className="full-container  w-full flex px-5 py-5 gap-5">
+      <div className="full-container w-full flex px-5 py-5 gap-5">
         <div className="left-side border-[1px] overflow-y-auto border-gray-300 rounded-2xl w-[70%] h-[50vh] flex flex-row ">
           <div className="w-full">
-            <div className="md:flex items-center p-5 border-t border-gray-200">
-              <div className="w-[17%] ">
-                <img
-                  src={image}
-                  alt
-                  className="w-full h-full object-center object-cover rounded-xl"
-                />
-              </div>
-              <div className="md:pl-3  w-full">
-                <div className="flex items-center justify-between w-full pt-1">
-                  <div className="product-title flex justify-between w-full">
-                    <p className="text-base font-black leading-none text-gray-800 pb-4">
-                      North wolf bag
-                    </p>
-                    <FaTrashCan className="hover:text-red-600 duration-200 cursor-pointer" />
-                  </div>
+            {productsInCart.map((product) => (
+              <div
+                key={product._id}
+                className="md:flex items-center p-5 border-t border-gray-200"
+              >
+                <div className="w-[17%]">
+                  <img
+                    src={product.img}
+                    alt=""
+                    className="w-full h-full object-center object-cover rounded-xl"
+                  />
                 </div>
-                <p className="text-xs leading-3 text-gray-600 py-2 pt-3">
-                  Size: large
-                </p>
-                <p className="text-xs leading-3 text-gray-600 py-2 pb-3">
-                  Color: Black
-                </p>
-
-                <div className="flex items-center justify-between  pr-6">
-                  <div className="price flex items-center pt-3">
-                    <h1 className="mr-2 text-base font-black leading-none text-gray-800">
-                      Price:
-                    </h1>
-                    <p className="text-base font-black leading-none text-gray-800">
-                      $9,000
-                    </p>
+                <div className="md:pl-3 w-full">
+                  <div className="flex items-center justify-between w-full pt-1">
+                    <div className="product-title flex justify-between w-full">
+                      <p className="text-base font-black leading-none text-gray-800 pb-4">
+                        {product.title}
+                      </p>
+                      <FaTrashCan className="hover:text-red-600 duration-200 cursor-pointer" />
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="md:flex items-center p-5 border-t border-gray-200">
-              <div className="w-[17%] ">
-                <img
-                  src={image}
-                  alt
-                  className="w-full h-full object-center object-cover rounded-xl"
-                />
-              </div>
-              <div className="md:pl-3  w-full">
-                <div className="flex items-center justify-between w-full pt-1">
-                  <div className="product-title flex justify-between w-full">
-                    <p className="text-base font-black leading-none text-gray-800 pb-4">
-                      North wolf bag
-                    </p>
-                    <FaTrashCan className="hover:text-red-600 duration-200 cursor-pointer" />
-                  </div>
-                </div>
-                <p className="text-xs leading-3 text-gray-600 py-2 pt-3">
-                  Size: large
-                </p>
-                <p className="text-xs leading-3 text-gray-600 py-2 pb-3">
-                  Color: Black
-                </p>
-
-                <div className="flex items-center justify-between  pr-6">
-                  <div className="price flex items-center pt-3">
-                    <h1 className="mr-2 text-base font-black leading-none text-gray-800">
-                      Price:
-                    </h1>
-                    <p className="text-base font-black leading-none text-gray-800">
-                      $9,000
-                    </p>
+                  <p className="text-xs leading-3 text-gray-600 py-2 pt-3">
+                    Size: {product.size}
+                  </p>
+                  <p className="text-xs leading-3 text-gray-600 py-2 pb-3">
+                    Color: {product.color}
+                  </p>
+                  <div className="flex flex-col  justify-between pr-6">
+                    <div className="price flex items-center pt-3">
+                      <h1 className="mr-2 text-base font-black leading-none text-gray-800">
+                        Price:
+                      </h1>
+                      <p className="text-base font-black leading-none text-gray-800">
+                        ${product.newprice}
+                      </p>
+                    </div>
+                    <div className="price flex items-center pt-3">
+                      <h1 className="mr-2 text-base font-black leading-none text-gray-800">
+                        Quantity:
+                      </h1>
+                      <p className="text-base font-black leading-none text-gray-800">
+                        {product.quantity}
+                      </p>
+                    </div>
+                    <div className="price flex items-center pt-3">
+                      <h1 className="mr-2 text-base font-black leading-none text-gray-800">
+                        Total Cost:
+                      </h1>
+                      <p className="text-base font-black leading-none text-gray-800">
+                        ${calculateTotalCost(product.quantity, product.newprice)}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="md:flex items-center p-5 border-t border-gray-200">
-              <div className="w-[17%] ">
-                <img
-                  src={image}
-                  alt
-                  className="w-full h-full object-center object-cover rounded-xl"
-                />
-              </div>
-              <div className="md:pl-3  w-full">
-                <div className="flex items-center justify-between w-full pt-1">
-                  <div className="product-title flex justify-between w-full">
-                    <p className="text-base font-black leading-none text-gray-800 pb-4">
-                      North wolf bag
-                    </p>
-                    <FaTrashCan className="hover:text-red-600 duration-200 cursor-pointer" />
-                  </div>
-                </div>
-                <p className="text-xs leading-3 text-gray-600 py-2 pt-3">
-                  Size: large
-                </p>
-                <p className="text-xs leading-3 text-gray-600 py-2 pb-3">
-                  Color: Black
-                </p>
-
-                <div className="flex items-center justify-between  pr-6">
-                  <div className="price flex items-center pt-3">
-                    <h1 className="mr-2 text-base font-black leading-none text-gray-800">
-                      Price:
-                    </h1>
-                    <p className="text-base font-black leading-none text-gray-800">
-                      $9,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="md:flex items-center p-5 border-t border-gray-200">
-              <div className="w-[17%] ">
-                <img
-                  src={image}
-                  alt
-                  className="w-full h-full object-center object-cover rounded-xl"
-                />
-              </div>
-              <div className="md:pl-3  w-full">
-                <div className="flex items-center justify-between w-full pt-1">
-                  <div className="product-title flex justify-between w-full">
-                    <p className="text-base font-black leading-none text-gray-800 pb-4">
-                      North wolf bag
-                    </p>
-                    <FaTrashCan className="hover:text-red-600 duration-200 cursor-pointer" />
-                  </div>
-                </div>
-                <p className="text-xs leading-3 text-gray-600 py-2 pt-3">
-                  Size: large
-                </p>
-                <p className="text-xs leading-3 text-gray-600 py-2 pb-3">
-                  Color: Black
-                </p>
-
-                <div className="flex items-center justify-between  pr-6">
-                  <div className="price flex items-center pt-3">
-                    <h1 className="mr-2 text-base font-black leading-none text-gray-800">
-                      Price:
-                    </h1>
-                    <p className="text-base font-black leading-none text-gray-800">
-                      $9,000
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-
         <div className="right-side border-[1px] border-gray-300 rounded-2xl w-1/2 p-5">
           <div>
             <h1 className="text-3xl font-semibold pb-5">Order Summary</h1>
-
             <div className="subtotal flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Subtotal</h1>
-              <h2 className="text-xl font-bold">$565</h2>
+              <h2 className="text-xl font-bold">${subtotal}</h2>
             </div>
             <div className="discount flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Discount (-20%)</h1>
-              <h2 className="text-xl text-red-500 font-bold">-$113</h2>
+              <h2 className="text-xl text-red-500 font-bold">${subtotal *DISCOUNT_RATE}</h2>
             </div>
             <div className="fees flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Delivery Fee</h1>
-              <h2 className="text-xl  font-bold">$15</h2>
+              <h2 className="text-xl  font-bold">${DELEVARY}</h2>
             </div>
             <hr />
             <div className="total flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Total</h1>
-              <h2 className="text-2xl  font-bold">$467</h2>
+              <h2 className="text-2xl  font-bold">${TOOTAL}</h2>
             </div>
             <div className="promo flex items-center gap-2">
               <div class="relative w-[70%] py-5">
@@ -201,11 +158,8 @@ const Cart = () => {
                 <span>Apply</span>
               </div>
             </div>
-            <div className="checkout flex items-center justify-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 font-semibold gap-2">
-              <span>Go to Checkout</span>
-              <FaArrowRight />
-            </div>
           </div>
+          
           <div className="logo h-[10vh]  flex justify-center items-center text-5xl font-extrabold uppercase">
             <h1>Shop.co</h1>
           </div>

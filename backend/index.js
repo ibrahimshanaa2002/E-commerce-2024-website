@@ -17,7 +17,7 @@ app.use(express.json());
 // Mount userRoute
 app.use("/api/user", userRoute);
 app.use("/api/product",productRoute)
-app.use("/api/cart/",cartRoute)
+app.use("/api/cart",cartRoute)
 
 // Start the server
 const PORT = process.env.PORT || 4001;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
@@ -9,10 +9,12 @@ import ShopDropDown from "./ShopDropDown";
 import "./Navbar.css";
 import CategoriesDropDown from "./CategoriesDropDown";
 import SearchPopup from "./SearchPopup";
+import { CartContext } from "../../context/CartContext/cartContextProvider";
 
 function Navbar() {
   const [mobileNav, setMobileNav] = useState(false);
   const [isSearchPopupOpen, setSearchPopupOpen] = useState(false);
+  const {itemCount} = useContext(CartContext)
 
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
@@ -78,9 +80,9 @@ function Navbar() {
           </div>
           <div className="relative ">
             <FiShoppingCart size={22} />
-            <div className="rounded-full bg-red-600 flex items-center justify-center  absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">
-              0
-            </div>
+            <div className="rounded-full bg-red-600 flex items-center justify-center absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">
+  {itemCount > 0 ? itemCount : 0}
+</div>
           </div>
           <FaRegUserCircle size={22} />
         </div>
