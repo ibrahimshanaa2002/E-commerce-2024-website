@@ -71,11 +71,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWY2MDMzN
     "color": "red"
 }
 
-###
-DELETE http://localhost:4001/api/cart/delete/:65ecf029853ac04006ff6c3f
-Authorization: Bearer eyJhbGciOieyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZjBjMWExZjA4ZTg1N2M5ODQzNzQ0YyIsImlhdCI6MTcxMDI4NjQ0OCwiZXhwIjoxNzEyODc4NDQ4fQ.m7IM8vyPf5yNIhQERx4VUERJTipAYECUhXZCBi7DqYE
+
 
 ###
 GET http://localhost:4001/api/cart/cart/item-count
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZjBjMWExZjA4ZTg1N2M5ODQzNzQ0YyIsImlhdCI6MTcxMDM1NDA0NywiZXhwIjoxNzEyOTQ2MDQ3fQ.aD-GdQi7j61nSKIgWbSxB_EyHzhMtJRAkUx1cZMff1I
+
+###
+DELETE http://localhost:4001/api/cart/del/65ecf0d0853ac04006ff6c45
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZjBjMWExZjA4ZTg1N2M5ODQzNzQ0YyIsImlhdCI6MTcxMDM1NDA0NywiZXhwIjoxNzEyOTQ2MDQ3fQ.aD-GdQi7j61nSKIgWbSxB_EyHzhMtJRAkUx1cZMff1I
