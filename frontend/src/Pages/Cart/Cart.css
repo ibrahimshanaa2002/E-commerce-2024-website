@@ -1,0 +1,8 @@
+@media screen and (max-width: 800px) {
+  .full-container {
+    flex-direction: column;
+  }
+  .right-sidess {
+    width: 100%;
+  }
+}
