@@ -51,18 +51,17 @@ const Cart = () => {
     try {
       const userData = JSON.parse(localStorage.getItem("user"));
       const userToken = userData ? userData.token : null;
-  
-      await axios.delete(
-        `http://localhost:4001/api/cart/delete/${productId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
+
+      await axios.delete(`http://localhost:4001/api/cart/delete/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      setProductsInCart(
+        productsInCart.filter((product) => product._id !== productId)
       );
-      
-    setProductsInCart(productsInCart.filter(product => product._id !== productId));
-      
+
       console.log("Product deleted successfully:", productId);
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -73,63 +72,66 @@ const Cart = () => {
     <div>
       <div className="title px-5 py-5">
         {user ? (
-          <h1 className="text-5xl font-bold">
-            <span className="text-red-700">{user.username}'s</span> Cart
-          </h1>
+          <h1 className="text-5xl font-bold flex items-center">Your Cart</h1>
         ) : (
           ""
         )}
       </div>
       <div className="full-container w-full flex px-5 py-5 gap-5">
-        <div className="left-sidess border-[1px] overflow-y-auto border-gray-300 rounded-2xl flex flex-row ">
+        <div className="left-sidess border-[1px] overflow-y-auto border-gray-300 rounded-2xl flex flex-row w-[70%]">
           <div className="w-full">
             {productsInCart.map((product) => (
-              <div key={product._id} className="md:flex items-center p-5 ">
+              <div key={product._id} className="items-center p-5 ">
                 <div className="flex items-center">
-                  <div className="w-[17%] h-full">
+                  <div className=" h-[170px] w-[170px]">
+                    {" "}
                     <div className="h-full">
                       <img
                         src={product.img}
                         alt=""
-                        className="h-full w-full object-cover"
+                        className="object-cover h-full w-full"
                       />
                     </div>
                   </div>
 
                   <div className="pl-3 w-full">
+                    {" "}
                     <div className="flex items-center justify-between w-full pt-1">
                       <div className="product-title flex justify-between w-full">
-                        <p className=" font-extrabold leading-none  ">
+                        <p className="font-extrabold leading-none">
                           {product.title}
                         </p>
-                        <FaTrashCan onClick={()=>handleDelete(product._id)} className="hover:text-red-600 duration-200 cursor-pointer" />
+                        <FaTrashCan
+                          onClick={() => handleDelete(product._id)}
+                          className="hover:text-red-600 duration-200 cursor-pointer"
+                        />
                       </div>
                     </div>
-                    <p className="text-xs leading-3 text-gray-600  pt-3">
+                    <p className="text-xs leading-3 text-gray-600 pt-3">
                       Size: {product.size}
                     </p>
                     <p className="text-xs leading-3 text-gray-600 py-2 pb-3">
                       Color: {product.color}
                     </p>
-                    <div className="flex flex-col  justify-between  ">
+                    <div className="flex flex-col justify-between">
                       <div className="price flex items-center py-1">
-                        <h1 className="mr-2 text-base font-bold leading-none ">
+                        <h1 className="mr-2 text-base font-bold leading-none">
                           Price:
                         </h1>
-                        <p className="  leading-none  text-gray-800">
+                        <p className="leading-none text-gray-800">
                           ${product.newprice}
                         </p>
                       </div>
                       <div className="price flex items-center py-1">
-                        <h1 className="mr-2 text-base font-bold  leading-none ">
+                        <h1 className="mr-2 text-base font-bold leading-none">
                           Quantity:
                         </h1>
-                        <p className=" leading-none text-gray-800">
+                        <p className="leading-none text-gray-800">
                           {product.quantity}
                         </p>
                       </div>
                       <div className="price flex items-center py-1">
-                        <h1 className="mr-2 text-base font-bold  leading-none ">
+                        <h1 className="mr-2 text-base font-bold leading-none">
                           Total Cost:
                         </h1>
                         <p className="leading-none text-gray-800">
@@ -184,14 +186,13 @@ const Cart = () => {
                   <MdOutlineDiscount />
                 </div>
               </div>
-              <div className="w-[30%] flex items-center justify-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 font-semibold">
+              <div className="w-[30%] flex items-center justify-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ">
                 <span>Apply</span>
               </div>
             </div>
-          </div>
-
-          <div className="logo h-[10vh]  flex justify-center items-center text-5xl font-extrabold uppercase">
-            <h1>Shop.co</h1>
+            <div className="checkout flex justify-center items-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ">
+              <span>Go To Checkout</span>
+            </div>
           </div>
         </div>
       </div>

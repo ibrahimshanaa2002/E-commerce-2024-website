@@ -93,23 +93,7 @@ function Navbar() {
           />
         </div>
       </div>
-      {mobileNav && (
-        <div>
-          <ul
-            className={`${
-              mobileNav ? "animate-slideInRight" : "animate-slideInLeft"
-            } absolute flex flex-col  bg-black/70 duration-500 ease-in-out transition-all h-[90vh] text-white items-center justify-center gap-6 w-[50%]`}
-          >
-            <li className="flex gap-1 items-center">
-              shop
-              <IoMdArrowDropdown size={22} />
-            </li>
-            <li>On Sale</li>
-            <li>New Arrivals</li>
-            <li>Brands</li>
-          </ul>
-        </div>
-      )}
+      {mobileNav && <div></div>}
     </div>
   );
 }
