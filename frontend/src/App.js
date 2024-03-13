@@ -13,6 +13,9 @@ import LayoutCart from "./Layout/LayoutCart";
 import Women from "./Pages/Categories/Women";
 import Man from "./Pages/Categories/Man";
 import Kids from "./Pages/Categories/Kids";
+import ForgetPassword from "./components/forgetPassword/ForgetPassword";
+import ResetPassword from "./components/forgetPassword/ResetPassword";
+
 library.add(fas);
 
 function ScrollToTop() {
@@ -28,7 +31,7 @@ function ScrollToTop() {
 function App() {
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />} />
         <Route path="/authentication" element={<LoginSignup />} />
@@ -40,6 +43,8 @@ function App() {
         <Route path="/Women-Products" element={<Women/>}/>
         <Route path="/Men-Products" element={<Man/>}/>
         <Route path="/Kids-Product" element={<Kids/>}/>
+        <Route path="/forget-password" element={<ForgetPassword/>}/>
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   );

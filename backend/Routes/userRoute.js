@@ -8,6 +8,7 @@ const {
   registerUser,
   SendMail,
   saveFeedback,
+  resetPassword
 } = require("../controllers/userController");
 
 router.post("/login", authUser);
@@ -86,5 +87,10 @@ router.get("/feedback/count", async (req, res) => {
     res.status(500).json({ message: "Failed to retrieve feedback count" });
   }
 });
-
+router.put("/resetPassword",resetPassword)
+router.get("/resetPassword", (req, res) => {
+  const resetToken = req.query.token;
+  // Render a page where the user can enter their new password
+  res.render("resetPasswordPage", { resetToken });
+});
 module.exports = router;
