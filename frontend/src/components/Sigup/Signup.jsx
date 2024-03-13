@@ -38,7 +38,9 @@ const Signup = ({handleToggle,handlepassword,showpassword}) => {
       setPassword("");
       setError(""); 
       navigate("/authentication")
+      handleToggle()
     } catch (error) {
+      setError("userName or Email is already in use");
       console.error("Error creating user:", error)
       
     }

@@ -50,7 +50,7 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-//Email
+
 
 const SendMail = async (req, res, next) => {
   try {
@@ -85,8 +85,7 @@ const SendMail = async (req, res, next) => {
   }
 };
 
-//Rating
-// Update saveFeedback function to include timestamp
+
 const saveFeedback = async (req, res) => {
   try {
     const { name, title, body, rating } = req.body;
@@ -114,9 +113,64 @@ const saveFeedback = async (req, res) => {
 };
 
 
+
+const resetPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const resetToken = generateResetToken();
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.resetToken = resetToken;
+    user.resetTokenExpiration = Date.now() + 3600000; 
+    await user.save();
+
+    const resetLink = `http://localhost:3000/reset-password?token=${resetToken}`;
+
+    await sendResetPasswordEmail(email, resetLink);
+
+    res.status(200).json({ message: "Reset password email sent successfully" });
+  } catch (error) {
+    console.error("Error sending reset password email:", error);
+    res.status(500).json({ message: "Failed to send reset password email" });
+  }
+});
+
+const generateResetToken = () => {
+  const token = require("crypto").randomBytes(20).toString("hex");
+  return token;
+};
+
+const sendResetPasswordEmail = async (email, resetLink) => {
+  // Configure nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: "shopcompass.sc@gmail.com",
+      pass: "ebwb owna blze kwmb",
+    },
+  });
+
+  // Email content
+  const mailOptions = {
+    from: "shopcompass.sc@gmail.com",
+    to: email,
+    subject: "Reset Your Password",
+    html: `<p>Please click <a href="${resetLink}">here</a> to reset your password.</p>`,
+  };
+
+  // Send email
+  await transporter.sendMail(mailOptions);
+};
+
+
+
 module.exports = {
   registerUser,
   authUser,
   SendMail,
   saveFeedback,
+  resetPassword
 };

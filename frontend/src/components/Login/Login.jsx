@@ -92,7 +92,7 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
               </div>
             </div>
             <span className="flex justify-end pb-5 ">
-              <Link to={''} className="cursor-pointer duration-10 hover:font-semibold hover:underline">
+              <Link to={'/forget-password'} className="cursor-pointer duration-10 hover:font-semibold hover:underline">
                 Forgot Password?
               </Link>
             </span>
