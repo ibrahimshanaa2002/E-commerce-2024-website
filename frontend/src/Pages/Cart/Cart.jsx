@@ -47,6 +47,27 @@ const Cart = () => {
   );
 
   const TOOTAL = subtotal - subtotal * DISCOUNT_RATE + DELEVARY;
+  const handleDelete = async (productId) => {
+    try {
+      const userData = JSON.parse(localStorage.getItem("user"));
+      const userToken = userData ? userData.token : null;
+  
+      await axios.delete(
+        `http://localhost:4001/api/cart/delete/${productId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      
+    setProductsInCart(productsInCart.filter(product => product._id !== productId));
+      
+      console.log("Product deleted successfully:", productId);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
 
   return (
     <div>
@@ -81,7 +102,7 @@ const Cart = () => {
                         <p className=" font-extrabold leading-none  ">
                           {product.title}
                         </p>
-                        <FaTrashCan className="hover:text-red-600 duration-200 cursor-pointer" />
+                        <FaTrashCan onClick={()=>handleDelete(product._id)} className="hover:text-red-600 duration-200 cursor-pointer" />
                       </div>
                     </div>
                     <p className="text-xs leading-3 text-gray-600  pt-3">

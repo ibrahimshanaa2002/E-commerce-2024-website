@@ -78,27 +78,27 @@ const getProductsInCart = asyncHandler(async (req, res) => {
     }
 });
 
-// const deleteProductFromCart = asyncHandler(async (req, res) => {
-//     try {
-//         const { productId } = req.params;
-//         const { userId } = req.user;
+const deleteProductFromCart = asyncHandler(async (req, res) => {
+    try {
+        const { productId } = req.params;
+        const userId = req.user._id;
 
-//         // Remove any additional characters from productId
-//         const cleanedProductId = productId.replace(":", "");
+        // Remove any additional characters from productId
+        const cleanedProductId = productId.replace(":", "");
 
-//         // Find the cart item to delete
-//         const cartItem = await Cart.findOneAndDelete({ productId: cleanedProductId, userId });
+        // Find the cart item to delete
+        const cartItem = await Cart.findOneAndDelete({ productId: cleanedProductId, userId });
 
-//         if (!cartItem) {
-//             return res.status(404).json({ message: "Product not found in cart" });
-//         }
+        if (!cartItem) {
+            return res.status(404).json({ message: "Product not found in cart" });
+        }
 
-//         return res.status(200).json({ message: "Product removed from cart successfully" });
-//     } catch (error) {
-//         console.error("Error deleting product from cart:", error);
-//         return res.status(500).json({ message: "Internal server error" });
-//     }
-// });
+        return res.status(200).json({ message: "Product removed from cart successfully" });
+    } catch (error) {
+        console.error("Error deleting product from cart:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 const getCartItemCount = asyncHandler(async (req, res) => {
     try {
@@ -122,6 +122,6 @@ const getCartItemCount = asyncHandler(async (req, res) => {
 module.exports = {
     addProductToCart,
     getProductsInCart,
-    // deleteProductFromCart,
+    deleteProductFromCart,
     getCartItemCount
 };
