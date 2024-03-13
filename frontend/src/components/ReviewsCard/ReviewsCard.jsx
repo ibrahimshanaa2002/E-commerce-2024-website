@@ -33,6 +33,7 @@ const ReviewsCard = () => {
             key={review._id}
             className="rounded-md shadow-lg bg-white p-5 flex flex-col"
           >
+          
             <div className="flex space-x-0.5 mb-2">
               {[...Array(5)].map((_, index) => (
                 <svg
@@ -69,7 +70,7 @@ const ReviewsCard = () => {
               </span>
               <div className="flex-shrink-0">
                 <svg
-                  className="w-5 h-5 text-gray-600"
+                  className="w-5 h-5 text-green-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >

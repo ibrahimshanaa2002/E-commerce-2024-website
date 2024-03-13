@@ -20,15 +20,18 @@ const ProductCard = (props) => {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      const response = await axios.put(`http://localhost:4001/api/product/product/${props._id}`, {
-        title: editedTitle,
-        desc: editedDesc,
-        newprice: editedNewPrice,
-        oldprice: editedOldPrice,
-      });
+      const response = await axios.put(
+        `http://localhost:4001/api/product/product/${props._id}`,
+        {
+          title: editedTitle,
+          desc: editedDesc,
+          newprice: editedNewPrice,
+          oldprice: editedOldPrice,
+        }
+      );
 
       if (response.status !== 200) {
-        throw new Error('Failed to update product.');
+        throw new Error("Failed to update product.");
       }
 
       // Update component state with the updated product data
@@ -40,116 +43,121 @@ const ProductCard = (props) => {
 
       setIsEditing(false);
       setIsSaving(false);
-      console.log('Changes saved successfully.');
+      console.log("Changes saved successfully.");
     } catch (error) {
-      console.error('Error updating product:', error);
+      console.error("Error updating product:", error);
       setIsSaving(false);
     }
   };
 
   const handleDelete = async () => {
     // Display a confirmation dialog
-    const confirmDelete = window.confirm('Are you sure you want to delete this product?');
-  
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+
     // If the user confirms deletion
     if (confirmDelete) {
       try {
         // Send a DELETE request to delete the product
-        await axios.delete(`http://localhost:4001/api/product/product/${props._id}`);
-        console.log('Product deleted successfully.');
+        await axios.delete(
+          `http://localhost:4001/api/product/product/${props._id}`
+        );
+        console.log("Product deleted successfully.");
       } catch (error) {
-        console.error('Error deleting product:', error);
+        console.error("Error deleting product:", error);
       }
     }
   };
+
   const location = useLocation();
   const isAdminRoute = location.pathname === "/admin";
 
   return (
-    <div className={`w-full sm:w-auto ${isAdminRoute ? "admin-product-card" : ""}`}>
+    <div
+      className={`w-full sm:w-auto ${isAdminRoute ? "admin-product-card" : ""}`}
+    >
       {isAdminRoute ? (
-        <div className="w-full h-full border border-gray-200 rounded-lg overflow-hidden">
-          <div className="flex flex-col items-start justify-between w-full h-full">
-            <div className="w-full h-1/3 img-hover-zoom">
-              <img
-                src={props.img}
-                className="w-full h-full object-cover"
-                alt="Product"
-              />
-            </div>
-            <div className="p-4 flex flex-col items-start justify-between h-1/3 w-full">
-              <div className="text-sm sm:text-base md:text-lg flex w-full justify-between items-center gap-4">
-                {isEditing ? (
-                  <input
-                    className="w-full border-2 border-gray-200"
-                    type="text"
-                    value={editedTitle}
-                    onChange={(e) => setEditedTitle(e.target.value)}
-                  />
-                ) : (
-                  <span>{props.title}</span>
-                )}
-                <span className="cursor-pointer" onClick={handleEdit}>
-                  <MdModeEdit />
-                </span>
-              </div>
-              <div className="text-sm sm:text-base md:text-lg flex gap-5 w-full items-center">
-                {isEditing ? (
-                  <input
-                    className="w-full border-2 border-gray-200"
-                    type="text"
-                    value={editedDesc}
-                    onChange={(e) => setEditedDesc(e.target.value)}
-                  />
-                ) : (
-                  <span>{props.desc}</span>
-                )}
-              </div>
-              <div className="flex items-center mb-2">{/* Star ratings */}</div>
-              <div className="flex items-center text-gray-400 gap-6">
-                {isEditing ? (
-                  <>
-                    <input
-                      className="w-full border-2 border-gray-200"
-                      type="number"
-                      value={editedNewPrice}
-                      onChange={(e) => setEditedNewPrice(e.target.value)}
-                    />
-                    <input
-                      className="w-full border-2 border-gray-200"
-                      type="number"
-                      value={editedOldPrice}
-                      onChange={(e) => setEditedOldPrice(e.target.value)}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <div className="font-bold text-xs sm:text-base md:text-lg">
-                      ${props.newprice}
-                    </div>
-                    <div className="font-bold text-xs sm:text-base md:text-lg line-through">
-                      ${props.oldprice}
-                    </div>
-                  </>
-                )}
-              </div>
-              {/* Save button */}
-              {isEditing && (
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                  onClick={handleSave}
-                >
-                  Save
-                </button>
+        <div className="w-full h-full border border-gray-200 rounded-lg overflow-hidden flex flex-col">
+          <div className="w-full h-[30vh] relative img-hover-zoom">
+            <img
+              src={props.img}
+              className="w-full h-full object-cover"
+              alt="Product"
+            />
+          </div>
+          <div className="p-4 flex flex-col items-start justify-between flex-grow">
+            <div className="text-sm sm:text-base md:text-lg flex w-full justify-between items-center gap-4">
+              {isEditing ? (
+                <input
+                  className="w-full border-2 border-gray-200"
+                  type="text"
+                  value={editedTitle}
+                  onChange={(e) => setEditedTitle(e.target.value)}
+                />
+              ) : (
+                <span>{props.title}</span>
               )}
-              {/* Delete button */}
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
+              <span className="cursor-pointer" onClick={handleEdit}>
+                <MdModeEdit />
+              </span>
             </div>
+            <div className="text-sm sm:text-base md:text-lg flex gap-5 w-full items-center">
+              {isEditing ? (
+                <input
+                  className="w-full border-2 border-gray-200"
+                  type="text"
+                  value={editedDesc}
+                  onChange={(e) => setEditedDesc(e.target.value)}
+                />
+              ) : (
+                <span>{props.desc}</span>
+              )}
+            </div>
+            <div className="flex items-center mb-2">{/* Star ratings */}</div>
+            <div className="flex items-center text-gray-400 gap-6">
+              {isEditing ? (
+                <>
+                  <input
+                    className="w-full border-2 border-gray-200"
+                    type="number"
+                    value={editedNewPrice}
+                    onChange={(e) => setEditedNewPrice(e.target.value)}
+                  />
+                  <input
+                    className="w-full border-2 border-gray-200"
+                    type="number"
+                    value={editedOldPrice}
+                    onChange={(e) => setEditedOldPrice(e.target.value)}
+                  />
+                </>
+              ) : (
+                <>
+                  <div className="font-bold text-xs sm:text-base md:text-lg">
+                    ${props.newprice}
+                  </div>
+                  <div className="font-bold text-xs sm:text-base md:text-lg line-through">
+                    ${props.oldprice}
+                  </div>
+                </>
+              )}
+            </div>
+            {/* Save button */}
+            {isEditing && (
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+            )}
+            {/* Delete button */}
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
           </div>
         </div>
       ) : (
@@ -157,14 +165,14 @@ const ProductCard = (props) => {
           to={`/product/${props._id}`}
           className="flex flex-col items-start justify-between w-full h-full border border-gray-200 rounded-lg overflow-hidden"
         >
-          <div className="w-full flex img-hover-zoom h-full">
+          <div className="w-full flex h-[50vh] relative img-hover-zoom">
             <img
               src={props.img}
               className="w-full h-full object-cover"
               alt="Product"
             />
           </div>
-          <div className="p-4 flex flex-col items-start justify-between h-[40%]">
+          <div className="p-4 flex flex-col items-start justify-between h-[30vh]">
             <div className="text-sm sm:text-base md:text-lg font-bold ">
               {props.title}
             </div>

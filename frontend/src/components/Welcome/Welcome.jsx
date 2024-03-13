@@ -14,6 +14,8 @@ const Welcome = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const { user } = useContext(UserContext);
 
+
+
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 600);
@@ -33,7 +35,7 @@ const Welcome = () => {
       <div className="bg-image bg-cover bg-center h-full flex justify-start items-start flex-col w-full p-12 ">
         <div className="left-container flex justify-start flex-col xl:w-[50%] py-12 sm:w-full">
           {user ? (
-            <h1 className="font-extrabold text-8xl xl:py-9 xl:w-[70%] flex sm:w-full pb-4 title">
+            <h1 className="font-extrabold text-8xl xl:py-9 xl:w-[70%] flex sm:w-full pb-4 title up">
               Welcome, {user.username}!
             </h1>
           ) : (

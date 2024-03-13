@@ -13,3 +13,20 @@
   border-radius: 20px;
   background: rgb(54, 49, 49);
 }
+
+img {
+  image-rendering: auto;
+}
+
+body {
+  font-smooth: always;
+}
+
+.smooth-transform {
+  transform: translateZ(0);
+}
+
+/* Enable hardware acceleration */
+.container {
+  transform: translateZ(0);
+}

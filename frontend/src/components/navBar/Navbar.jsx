@@ -14,7 +14,7 @@ import { CartContext } from "../../context/CartContext/cartContextProvider";
 function Navbar() {
   const [mobileNav, setMobileNav] = useState(false);
   const [isSearchPopupOpen, setSearchPopupOpen] = useState(false);
-  const {itemCount} = useContext(CartContext)
+  const { itemCount } = useContext(CartContext);
 
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
@@ -55,10 +55,8 @@ function Navbar() {
             className="text-gray-500 cursor-pointer"
             onClick={handleSearchIconClick}
           />
-          <div className="absolute">
-          {isSearchPopupOpen && <SearchPopup />}
-          </div>
-        
+          <div className="absolute">{isSearchPopupOpen && <SearchPopup />}</div>
+
           <input
             className="bg-transparent border-none rounded-none w-full  outline-none px-4 "
             type="text"
@@ -78,13 +76,21 @@ function Navbar() {
               id=""
             />
           </div>
-          <div className="relative ">
-            <FiShoppingCart size={22} />
-            <div className="rounded-full bg-red-600 flex items-center justify-center absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">
-  {itemCount > 0 ? itemCount : 0}
-</div>
-          </div>
-          <FaRegUserCircle size={22} />
+          <Link to={"/Cart"}>
+            <div className="relative ">
+              <FiShoppingCart
+                size={22}
+                className="hover:text-red-900 duration-200 cursor-pointer"
+              />
+              <div className="rounded-full bg-red-600 flex items-center justify-center absolute top-[-35%] left-[-40%] text-white w-full h-full text-sm">
+                {itemCount > 0 ? itemCount : 0}
+              </div>
+            </div>
+          </Link>
+          <FaRegUserCircle
+            size={22}
+            className="hover:text-red-900 duration-200 cursor-pointer"
+          />
         </div>
       </div>
       {mobileNav && (
@@ -96,7 +102,7 @@ function Navbar() {
           >
             <li className="flex gap-1 items-center">
               shop
-              <IoMdArrowDropdown size={20} />
+              <IoMdArrowDropdown size={22} />
             </li>
             <li>On Sale</li>
             <li>New Arrivals</li>
