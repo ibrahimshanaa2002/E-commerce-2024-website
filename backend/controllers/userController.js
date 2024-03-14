@@ -35,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const authUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username }); //take email from the inputs and take the email from the db and check them if they ma
+  const user = await User.findOne({ username }); //take email from the inputs and take the email from the db and check them if they match
   if (user && (await user.matchedPassword(password))) {
     res.status(200).json({
       message: `welcome ${user.username}`,
@@ -73,7 +73,7 @@ const SendMail = async (req, res, next) => {
       from: "shopcompass.sc@gmail.com",
       to: Email,
       subject: emailSubject,
-      text: emailMessage,
+      html: emailMessage,
     };
 
     const info = await transporter.sendMail(mailOptions);
