@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../modules/user");
 const Rating = require("../modules/Rating");
 const nodemailer = require("nodemailer");
-const {generateToken} = require("../config/generateToken")
+const { generateToken } = require("../config/generateToken");
 const { emailSubject, emailMessage } = require("./emailConfig");
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -25,7 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
-      token : generateToken(user._id)
+      token: generateToken(user._id),
     });
   } else {
     res.status(500).json({ message: "User registration failed" });
@@ -42,15 +42,13 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
-      token : generateToken(user._id)
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
     throw new Error("invalid email and password");
   }
 });
-
-
 
 const SendMail = async (req, res, next) => {
   try {
@@ -85,7 +83,6 @@ const SendMail = async (req, res, next) => {
   }
 };
 
-
 const saveFeedback = async (req, res) => {
   try {
     const { name, title, body, rating } = req.body;
@@ -112,8 +109,6 @@ const saveFeedback = async (req, res) => {
   }
 };
 
-
-
 const resetPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
@@ -124,7 +119,7 @@ const resetPassword = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     user.resetToken = resetToken;
-    user.resetTokenExpiration = Date.now() + 3600000; 
+    user.resetTokenExpiration = Date.now() + 3600000;
     await user.save();
 
     const resetLink = `http://localhost:3000/reset-password?token=${resetToken}`;
@@ -165,12 +160,10 @@ const sendResetPasswordEmail = async (email, resetLink) => {
   await transporter.sendMail(mailOptions);
 };
 
-
-
 module.exports = {
   registerUser,
   authUser,
   SendMail,
   saveFeedback,
-  resetPassword
+  resetPassword,
 };

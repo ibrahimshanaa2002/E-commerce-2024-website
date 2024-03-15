@@ -8,6 +8,6 @@ const emailMessage = fs.readFileSync(
   path.resolve(__dirname, "./emailConfig/emailTemplate.html"),
   "utf8"
 );
-console.log(emailMessage)
+console.log(emailMessage);
 
 module.exports = { emailSubject, emailMessage };
