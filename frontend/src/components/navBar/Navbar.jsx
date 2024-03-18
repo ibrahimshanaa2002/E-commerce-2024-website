@@ -8,15 +8,10 @@ import "./Navbar.css";
 import CategoriesDropDown from "./CategoriesDropDown";
 import SearchPopup from "./SearchPopup";
 import { CartContext } from "../../context/CartContext/cartContextProvider";
-import { FaBagShopping, FaRegCircleDot } from "react-icons/fa6";
+import { FaRegCircleDot } from "react-icons/fa6";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { BiShoppingBag } from "react-icons/bi";
-import {
-  TbCategory,
-  TbMoodKid,
-  TbPlaneArrival,
-  TbProgressAlert,
-} from "react-icons/tb";
+import { TbMoodKid, TbPlaneArrival, TbProgressAlert } from "react-icons/tb";
 import { IoHomeOutline } from "react-icons/io5";
 import { LiaFemaleSolid, LiaMaleSolid } from "react-icons/lia";
 
