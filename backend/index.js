@@ -5,6 +5,7 @@ const connectDb = require("./config/db");
 const userRoute = require("./Routes/userRoute");
 const productRoute = require("./Routes/productRoute") 
 const cartRoute =require("./Routes/cartRoute")
+const chekoutRoute = require("./Routes/checkOutRoute")
 dotenv.config();
 
 // Connect to MongoDB
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/user", userRoute);
 app.use("/api/product",productRoute)
 app.use("/api/cart",cartRoute)
+app.use("/api",chekoutRoute)
 
 // Start the server
 const PORT = process.env.PORT || 4001;

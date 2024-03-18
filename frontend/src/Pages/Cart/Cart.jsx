@@ -9,6 +9,7 @@ const Cart = () => {
   // User context
   const { user } = useContext(UserContext);
 
+
   // State variables
   const [productsInCart, setProductsInCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
