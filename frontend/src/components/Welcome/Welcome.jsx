@@ -14,8 +14,6 @@ const Welcome = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const { user } = useContext(UserContext);
 
-
-
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 600);

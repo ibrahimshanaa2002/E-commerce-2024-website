@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import "./Cart.css";
 import { FaTrashCan } from "react-icons/fa6";
 import { MdOutlineDiscount } from "react-icons/md";
@@ -6,11 +6,40 @@ import { UserContext } from "../../context/userContext/userContextProvider";
 import axios from "axios";
 
 const Cart = () => {
+  // User context
   const { user } = useContext(UserContext);
-  const [productsInCart, setProductsInCart] = useState([]);
-  const DISCOUNT_RATE = 0.2;
-  const DELEVARY = 15;
 
+  // State variables
+  const [productsInCart, setProductsInCart] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  // Constants
+  const DISCOUNT_RATE = 0.2;
+  const DELIVERY = 15;
+
+  // Function to calculate total cost for a product
+  const calculateTotalCost = useCallback((quantity, price) => {
+    return quantity * price;
+  }, []);
+
+  // Function to calculate subtotal and total
+  const calculateSubtotal = useCallback(
+    (products) => {
+      const newSubtotal = products.reduce(
+        (total, product) =>
+          total + calculateTotalCost(product.quantity, product.newprice),
+        0
+      );
+      const newTotal = newSubtotal - newSubtotal * DISCOUNT_RATE + DELIVERY;
+
+      setSubtotal(newSubtotal);
+      setTotal(newTotal);
+    },
+    [calculateTotalCost]
+  );
+
+  // Fetch products in the cart on component mount
   useEffect(() => {
     const fetchProductsInCart = async () => {
       try {
@@ -26,27 +55,18 @@ const Cart = () => {
         );
 
         setProductsInCart(response.data.productsInCart);
+
+        // Calculate subtotal and total on products update
+        calculateSubtotal(response.data.productsInCart);
       } catch (error) {
         console.error("Error fetching products in cart:", error);
       }
     };
 
     fetchProductsInCart();
-  }, []);
+  }, [calculateSubtotal]);
 
-  // Function to calculate total cost for a product
-  const calculateTotalCost = (quantity, price) => {
-    return quantity * price;
-  };
-
-  // Calculate subtotal for all products in the cart
-  const subtotal = productsInCart.reduce(
-    (total, product) =>
-      total + calculateTotalCost(product.quantity, product.newprice),
-    0
-  );
-
-  const TOOTAL = subtotal - subtotal * DISCOUNT_RATE + DELEVARY;
+  // Function to handle deletion of a product from cart
   const handleDelete = async (productId) => {
     try {
       const userData = JSON.parse(localStorage.getItem("user"));
@@ -62,6 +82,11 @@ const Cart = () => {
         productsInCart.filter((product) => product._id !== productId)
       );
 
+      // Recalculate subtotal and total after deletion
+      calculateSubtotal(
+        productsInCart.filter((product) => product._id !== productId)
+      );
+
       console.log("Product deleted successfully:", productId);
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -70,6 +95,7 @@ const Cart = () => {
 
   return (
     <div>
+      {/* Cart title */}
       <div className="title px-5 py-5">
         {user ? (
           <h1 className="text-5xl font-bold flex items-center">Your Cart</h1>
@@ -77,7 +103,9 @@ const Cart = () => {
           ""
         )}
       </div>
+      {/* Cart content */}
       <div className="full-container w-full flex px-5 py-5 gap-5">
+        {/* Left side - Cart items */}
         <div className="left-sidess border-[1px] overflow-y-auto border-gray-300 rounded-2xl flex flex-row w-[70%]">
           <div className="w-full">
             {productsInCart.map((product) => (
@@ -93,7 +121,6 @@ const Cart = () => {
                       />
                     </div>
                   </div>
-
                   <div className="pl-3 w-full">
                     {" "}
                     <div className="flex items-center justify-between w-full pt-1">
@@ -149,28 +176,34 @@ const Cart = () => {
             ))}
           </div>
         </div>
+        {/* Right side - Order summary */}
         <div className="right-sidess border-[1px] border-gray-300 rounded-2xl w-1/2 p-5">
           <div>
             <h1 className="text-3xl font-semibold pb-5">Order Summary</h1>
+            {/* Subtotal */}
             <div className="subtotal flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Subtotal</h1>
               <h2 className="text-xl font-bold">${subtotal}</h2>
             </div>
+            {/* Discount */}
             <div className="discount flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Discount (-20%)</h1>
               <h2 className="text-xl text-red-500 font-bold">
                 ${(subtotal * DISCOUNT_RATE).toFixed(2)}
               </h2>
             </div>
+            {/* Delivery fee */}
             <div className="fees flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Delivery Fee</h1>
-              <h2 className="text-xl  font-bold">${DELEVARY}</h2>
+              <h2 className="text-xl  font-bold">${DELIVERY}</h2>
             </div>
             <hr />
+            {/* Total */}
             <div className="total flex items-center justify-between py-2">
               <h1 className="text-xl text-gray-700">Total</h1>
-              <h2 className="text-2xl  font-bold">${TOOTAL}</h2>
+              <h2 className="text-2xl  font-bold">${total}</h2>
             </div>
+            {/* Promo code */}
             <div className="promo flex items-center gap-2">
               <div className="relative w-[70%] py-5">
                 <input
@@ -190,6 +223,7 @@ const Cart = () => {
                 <span>Apply</span>
               </div>
             </div>
+            {/* Checkout button */}
             <div className="checkout flex justify-center items-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ">
               <span>Go To Checkout</span>
             </div>

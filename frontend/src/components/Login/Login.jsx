@@ -30,7 +30,7 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
       setUserName("");
       setPassword("");
       setError("");
-      navigate("/"); // Redirect to the /authentication route
+      navigate("/"); // Redirect to the / route
     } catch (error) {
       console.error("Error logging in:", error);
       setError(

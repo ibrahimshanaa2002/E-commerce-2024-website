@@ -1,9 +1,5 @@
-// Frontend.jsx
-
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import ReviewsCardHeader from "./ReviewsCardHeader";
-import FeedBackSubmit from "./FeedBackSubmit";
 import { RatingContext } from "../../context/ratingContext/ratingContextProvider";
 
 const ReviewsCard = () => {
@@ -33,7 +29,6 @@ const ReviewsCard = () => {
             key={review._id}
             className="rounded-md shadow-lg bg-white p-5 flex flex-col"
           >
-          
             <div className="flex space-x-0.5 mb-2">
               {[...Array(5)].map((_, index) => (
                 <svg

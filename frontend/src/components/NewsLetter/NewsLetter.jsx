@@ -10,12 +10,9 @@ const NewsLetter = () => {
   const handleSubmitt = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:4001/api/user/sendMail",
-        {
-          Email: email, // Send the email address in the 'Email' field
-        }
-      );
+      await axios.post("http://localhost:4001/api/user/sendMail", {
+        Email: email, // Send the email address in the 'Email' field
+      });
       setEmail("");
       setError(""); // Reset error state if submission succeeds
       alert("Email submitted successfully!");

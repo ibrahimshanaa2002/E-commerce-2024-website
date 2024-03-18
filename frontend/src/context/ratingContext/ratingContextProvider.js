@@ -1,5 +1,3 @@
-// ratingContextProvider.js
-
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -7,7 +5,7 @@ export const RatingContext = createContext([]);
 
 const RatingContextProvider = (props) => {
   const [ratings, setRatings] = useState([]);
-  
+
   useEffect(() => {
     const fetchAllRatings = async () => {
       try {

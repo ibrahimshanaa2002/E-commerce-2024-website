@@ -16,9 +16,6 @@ const Delivery = () => {
 
   return (
     <div>
-      {/* Show the loading spinner if the image is not loaded */}
-
-      {/* Render the image and attach onLoad event listener */}
       <div>
         <img
           src={DeliveryServicePNG}
@@ -29,6 +26,7 @@ const Delivery = () => {
           onLoad={handleImageLoad} // Call handleImageLoad when the image is loaded
         />
         <div className="flex justify-center items-center ">
+          {/* Show the loading spinner if the image is not loaded */}
           {!imageLoaded && (
             <ThreeDots
               visible={true}

@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const ResetPassword = () => {
   const location = useLocation();
-  const resetToken = new URLSearchParams(location.search).get('token');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const resetToken = new URLSearchParams(location.search).get("token");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage("Passwords do not match");
       return;
     }
     try {
-      const response = await axios.put('http://localhost:4001/api/user/resetPassword', {
-        token: resetToken,
-        password: password,
-      });
+      const response = await axios.put(
+        "http://localhost:4001/api/user/resetPassword",
+        {
+          token: resetToken,
+          password: password,
+        }
+      );
       setMessage(response.data.message);
     } catch (error) {
-      setMessage(error.response.data.message || 'Error resetting password');
+      setMessage(error.response.data.message || "Error resetting password");
     }
   };
 

@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 
-// emailConfig.js
 const emailSubject =
   "Welcome to Shop.co - Your Ultimate Online Shopping Destination!";
 const emailMessage = fs.readFileSync(

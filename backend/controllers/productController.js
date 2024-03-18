@@ -1,19 +1,23 @@
 const asyncHandler = require("express-async-handler");
 const Product = require("../modules/Product");
-const Sale = require("../modules/Sale")
+const Sale = require("../modules/Sale");
 
 // addproduct
 const addProduct = asyncHandler(async (req, res) => {
   try {
     // Split color and size strings into arrays
-    const colors = req.body.color.map(colorString => colorString.split(' ').map(color => color.trim()));
-    const sizes = req.body.size.map(sizeString => sizeString.split(' ').map(size => size.trim()));
+    const colors = req.body.color.map((colorString) =>
+      colorString.split(" ").map((color) => color.trim())
+    );
+    const sizes = req.body.size.map((sizeString) =>
+      sizeString.split(" ").map((size) => size.trim())
+    );
 
     // Create a new product instance with split color and size arrays
     const newProduct = new Product({
       ...req.body,
       color: colors.flat(), // Flatten the array to remove nested arrays
-      size: sizes.flat() // Flatten the array to remove nested arrays
+      size: sizes.flat(), // Flatten the array to remove nested arrays
     });
 
     // Save the product to the database
@@ -24,18 +28,21 @@ const addProduct = asyncHandler(async (req, res) => {
   }
 });
 
-
 // updateProduct
 
 const updatedProduct = asyncHandler(async (req, res) => {
-  const productId = req.params.productId; 
-  const updateFields = req.body;  
+  const productId = req.params.productId;
+  const updateFields = req.body;
 
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(productId, updateFields, { new: true });
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      updateFields,
+      { new: true }
+    );
 
     if (!updatedProduct) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.status(200).json(updatedProduct);
@@ -43,10 +50,6 @@ const updatedProduct = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
 
 // arrivals
 const newArrivals = asyncHandler(async (req, res) => {
@@ -66,30 +69,30 @@ const topSelling = asyncHandler(async (req, res) => {
       {
         $group: {
           _id: "$product",
-          totalQuantitySold: { $sum: "$quantity" }
-        }
+          totalQuantitySold: { $sum: "$quantity" },
+        },
       },
       {
         $lookup: {
-          from: "products", // name of the collection to lookup
+          from: "products",
           localField: "_id",
           foreignField: "_id",
-          as: "productInfo"
-        }
+          as: "productInfo",
+        },
       },
       {
-        $unwind: "$productInfo" // Unwind to flatten the productInfo array
+        $unwind: "$productInfo", // Unwind to flatten the productInfo array
       },
       {
-        $sort: { totalQuantitySold: -1 } // Sort by total quantity sold in descending order
+        $sort: { totalQuantitySold: -1 }, // Sort by total quantity sold in descending order
       },
       {
         $project: {
           _id: "$productInfo._id",
           title: "$productInfo.title",
-          totalQuantitySold: 1
-        }
-      }
+          totalQuantitySold: 1,
+        },
+      },
     ]);
 
     res.status(200).json(topSellingProducts);
@@ -98,7 +101,7 @@ const topSelling = asyncHandler(async (req, res) => {
   }
 });
 const allProducts = asyncHandler(async (req, res) => {
-  const productId = req.params
+  const productId = req.params;
 
   try {
     const products = await Product.find();
@@ -109,12 +112,10 @@ const allProducts = asyncHandler(async (req, res) => {
   }
 });
 
-
 module.exports = {
   addProduct,
   updatedProduct,
   newArrivals,
   topSelling,
   allProducts,
-
 };

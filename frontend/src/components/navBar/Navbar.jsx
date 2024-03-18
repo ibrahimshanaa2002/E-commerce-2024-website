@@ -1,6 +1,4 @@
 import React, { useContext, useState } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -13,21 +11,10 @@ import { CartContext } from "../../context/CartContext/cartContextProvider";
 
 function Navbar() {
   const [mobileNav, setMobileNav] = useState(false);
-  const [isSearchPopupOpen, setSearchPopupOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const { itemCount } = useContext(CartContext);
 
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-    setSearchPopupOpen(event.target.value.trim() !== ""); // Open search popup only if there's a search query
-  };
-
-  const handleSearchIconClick = () => {
-    setSearchPopupOpen(!isSearchPopupOpen);
   };
 
   return (

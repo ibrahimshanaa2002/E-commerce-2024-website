@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { IoClose } from "react-icons/io5";
 import FeedBackSubmit from "./FeedBackSubmit";
-import RatingContextProvider from "../../context/ratingContext/ratingContextProvider";
 import axios from "axios";
 import "./ReviewsCard.css";
 
@@ -32,7 +31,7 @@ const ReviewsCardHeader = () => {
 
   const handleFilterByDate = async (dateRange) => {
     try {
-      const response = await axios.get(
+      await axios.get(
         `http://localhost:4001/api/user/feedback?dateRange=${dateRange}`
       );
       // Handle the filtered data, maybe update context or state with the filtered reviews

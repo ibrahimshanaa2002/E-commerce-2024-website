@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ProductContext } from "../../context/productContext/productContextProvider"; // Adjust the path to your context file
+import { ProductContext } from "../../context/productContext/productContextProvider"; // Adjust the path to the context file
 import { IoSearchOutline } from "react-icons/io5";
 
 const SearchPopup = () => {
@@ -84,7 +84,7 @@ const SearchPopup = () => {
             <Link
               to={`/product/${product._id}`}
               key={product._id}
-              className="flex items-center border-b border-gray-200 py-4 transition duration-300 ease-in-out hover:bg-opacity-60 bg-white bg-opacity-50 transition duration-300 ease-in-out hover:bg-gray-100 px-5 "
+              className="flex items-center border-b border-gray-200 py-4  hover:bg-opacity-60 bg-white bg-opacity-50 transition duration-300 ease-in-out hover:bg-gray-100 px-5 "
             >
               {/* Product image */}
               <img

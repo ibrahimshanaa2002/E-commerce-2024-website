@@ -45,18 +45,18 @@
   }
   .column-img {
     display: flex;
-    flex-direction: row; /* Changed to column to stack images vertically */
+    flex-direction: row;
     width: 100%;
     padding: 0;
-    overflow-x: auto; /* Add horizontal scrollbar when needed */
-    white-space: nowrap; /* Prevent wrapping of images */
+    overflow-x: auto;
+    white-space: nowrap;
     gap: 5px;
   }
 
   .column-img img {
-    width: 100%; /* Set image width to 100% of container */
-    max-width: 30%; /* Limit maximum image width to 30% of container */
-    margin-bottom: 10px; /* Add margin between images */
+    width: 100%;
+    max-width: 30%;
+    margin-bottom: 10px;
   }
 }
 @media only screen and (max-width: 1520px) {

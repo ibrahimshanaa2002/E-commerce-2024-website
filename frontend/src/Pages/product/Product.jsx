@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/productContext/productContextProvider";
 import Loader from "../../components/Loader/Loader";
 import axios from "axios";
-import { UserContext } from "../../context/userContext/userContextProvider";
 
 const convertColorToHex = (colorName) => {
   const tempColor = document.createElement("div");
@@ -17,26 +16,26 @@ const convertColorToHex = (colorName) => {
   return computedColor;
 };
 const Product = () => {
-  const { productId } = useParams();
-  const { products } = useContext(ProductContext);
-  const product = products.find((e) => e._id === productId);
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
-  const [ error ,setError] = useState("")
-  const { user } = useContext(UserContext);
+  const { productId } = useParams(); // Fetching product ID from URL
+  const { products } = useContext(ProductContext); // Getting products from context
+  const product = products.find((e) => e._id === productId); // Finding the current product
+  const [selectedColor, setSelectedColor] = useState(null); // State for selected color
+  const [selectedSize, setSelectedSize] = useState(null); // State for selected size
+  const [error, setError] = useState(""); // State for error messages
 
+  // Function to select color
   const selectColor = (color) => {
     setSelectedColor(color);
   };
-
+  // Function to handle size selection
   const handleSizeClick = (size) => {
     setSelectedSize(size);
   };
-
+  // Function to check if color is white
   const isWhite = (color) => {
     return color.toLowerCase() === "white";
   };
-
+  // State and functions for quantity
   const [count, setCount] = useState(1);
   const incrementCount = () => {
     setCount(count + 1);
@@ -46,53 +45,57 @@ const Product = () => {
       setCount(count - 1);
     }
   };
+  // Function to add item to cart
   const addToCart = async () => {
     try {
+      // Validating selection and quantity
       if (!selectedColor || !selectedSize || count <= 0) {
         setError("Please select color, size, and quantity");
         return;
       }
+      // Getting user token from local storage
       const userData = JSON.parse(localStorage.getItem("user"));
-      const userToken = userData ? userData.token : null; 
+      const userToken = userData ? userData.token : null;
       if (!userToken) {
+        // Redirecting to authentication if user token is not available
         window.location.href = "/authentication";
         return;
       }
+      // Data to send to the server
       const data = {
         quantity: count,
         size: selectedSize,
-        color: selectedColor
+        color: selectedColor,
       };
-      const response = await axios.post(
+      // Making POST request to add item to cart
+      await axios.post(
         `http://localhost:4001/api/cart/addToCart/${productId}`,
         data,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
         }
       );
     } catch (error) {
       console.error("Failed to add item to cart:", error);
-
     }
   };
-  
-  
+  // Loading spinner while product is loading
   if (!product) {
     return (
       <div className="h-screen flex w-full justify-center items-center">
         <Loader />
       </div>
-    ); // return a loading spinner or component
+    );
   }
 
   return (
     <div className="main w-full h-screen flex justify-around gap-6 p-10 ">
-   
+      {/* Left container */}
       <div className="left-container w-1/2  flex justify-center gap-6">
-     
+        {/* Big product image */}
         <div className="big-image img-hover-zoom ">
           <img
             src={product.img}
@@ -100,6 +103,7 @@ const Product = () => {
             className="h-full hover:cursor-pointer"
           />
         </div>
+        {/* Column of small product images */}
         <div className="column-img px-2 h-full justify-between  flex flex-col overflow-auto gap-3">
           <img
             src={product.img}
@@ -128,11 +132,15 @@ const Product = () => {
           />
         </div>
       </div>
+      {/* Right container */}
       <div className="right-container w-1/2 h-full flex flex-col  justify-center">
-      {error && <span className="text-red-400 underline">*{error}*</span>}
+        {/* Error message */}
+        {error && <span className="text-red-400 underline">*{error}*</span>}
+        {/* Product title */}
         <h1 className="text-5xl font-extrabold uppercase title">
           {product.title}
         </h1>
+        {/* Product rating */}
         <div className="Main-starts flex justify-start items-center text-center gap-3 py-5">
           <div className="stars flex text-yellow-400 text-2xl">
             <RiStarSFill />
@@ -143,6 +151,7 @@ const Product = () => {
           </div>
           <div className="rate">4.5/ 5</div>
         </div>
+        {/* Product prices and discount */}
         <div className="price-container flex justify-start items-center gap-4">
           <div className="price">
             <h1 className="font-bold text-3xl">${product.newprice}</h1>
@@ -158,9 +167,11 @@ const Product = () => {
             </h1>
           </div>
         </div>
+        {/* Product description */}
         <div className="product-desc border-b-2 py-2">
           <p className="py-5">{product.desc}</p>
         </div>
+        {/* Color selection */}
         <div className="color-container border-b-2 py-2">
           <h1>Select Color</h1>
           <div className="colors-circle py-5 gap-2 flex flex-wrap  items-center">
@@ -189,6 +200,7 @@ const Product = () => {
             ))}
           </div>
         </div>
+        {/* Size selection */}
         <div className="size-container border-b-2 py-2">
           <h1>Select Size</h1>
           <div className="sizes flex flex-wrap gap-2 md:gap-4 py-2">
@@ -205,7 +217,9 @@ const Product = () => {
             ))}
           </div>
         </div>
+        {/* Quantity counter */}
         <div className="Counter flex text-center items-center w-full py-5 gap-4">
+          {/* Counter buttons */}
           <div className="counter-container w-[30%]  bg-[#F0F0F0] rounded-full gap-5 p-3 flex items-center justify-around">
             <div className="Negative">
               <button className=" text-3xl" onClick={decrementCount}>
@@ -218,13 +232,16 @@ const Product = () => {
 
             <div className="positive">
               <button className="text-3xl" onClick={incrementCount}>
-                {/* this is the quantity */}
-                +
+                {/* this is the quantity */}+
               </button>
             </div>
           </div>
-          <div onClick={addToCart} className="Add-To-Cart-container w-[70%] bg-black text-white rounded-full gap-5 p-3 flex items-center justify-center hover:text-black hover:bg-orange-400 duration-300 cursor-pointer">
-            <button className="cart-button text-3xl" >Add To Cart</button>
+          {/* Add to cart button */}
+          <div
+            onClick={addToCart}
+            className="Add-To-Cart-container w-[70%] bg-black text-white rounded-full gap-5 p-3 flex items-center justify-center hover:text-black hover:bg-orange-400 duration-300 cursor-pointer"
+          >
+            <button className="cart-button text-3xl">Add To Cart</button>
           </div>
         </div>
       </div>

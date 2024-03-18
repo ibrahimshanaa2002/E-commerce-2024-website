@@ -15,8 +15,9 @@ const AboutUs = () => {
           <img
             className="blueDots"
             src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/aw3.svg"
+            alt=""
           />
-          <img className="mainImg" src={fashionimg} />
+          <img alt="" className="mainImg" src={fashionimg} />
         </div>
         <div className="responsive-container-block textSide">
           <p className="text-blk heading">About Us</p>

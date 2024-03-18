@@ -70,7 +70,7 @@ const AddProduct = () => {
         size,
         category,
         style,
-        sex :selectedSex,
+        sex: selectedSex,
         season: selectedSeason, // Pass selected season
         img: img,
       })
@@ -83,7 +83,7 @@ const AddProduct = () => {
         setColor([]);
         setSize([]);
         setCategory("");
-        setSex([])
+        setSex([]);
         setSelectedSeason(""); // Reset selected season
         setImgFile("");
       })

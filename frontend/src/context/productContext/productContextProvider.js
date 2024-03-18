@@ -1,12 +1,16 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
+// Create a context for Product data
 export const ProductContext = createContext({});
 
+// Provider component for ProductContext
 const ProductContextProvider = (props) => {
+  // State for products and new arrivals
   const [products, setProducts] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
 
+  // Filtering functions
   const filterProductsForWomen = () => {
     return products.filter((product) => product.sex === "Women");
   };
@@ -42,14 +46,14 @@ const ProductContextProvider = (props) => {
     return products.filter((product) => product.season === "Gym");
   };
 
-
+  // Effect hook to fetch new arrivals
   useEffect(() => {
     const fetchNewArrivals = async () => {
       try {
         const response = await axios.get(
           "http://localhost:4001/api/product/newArrivals"
         );
-        setNewArrivals(await response.data);
+        setNewArrivals(response.data);
         // Assuming the response data is an array of products
       } catch (error) {
         console.error("Error fetching new arrivals:", error);
@@ -59,13 +63,14 @@ const ProductContextProvider = (props) => {
     fetchNewArrivals();
   }, []);
 
+  // Effect hook to fetch all products
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
         const response = await axios.get(
           "http://localhost:4001/api/product/allProducts"
         );
-        setProducts(await response.data);
+        setProducts(response.data);
         // Assuming the response data is an array of products
       } catch (error) {
         console.error("Error fetching all products:", error);
@@ -85,13 +90,10 @@ const ProductContextProvider = (props) => {
     filterProductspring: filterProductspring,
     filterProductsForsummer: filterProductsForsummer,
     filterProductsForwinter: filterProductsForwinter,
-    filterProductsForCasual:filterProductsForCasual,
-    filterProductsForFormal:filterProductsForFormal,
-    filterProductsForParty:filterProductsForParty,
-    filterProductsForGym:filterProductsForGym
-
-
-
+    filterProductsForCasual: filterProductsForCasual,
+    filterProductsForFormal: filterProductsForFormal,
+    filterProductsForParty: filterProductsForParty,
+    filterProductsForGym: filterProductsForGym,
   };
 
   return (
