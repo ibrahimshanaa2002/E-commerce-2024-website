@@ -15,6 +15,9 @@ import Man from "./Pages/Categories/Man";
 import Kids from "./Pages/Categories/Kids";
 import ForgetPassword from "./components/forgetPassword/ForgetPassword";
 import ResetPassword from "./components/forgetPassword/ResetPassword";
+import AboutUs from "./Pages/AboutUs/AboutUs";
+import Feature from "./Pages/Feature/Feature";
+import ContactUs from "./Pages/ContactUs/ContactUs";
 
 library.add(fas);
 
@@ -45,6 +48,10 @@ function App() {
         <Route path="/Kids-Product" element={<Kids/>}/>
         <Route path="/forget-password" element={<ForgetPassword/>}/>
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/AboutUs" element={<AboutUs/>} />
+        <Route path="/Features" element={<Feature/>} />
+        <Route path="/ContactUs" element={<ContactUs/>} />
+        
       </Routes>
     </BrowserRouter>
   );

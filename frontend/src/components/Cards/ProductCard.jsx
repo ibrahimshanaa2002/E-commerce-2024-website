@@ -4,6 +4,7 @@ import star2 from "../../assets/star_dull_icon.png";
 import { MdModeEdit } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import "./Card.css";
 
 const ProductCard = (props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -34,8 +35,7 @@ const ProductCard = (props) => {
         throw new Error("Failed to update product.");
       }
 
-      // Update component state with the updated product data
-      const updatedProductData = response.data; // Assuming the response contains the updated product data
+      const updatedProductData = response.data;
       setEditedTitle(updatedProductData.title);
       setEditedDesc(updatedProductData.desc);
       setEditedNewPrice(updatedProductData.newprice);
@@ -51,15 +51,12 @@ const ProductCard = (props) => {
   };
 
   const handleDelete = async () => {
-    // Display a confirmation dialog
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this product?"
     );
 
-    // If the user confirms deletion
     if (confirmDelete) {
       try {
-        // Send a DELETE request to delete the product
         await axios.delete(
           `http://localhost:4001/api/product/product/${props._id}`
         );
@@ -78,15 +75,16 @@ const ProductCard = (props) => {
       className={`w-full sm:w-auto ${isAdminRoute ? "admin-product-card" : ""}`}
     >
       {isAdminRoute ? (
-        <div className="w-full h-full border border-gray-200 rounded-lg overflow-hidden flex flex-col">
-          <div className="w-full h-[30vh] relative img-hover-zoom">
+        <div className="w-full h-full border border-gray-200 justify-between rounded-lg overflow-hidden flex flex-col">
+          <div className={`w-full relative img-hover-zoom`}>
             <img
               src={props.img}
-              className="w-full h-full object-cover"
+              className="w-full h-auto"
               alt="Product"
+              style={{ maxWidth: "100%" }}
             />
           </div>
-          <div className="p-4 flex flex-col items-start justify-between flex-grow">
+          <div className="p-4 flex flex-col items-start flex-grow">
             <div className="text-sm sm:text-base md:text-lg flex w-full justify-between items-center gap-4">
               {isEditing ? (
                 <input
@@ -102,7 +100,7 @@ const ProductCard = (props) => {
                 <MdModeEdit />
               </span>
             </div>
-            <div className="text-sm sm:text-base md:text-lg flex gap-5 w-full items-center">
+            <div className="text-sm sm:text-base md:text-lg flex w-full items-center gap-5">
               {isEditing ? (
                 <input
                   className="w-full border-2 border-gray-200"
@@ -119,13 +117,13 @@ const ProductCard = (props) => {
               {isEditing ? (
                 <>
                   <input
-                    className="w-full border-2 border-gray-200"
+                    className="w-24 border-2 border-gray-200"
                     type="number"
                     value={editedNewPrice}
                     onChange={(e) => setEditedNewPrice(e.target.value)}
                   />
                   <input
-                    className="w-full border-2 border-gray-200"
+                    className="w-24 border-2 border-gray-200"
                     type="number"
                     value={editedOldPrice}
                     onChange={(e) => setEditedOldPrice(e.target.value)}
@@ -142,7 +140,6 @@ const ProductCard = (props) => {
                 </>
               )}
             </div>
-            {/* Save button */}
             {isEditing && (
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -151,7 +148,6 @@ const ProductCard = (props) => {
                 Save
               </button>
             )}
-            {/* Delete button */}
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               onClick={handleDelete}
@@ -163,21 +159,27 @@ const ProductCard = (props) => {
       ) : (
         <Link
           to={`/product/${props._id}`}
-          className="flex flex-col items-start justify-between w-full h-full border border-gray-200 rounded-lg overflow-hidden"
+          className="flex flex-col items-start  w-full h-full border border-gray-200 rounded-lg overflow-hidden"
         >
-          <div className="w-full flex h-[50vh] relative img-hover-zoom">
+          <div className={`w-full relative img-hover-zoom h-auto`}>
             <img
               src={props.img}
-              className="w-full h-full object-cover"
+              className="w-full h-auto"
               alt="Product"
+              style={{ maxWidth: "100%" }}
             />
           </div>
-          <div className="p-4 flex flex-col items-start justify-between h-[30vh]">
-            <div className="text-sm sm:text-base md:text-lg font-bold ">
+          <div className="p-4 flex flex-col gap-9 justify-between h-1/2">
+            <div
+              className="text-sm sm:text-base md:text-lg font-bold titles"
+              style={{ height: "4rem" }}
+            >
               {props.title}
             </div>
-            <div className="text-sm sm:text-base md:text-lg ">{props.desc}</div>
-            <div className="flex items-center mb-2">
+            <div className="text-sm sm:text-base md:text-lg overflow-hidden  descriptions ">
+              {props.desc}
+            </div>
+            <div className="flex items-center mb-2 py-2 justify-start">
               <img src={star1} className="w-4 h-4 mr-1" alt="Star" />
               <img src={star1} className="w-4 h-4 mr-1" alt="Star" />
               <img src={star1} className="w-4 h-4 mr-1" alt="Star" />

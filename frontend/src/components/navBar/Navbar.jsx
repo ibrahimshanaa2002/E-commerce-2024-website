@@ -14,10 +14,16 @@ import { CartContext } from "../../context/CartContext/cartContextProvider";
 function Navbar() {
   const [mobileNav, setMobileNav] = useState(false);
   const [isSearchPopupOpen, setSearchPopupOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { itemCount } = useContext(CartContext);
 
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    setSearchPopupOpen(event.target.value.trim() !== ""); // Open search popup only if there's a search query
   };
 
   const handleSearchIconClick = () => {
@@ -49,33 +55,8 @@ function Navbar() {
             <CategoriesDropDown />
           </li>
         </ul>
-        <div className="bg-gray-100 hidden sm:flex w-full px-2 py-1 ml-5 placeholder:text-[10px] rounded-full">
-          <IoSearchOutline
-            size={30}
-            className="text-gray-500 cursor-pointer"
-            onClick={handleSearchIconClick}
-          />
-          <div className="absolute">{isSearchPopupOpen && <SearchPopup />}</div>
-
-          <input
-            className="bg-transparent border-none rounded-none w-full  outline-none px-4 "
-            type="text"
-            placeholder="Search For Products..."
-            name=""
-            id=""
-          />
-        </div>
+        <SearchPopup />
         <div className="flex gap-4  items-center justify-center px-8 ">
-          <div className="bg-gray-100 flex sm:hidden w-full px-2 placeholder:text-[6px] py-1 rounded-full">
-            <IoSearchOutline size={30} className="text-gray-500" />
-            <input
-              className="bg-transparent border-none rounded-none w-full  outline-none px-4 "
-              type="text"
-              placeholder="Search For Products..."
-              name=""
-              id=""
-            />
-          </div>
           <Link to={"/Cart"}>
             <div className="relative ">
               <FiShoppingCart

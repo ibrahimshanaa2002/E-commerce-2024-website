@@ -59,6 +59,7 @@ const FeedBackSubmit = () => {
         setReview("");
         setSubmitted(true); // Set submitted state to true after successful submission
       } catch (error) {
+        setError("Name or Title is already in use.");
         console.error("Error submitting feedback:", error);
       }
     }

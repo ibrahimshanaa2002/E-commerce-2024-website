@@ -17,20 +17,26 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4001/api/user/login", {
-        username: username,
-        password: password,
-      });
+      const response = await axios.post(
+        "http://localhost:4001/api/user/login",
+        {
+          username: username,
+          password: password,
+        }
+      );
       console.log("User logged in:", response.data);
-     const userData = response.data;
-      loginUser(userData)
+      const userData = response.data;
+      loginUser(userData);
       setUserName("");
       setPassword("");
       setError("");
       navigate("/"); // Redirect to the /authentication route
     } catch (error) {
       console.error("Error logging in:", error);
-      setError(error.response.data.message || "Error logging in"); // Set the error message received from the server
+      setError(
+        error.response.data.message ||
+          "Check if the account username or password was typed correctly"
+      ); // Set the error message received from the server
     }
   };
 
@@ -57,7 +63,9 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
                   </div>
                   <input
                     value={username}
-                    onChange={(e) => { setUserName(e.target.value) }}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
                     type="text"
                     placeholder="userName"
                     className="outline-none rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
@@ -75,28 +83,36 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
                   <div className="flex items-center relative">
                     <input
                       value={password}
-                      onChange={(e) => { setPassword(e.target.value) }}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
                       type={`${showpassword ? "text" : "password"}`}
                       placeholder="password"
                       className="outline-none  rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
                     />
                     <div className="text-2xl cursor-pointer absolute right-0 duration-200 text-[#000700]">
-                      {
-                        showpassword ? <IoIosEyeOff onClick={handlepassword} /> : <IoMdEye onClick={handlepassword} />
-                      }
+                      {showpassword ? (
+                        <IoIosEyeOff onClick={handlepassword} />
+                      ) : (
+                        <IoMdEye onClick={handlepassword} />
+                      )}
                     </div>
-
                   </div>
-
                 </div>
               </div>
             </div>
             <span className="flex justify-end pb-5 ">
-              <Link to={'/forget-password'} className="cursor-pointer duration-10 hover:font-semibold hover:underline">
+              <Link
+                to={"/forget-password"}
+                className="cursor-pointer duration-10 hover:font-semibold hover:underline"
+              >
                 Forgot Password?
               </Link>
             </span>
-            <span onClick={handleSubmit} className="login-button flex justify-center bg-black text-white p-5 rounded-3xl cursor-pointer">
+            <span
+              onClick={handleSubmit}
+              className="login-button flex justify-center bg-black text-white p-5 rounded-3xl cursor-pointer"
+            >
               Login
             </span>
             <div className="flex items-center justify-center py-4">
@@ -111,8 +127,13 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
             <h3 className="flex justify-center pt-9 pointer-events-none">
               Don't have an account?
             </h3>
-            <h1 onClick={handleToggle} className="flex items-center justify-center py-2 ">
-              <span className="hover:font-semibold duration-300 cursor-pointer">Sign Up</span>
+            <h1
+              onClick={handleToggle}
+              className="flex items-center justify-center py-2 "
+            >
+              <span className="hover:font-semibold duration-300 cursor-pointer">
+                Sign Up
+              </span>
             </h1>
           </div>
         </div>

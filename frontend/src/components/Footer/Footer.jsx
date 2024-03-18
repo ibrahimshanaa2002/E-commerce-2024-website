@@ -1,7 +1,14 @@
 import React from "react";
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import { FaCcVisa } from "react-icons/fa";
-import NewsLetter from "../NewsLetter/NewsLetter";
+import { Link } from "react-router-dom";
+
+import {
+  Mastercard,
+  Visa,
+  Paypal,
+  Unionpay,
+  Hiper,
+} from "react-payment-logos/dist/flat";
 
 const Footer = () => {
   return (
@@ -27,8 +34,16 @@ const Footer = () => {
             <div className="flex-col items-center justify-center gap-4 w-full sm:w-auto">
               <h1 className="font-semibold">Company</h1>
               <ul className="mt-2 gap-2 flex-col items-start justify-center">
-                <li>About</li>
-                <li>Features</li>
+                <li>
+                  <Link to={"/AboutUs"} target="_blank">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/Features"} target="_blank">
+                    Features
+                  </Link>
+                </li>
                 <li>Works</li>
                 <li>Career</li>
               </ul>
@@ -37,7 +52,9 @@ const Footer = () => {
             <div className="flex-col items-center justify-center gap-4 w-full py-10 sm:py-0 sm:w-auto">
               <h1 className="font-semibold">Help</h1>
               <ul className="mt-2 gap-2 flex-col items-start justify-center">
-                <li>Customer Support</li>
+                <Link to={"ContactUs"} target="_blank">
+                  <li>Customer Support</li>
+                </Link>
                 <li>Delivery Details</li>
                 <li>Terms & Conditions</li>
                 <li>Privacy Policy</li>
@@ -66,13 +83,25 @@ const Footer = () => {
           </div>
           <div className="w-full h-[1px] bg-orange-600 my-4"></div>
           <div className="flex  flex-row items-center justify-between w-full py-4">
-            <div className="w-full">Shop.co © 2000-2023, All Rights Reserved</div>
-            <div className="flex items-center justify-between sm:justify-end sm:gap-10 w-full">
-              <div><FaCcVisa /></div>
-              <div><FaCcVisa /></div>
-              <div><FaCcVisa /></div>
-              <div><FaCcVisa /></div>
-              <div><FaCcVisa /></div>
+            <div className="w-full">
+              Shop.co © 2000-2023, All Rights Reserved
+            </div>
+            <div className="flex items-center justify-between sm:justify-end sm:gap-10 w-full ">
+              <div className="hover:cursor-pointer">
+                <Visa />
+              </div>
+              <div className="hover:cursor-pointer">
+                <Mastercard />
+              </div>
+              <div className="hover:cursor-pointer">
+                <Paypal />
+              </div>
+              <div className="hover:cursor-pointer">
+                <Unionpay />
+              </div>
+              <div className="hover:cursor-pointer">
+                <Hiper />
+              </div>
             </div>
           </div>
         </div>

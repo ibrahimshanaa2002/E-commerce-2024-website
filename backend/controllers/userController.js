@@ -122,7 +122,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     user.resetTokenExpiration = Date.now() + 3600000;
     await user.save();
 
-    const resetLink = `http://localhost:3000/reset-password?token=${resetToken}`;
+    const resetLink = `http://localhost:4001/reset-password?token=${resetToken}`;
 
     await sendResetPasswordEmail(email, resetLink);
 
