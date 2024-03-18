@@ -33,19 +33,19 @@ const Footer = () => {
             {/* company */}
             <div className="flex-col items-center justify-center gap-4 w-full sm:w-auto">
               <h1 className="font-semibold">Company</h1>
-              <ul className="mt-2 gap-2 flex-col items-start justify-center">
-                <li>
+              <ul className="mt-2 gap-2 flex-col items-start justify-center ">
+                <li className="hover:text-orange-500">
                   <Link to={"/AboutUs"} target="_blank">
                     About Us
                   </Link>
                 </li>
-                <li>
+                <li className="hover:text-orange-500">
                   <Link to={"/Features"} target="_blank">
                     Features
                   </Link>
                 </li>
-                <li>Works</li>
-                <li>Career</li>
+                <li className="hover:text-orange-500">Works</li>
+                <li className="hover:text-orange-500">Career</li>
               </ul>
             </div>
             {/* Help */}
@@ -53,31 +53,33 @@ const Footer = () => {
               <h1 className="font-semibold">Help</h1>
               <ul className="mt-2 gap-2 flex-col items-start justify-center">
                 <Link to={"ContactUs"} target="_blank">
-                  <li>Customer Support</li>
+                  <li className="hover:text-orange-500">Customer Support</li>
                 </Link>
-                <li>Delivery Details</li>
-                <li>Terms & Conditions</li>
-                <li>Privacy Policy</li>
+                <Link to={"Delivery-Details"}>
+                  <li className="hover:text-orange-500">Delivery Details</li>
+                </Link>
+                <li className="hover:text-orange-500">Terms & Conditions</li>
+                <li className="hover:text-orange-500">Privacy Policy</li>
               </ul>
             </div>
             {/* FAQ */}
             <div className="flex-col items-center justify-center gap-4 w-full sm:w-auto mb-7">
               <h1 className="font-semibold">FAQ</h1>
               <ul className="mt-2 gap-2 flex-col items-start justify-center">
-                <li>Account</li>
-                <li>Manage Deliveries</li>
-                <li>Orders</li>
-                <li>Payments</li>
+                <li className="hover:text-orange-500">Account</li>
+                <li className="hover:text-orange-500">Manage Deliveries</li>
+                <li className="hover:text-orange-500">Orders</li>
+                <li className="hover:text-orange-500">Payments</li>
               </ul>
             </div>
             {/* Resources */}
             <div className="flex-col items-center justify-center gap-4 w-full sm:w-auto">
               <h1 className="font-semibold">Resources</h1>
               <ul className="mt-2 gap-2 flex-col items-start justify-center">
-                <li>Free eBook</li>
-                <li>Development Tutorials</li>
-                <li>How To Blog</li>
-                <li>YouTube Playlist</li>
+                <li className="hover:text-orange-500">Free eBook</li>
+                <li className="hover:text-orange-500">Development Tutorials</li>
+                <li className="hover:text-orange-500">How To Blog</li>
+                <li className="hover:text-orange-500">YouTube Playlist</li>
               </ul>
             </div>
           </div>

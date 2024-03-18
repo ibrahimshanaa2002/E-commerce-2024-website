@@ -7,7 +7,7 @@ import Layout from "./Layout/Layout";
 import LayoutArrivals from "./Layout/LayoutArrivals";
 import LayoutAdmin from "./Layout/LayoutAdmin";
 import LayoutAllProducts from "./Layout/LayoutAllProducts";
-import LayoutProduct from './Layout/LayoutProduct';
+import LayoutProduct from "./Layout/LayoutProduct";
 import { useEffect } from "react";
 import LayoutCart from "./Layout/LayoutCart";
 import Women from "./Pages/Categories/Women";
@@ -15,9 +15,10 @@ import Man from "./Pages/Categories/Man";
 import Kids from "./Pages/Categories/Kids";
 import ForgetPassword from "./components/forgetPassword/ForgetPassword";
 import ResetPassword from "./components/forgetPassword/ResetPassword";
-import AboutUs from "./Pages/AboutUs/AboutUs";
-import Feature from "./Pages/Feature/Feature";
-import ContactUs from "./Pages/ContactUs/ContactUs";
+import AboutUs from "./Pages/FooterLists/AboutUs/AboutUs";
+import Feature from "./Pages/FooterLists/Feature/Feature";
+import ContactUs from "./Pages/FooterLists/ContactUs/ContactUs";
+import Delivery from "./Pages/FooterLists/Delivery/Delivery";
 
 library.add(fas);
 
@@ -43,15 +44,15 @@ function App() {
         <Route path="/allProducts" element={<LayoutAllProducts />} />
         <Route path="/admin" element={<LayoutAdmin />} />
         <Route path="/Cart" element={<LayoutCart />} />
-        <Route path="/Women-Products" element={<Women/>}/>
-        <Route path="/Men-Products" element={<Man/>}/>
-        <Route path="/Kids-Product" element={<Kids/>}/>
-        <Route path="/forget-password" element={<ForgetPassword/>}/>
+        <Route path="/Women-Products" element={<Women />} />
+        <Route path="/Men-Products" element={<Man />} />
+        <Route path="/Kids-Product" element={<Kids />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/AboutUs" element={<AboutUs/>} />
-        <Route path="/Features" element={<Feature/>} />
-        <Route path="/ContactUs" element={<ContactUs/>} />
-        
+        <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/Features" element={<Feature />} />
+        <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/Delivery-Details" element={<Delivery />} />
       </Routes>
     </BrowserRouter>
   );
