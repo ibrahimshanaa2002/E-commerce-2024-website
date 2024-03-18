@@ -23,6 +23,7 @@ import AboutUs from "./Pages/FooterLists/AboutUs/AboutUs";
 import Feature from "./Pages/FooterLists/Feature/Feature";
 import ContactUs from "./Pages/FooterLists/ContactUs/ContactUs";
 import Delivery from "./Pages/FooterLists/Delivery/Delivery";
+import CheckOut from "./Pages/CheckOut/CheckOut";
 
 library.add(fas);
 
@@ -57,6 +58,7 @@ function App() {
         {/* Admin And Users Routes */}
         <Route path="/admin" element={<LayoutAdmin />} />
         <Route path="/Cart" element={<LayoutCart />} />
+        <Route path="/CheckOut" element={<CheckOut />} />
         {/* Footers Lists */}
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/Features" element={<Feature />} />
