@@ -24,6 +24,8 @@ import Feature from "./Pages/FooterLists/Feature/Feature";
 import ContactUs from "./Pages/FooterLists/ContactUs/ContactUs";
 import Delivery from "./Pages/FooterLists/Delivery/Delivery";
 import CheckOut from "./Pages/CheckOut/CheckOut";
+import TermsConditions from "./Pages/FooterLists/Terms & Conditions/TermsConditions";
+import PrivacyPolicy from "./Pages/FooterLists/PrivacyPolicy/PrivacyPolicy";
 
 library.add(fas);
 
@@ -64,6 +66,8 @@ function App() {
         <Route path="/Features" element={<Feature />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/Delivery-Details" element={<Delivery />} />
+        <Route path="/TermsConditions" element={<TermsConditions />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
       </Routes>
     </BrowserRouter>
   );

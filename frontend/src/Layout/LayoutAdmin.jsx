@@ -3,6 +3,7 @@ import AddProduct from "../components/addProduct/AddProduct";
 import Navbar from "../components/navBar/Navbar";
 import Footer from "../components/Footer/Footer";
 import EditDeleteProduct from "../components/addProduct/EditDeleteProduct";
+import Orders from "../components/Orders/Orders";
 
 const LayoutAdmin = () => {
   return (
@@ -10,6 +11,7 @@ const LayoutAdmin = () => {
       <Navbar />
       <AddProduct />
       <EditDeleteProduct />
+      <Orders />
       <Footer />
     </div>
   );
