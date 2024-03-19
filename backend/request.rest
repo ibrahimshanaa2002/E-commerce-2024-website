@@ -96,3 +96,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZjBjMWExZ
 }
 
 
+###
+DELETE http://localhost:4001/api/cart/deleteAllFromTheCart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZjBjMWExZjA4ZTg1N2M5ODQzNzQ0YyIsImlhdCI6MTcxMDc4ODk0NSwiZXhwIjoxNzEzMzgwOTQ1fQ.zUUr0gckevle2TVx1zMZqVQ7XvfBjNLBE47jLRmsKho

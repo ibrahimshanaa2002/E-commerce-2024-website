@@ -126,9 +126,27 @@ const getCartItemCount = asyncHandler(async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+const deleteAllFromTheCartByUserId = async (req, res) => {
+  try {
+    // Extract user ID from the request object (assuming it's available after authentication)
+    const userId = req.user._id; // Assuming the user ID is stored in req.user after authentication
+
+    // Delete all cart items related to the user ID
+    await Cart.deleteMany({ userId: userId });
+
+    // Send a success response
+    res.status(200).json({ success: true, message: 'All items removed from the cart successfully.' });
+  } catch (error) {
+    // Handle errors
+    console.error('Error deleting cart items:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   addProductToCart,
   getProductsInCart,
   deleteProductFromCart,
   getCartItemCount,
+  deleteAllFromTheCartByUserId
 };

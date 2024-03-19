@@ -11,6 +11,10 @@ const orderSchema = new mongoose.Schema({
   streetAddress : {type : String , required : true },
   state : {type :String , required:true},
   zip : {type : Number,required:true},
+  size: {type:Array, required : true},
+  color: { type: Array },
+  email:{type:String},
+  name: {type:String}
 });
 
 const Order = mongoose.model("Order", orderSchema);

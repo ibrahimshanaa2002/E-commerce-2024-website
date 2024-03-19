@@ -1,41 +1,39 @@
-const asyncHandler = require("express-async-handler");
-const Order = require("../modules/order");
-const Cart = require("../modules/Cart");
+// Import necessary modules
+const Order = require('../modules/order');
 
-const createOrder = asyncHandler(async (req, res) => {
+// Controller function to create an order
+const createOrder = async (req, res) => {
   try {
-    // Extract user ID from the authenticated user
-    const userId = req.user._id;
+    // Extract order data from request body
+    const { user, products, subtotal, total, phoneNumber, streetAddress, state, zip, size, color, email, name } = req.body;
 
-    // Retrieve products from the user's cart
-    const cartItems = await Cart.find({ userId });
-
-    // Create an order object
-    const order = new Order({
-      user: userId, // Updated to match the schema field
-      products: cartItems.map(item => ({
-        productId: item.productId,
-        quantity: item.quantity
-      })),
-      subtotal: req.body.subtotal,
-      total: req.body.total,
-      phoneNumber: req.body.phoneNumber, // Added phoneNumber field
-      streetAddress: req.body.streetAddress, // Added streetAddress field
-      state: req.body.state, // Added state field
-      zip: req.body.zip // Added zip field
+    // Create a new order instance
+    const newOrder = new Order({
+      user,
+      products,
+      subtotal,
+      total,
+      phoneNumber,
+      streetAddress,
+      state,
+      zip,
+      size,
+      color,
+      email,
+      name
     });
 
-    await order.save();
- 
-    await Cart.deleteMany({ userId });
+    // Save the order to the database
+    const savedOrder = await newOrder.save();
 
-    res.status(201).json({ success: true, order });
+    // Respond with the created order
+    res.status(201).json(savedOrder);
   } catch (error) {
-    console.error("Error creating order:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    // Handle errors
+    console.error('Error creating order:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-});
-
-module.exports = {
-  createOrder,
 };
+
+// Export the controller function
+module.exports = { createOrder };

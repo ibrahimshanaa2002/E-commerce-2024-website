@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 import "./Cart.css";
 import { FaTrashCan } from "react-icons/fa6";
 import { MdOutlineDiscount } from "react-icons/md";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import { UserContext } from "../../context/userContext/userContextProvider";
+
 import axios from "axios";
 
 const Cart = () => {
   // User context
   const { user } = useContext(UserContext);
-
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   // State variables
   const [productsInCart, setProductsInCart] = useState([]);
@@ -94,12 +96,17 @@ const Cart = () => {
     }
   };
 
+  // Function to navigate to checkout page with cart items data
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cartItems: productsInCart, subtotal: subtotal , total: total } });
+  };
+
   return (
     <div>
       {/* Cart title */}
       <div className="title px-5 py-5">
         {user ? (
-          <h1 className="text-5xl font-bold flex items-center">Your Cart</h1>
+          <h1 className="text-5xl font-bold flex items-center">{user.username}</h1>
         ) : (
           ""
         )}
@@ -225,7 +232,12 @@ const Cart = () => {
               </div>
             </div>
             {/* Checkout button */}
-            <div className="checkout flex justify-center items-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ">
+            <div
+                className={`checkout flex justify-center items-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ${
+                  productsInCart.length === 0 ? "hidden" : ""
+                }`}
+              onClick={handleCheckout} // Call handleCheckout function onClick
+            >
               <span>Go To Checkout</span>
             </div>
           </div>

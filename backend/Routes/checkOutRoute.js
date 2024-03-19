@@ -3,7 +3,7 @@ const { protect } = require("../middlewares/authMiddleWare");
 const { createOrder } = require("../controllers/checkOutController");
 const router = express.Router();
 
-router.post("/create-order", protect,createOrder);
+router.post("/create-order",createOrder);
 
 
 module.exports = router;
