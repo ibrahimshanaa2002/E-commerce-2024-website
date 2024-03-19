@@ -55,10 +55,12 @@ const Footer = () => {
                 <Link to={"ContactUs"} target="_blank">
                   <li className="hover:text-orange-500">Customer Support</li>
                 </Link>
-                <Link to={"Delivery-Details"}>
+                <Link to={"/Delivery-Details"}>
                   <li className="hover:text-orange-500">Delivery Details</li>
                 </Link>
-                <li className="hover:text-orange-500">Terms & Conditions</li>
+                <Link to={"/termsconditions"} target="_blank">
+                  <li className="hover:text-orange-500">Terms & Conditions</li>
+                </Link>
                 <li className="hover:text-orange-500">Privacy Policy</li>
               </ul>
             </div>
@@ -88,22 +90,22 @@ const Footer = () => {
             <div className="w-full">
               Shop.co © 2000-2023, All Rights Reserved
             </div>
-            <div className="flex items-center justify-between sm:justify-end sm:gap-10 w-full ">
-              <div className="hover:cursor-pointer">
-                <Visa />
-              </div>
-              <div className="hover:cursor-pointer">
-                <Mastercard />
-              </div>
-              <div className="hover:cursor-pointer">
-                <Paypal />
-              </div>
-              <div className="hover:cursor-pointer">
-                <Unionpay />
-              </div>
-              <div className="hover:cursor-pointer">
-                <Hiper />
-              </div>
+          </div>
+          <div className="flex items-center justify-between sm:justify-normal  sm:gap-10 w-full ">
+            <div className="hover:cursor-pointer">
+              <Visa />
+            </div>
+            <div className="hover:cursor-pointer">
+              <Mastercard />
+            </div>
+            <div className="hover:cursor-pointer">
+              <Paypal />
+            </div>
+            <div className="hover:cursor-pointer">
+              <Unionpay />
+            </div>
+            <div className="hover:cursor-pointer">
+              <Hiper />
             </div>
           </div>
         </div>
