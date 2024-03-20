@@ -15,7 +15,7 @@ import { TbMoodKid, TbPlaneArrival, TbProgressAlert } from "react-icons/tb";
 import { IoHomeOutline } from "react-icons/io5";
 import { LiaFemaleSolid, LiaMaleSolid } from "react-icons/lia";
 
-function Navbar() {
+const Navbar = () => {
   const [mobileNav, setMobileNav] = useState(false);
   const { itemCount } = useContext(CartContext);
   const navbarRef = useRef(null);
@@ -100,23 +100,29 @@ function Navbar() {
       >
         <div className="mobileNav-container p-5">
           <ul>
-            <li class="py-3 flex items-center gap-2">
-              <IoHomeOutline />
-              Home
-            </li>
+            <Link to={"/"}>
+              <li class="py-3 flex items-center gap-2">
+                <IoHomeOutline />
+                Home
+              </li>
+            </Link>
             <li class="py-3 flex items-center gap-2 font-bold">
               <FaRegCircleDot />
               Shop
             </li>
-            <li class="py-3 flex items-center gap-2">
-              <BiShoppingBag />
-              All Products
-            </li>
-            <li class="py-3 flex items-center gap-2">
-              <TbPlaneArrival />
-              New Arrivals
-            </li>
-            <li class="py-3 flex items-center gap-2">
+            <Link to={"/allProducts"}>
+              <li class="py-3 flex items-center gap-2">
+                <BiShoppingBag />
+                All Products
+              </li>
+            </Link>
+            <Link to={"/newArrivals"}>
+              <li class="py-3 flex items-center gap-2">
+                <TbPlaneArrival />
+                New Arrivals
+              </li>
+            </Link>
+            <li class="py-3 flex items-center gap-2" targetId="top-selling">
               <FaArrowTrendUp />
               Top Selling
             </li>
@@ -128,23 +134,29 @@ function Navbar() {
               <FaRegCircleDot />
               Categories
             </li>
-            <li class="py-3 flex items-center gap-2">
-              <LiaMaleSolid />
-              Men
-            </li>
-            <li class="py-3 flex items-center gap-2">
-              <LiaFemaleSolid />
-              Women
-            </li>
-            <li class="py-3 flex items-center gap-2">
-              <TbMoodKid />
-              Kids
-            </li>
+            <Link to={"/Men-Products"}>
+              <li class="py-3 flex items-center gap-2">
+                <LiaMaleSolid />
+                Men
+              </li>
+            </Link>
+            <Link to={"/Women-Products"}>
+              <li class="py-3 flex items-center gap-2">
+                <LiaFemaleSolid />
+                Women
+              </li>
+            </Link>
+            <Link to={"/Kids-Product"}>
+              <li class="py-3 flex items-center gap-2">
+                <TbMoodKid />
+                Kids
+              </li>
+            </Link>
           </ul>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;
