@@ -7,8 +7,8 @@ import Brand2 from "../../assets/Brands/Brand2.png";
 import Brand3 from "../../assets/Brands/Brand3.png";
 import Brand4 from "../../assets/Brands/Brand4.png";
 import Brand5 from "../../assets/Brands/Brand5.png";
-import { Link } from "react-router-dom";
 import { UserContext } from "../../context/userContext/userContextProvider";
+import Dtom from "./Dtom";
 
 const Welcome = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
@@ -46,11 +46,8 @@ const Welcome = () => {
             designed to bring out your individuality and cater to your sense of
             style.
           </p>
-          <Link to={"/allproducts"}>
-            <span className="flex justify-center items-center xl:w-[20%] sm:w-full bg-black hover:bg-orange-500 text-white font-semibold p-5 rounded-full cursor-pointer duration-300">
-              Shop Now
-            </span>
-          </Link>
+
+          <Dtom />
         </div>
         <div className="w-[50%] static-cards">
           <StatisticCard />
