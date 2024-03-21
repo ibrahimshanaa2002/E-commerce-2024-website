@@ -11,6 +11,8 @@ const ProductContextProvider = (props) => {
   const [newArrivals, setNewArrivals] = useState([]);
 
   // Filtering functions
+
+  // for sex
   const filterProductsForWomen = () => {
     return products.filter((product) => product.sex === "Women");
   };
@@ -20,6 +22,7 @@ const ProductContextProvider = (props) => {
   const filterProductsForKids = () => {
     return products.filter((product) => product.sex === "Kids");
   };
+  // for seasen
   const filterProductsForfall = () => {
     return products.filter((product) => product.season === "fall");
   };
@@ -32,18 +35,19 @@ const ProductContextProvider = (props) => {
   const filterProductsForwinter = () => {
     return products.filter((product) => product.season === "winter");
   };
+  // for styling
   const filterProductsForCasual = () => {
     return products.filter((product) => product.style === "Casual");
   };
   const filterProductsForFormal = () => {
-    return products.filter((product) => product.season === "Formal");
+    return products.filter((product) => product.style === "Formal");
   };
   const filterProductsForParty = () => {
-    return products.filter((product) => product.season === "Party");
+    return products.filter((product) => product.style === "Party");
   };
 
   const filterProductsForGym = () => {
-    return products.filter((product) => product.season === "Gym");
+    return products.filter((product) => product.style === "Gym");
   };
 
   // Effect hook to fetch new arrivals
