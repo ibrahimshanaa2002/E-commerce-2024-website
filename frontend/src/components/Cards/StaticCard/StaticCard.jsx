@@ -33,7 +33,7 @@ const StatisticCard = ({ count, description }) => {
   );
 };
 
-const StaticsCard = () => {
+const StaticsCard = (props) => {
   const [ratingCount, setRatingCount] = useState(0);
 
   useEffect(() => {
@@ -54,7 +54,10 @@ const StaticsCard = () => {
     <div className="flex flex-col justify-center text-center items-center ">
       <div className="flex justify-center w-full">
         <StatisticCard count={200} description="International Brands" />
-        <StatisticCard count={2000} description="High-Quality Products" />
+        <StatisticCard
+          count={props.nbProducts}
+          description="High-Quality Products"
+        />
       </div>
       <div className="one flex justify-center w-full">
         <StatisticCard count={ratingCount} description="Happy Customers" />

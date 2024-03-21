@@ -10,11 +10,14 @@ import Brand5 from "../../assets/Brands/Brand5.png";
 import { UserContext } from "../../context/userContext/userContextProvider";
 import Dtom from "./Dtom";
 import Aos from "aos";
+import { ProductContext } from "../../context/productContext/productContextProvider";
 
 const Welcome = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
   const { user } = useContext(UserContext);
+  const { products } = useContext(ProductContext);
 
+  const nbProducts = products.reduce((total, product) => total + 1, 0);
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
@@ -65,7 +68,7 @@ const Welcome = () => {
           </div>
         </div>
         <div className="w-[50%] static-cards">
-          <StatisticCard />
+          <StatisticCard nbProducts= {nbProducts} />
         </div>
       </div>
       <div className="mobile flex flex-col-reverse">
