@@ -12,7 +12,7 @@ const ProductModel = mongoose.Schema(
     title: { type: String },
     desc: { type: String },
     img: { type: String },
-    categories: { type: String },
+    categories: { type: String },//ma wslt
     size: { type: Array },
     season: {
       type: String,
@@ -24,13 +24,14 @@ const ProductModel = mongoose.Schema(
     style: { type: String },
     newprice: { type: Number },
     oldprice: { type: Number },
-    quantity: { type: Number },
+    quantity: { type: Number },//ma st3mlnaha haleyyan
+    availableQuantity:{type:Number},//mas st3malnaha haleyan . msln 50 w talab 2 bsero yn2so
     sex: {
       type: String,
       enum: ["Men", "Women", "Kids"],
       required: true,
     },
-    totalQuantitySold: { type: Number, default: 0 },
+    totalQuantitySold: { type: Number, default: 0 },// ma st3malnagha bs ymkn n3taza bl top sellings
   },
   {
     timestamps: true,

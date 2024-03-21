@@ -20,7 +20,7 @@ const CheckOut = () => {
   const [email, setEmail] = useState(user.email.toLowerCase());
   const [name, setName] = useState(user.username.toLowerCase());
   const { cartItems, subtotal, total } = location.state;
-
+  console.log(cartItems)
   const [phoneNumber, setPhoneNumber] = useState("");
   const [street, setStreet] = useState("");
   const [selectedGovernorate, setSelectedGovernorate] = useState("");
@@ -32,6 +32,8 @@ const CheckOut = () => {
 
   const handleSubmit = async () => {
     try {
+      const totalQuantity = cartItems.reduce((total, product) => total + product.quantity, 0);
+
       const orderData = {
         user: user._id,
         email: email,
@@ -45,6 +47,7 @@ const CheckOut = () => {
         zip: zip,
         size: cartItems.map((product) => product.size),
         color: cartItems.map((product) => product.color),
+        quantity:totalQuantity
       };
 
       // Place the order

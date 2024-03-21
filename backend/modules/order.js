@@ -14,8 +14,9 @@ const orderSchema = new mongoose.Schema({
   size: {type:Array, required : true},
   color: { type: Array },
   email:{type:String},
-  name: {type:String}
-});
+  name: {type:String},
+  quantity:{type:Number}
+}, { timestamps: true });
 
 const Order = mongoose.model("Order", orderSchema);
 

@@ -26,6 +26,7 @@ import Delivery from "./Pages/FooterLists/Delivery/Delivery";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import TermsConditions from "./Pages/FooterLists/Terms & Conditions/TermsConditions";
 import PrivacyPolicy from "./Pages/FooterLists/PrivacyPolicy/PrivacyPolicy";
+import Orders from "./components/Orders/Orders";
 
 library.add(fas);
 
@@ -68,6 +69,7 @@ function App() {
         <Route path="/Delivery-Details" element={<Delivery />} />
         <Route path="/TermsConditions" element={<TermsConditions />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/orders" element={<Orders/>}/>
       </Routes>
     </BrowserRouter>
   );
