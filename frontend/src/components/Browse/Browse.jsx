@@ -4,6 +4,7 @@ import b2 from "../../assets/Browse/b2.png";
 import b3 from "../../assets/Browse/b3.png";
 import b4 from "../../assets/Browse/b4.png";
 import Aos from "aos";
+import { Link } from "react-router-dom";
 const Browse = () => {
   useEffect(() => {
     Aos.init({ duration: 1000 });
@@ -21,9 +22,9 @@ const Browse = () => {
               <div className="mb-4 flex items-center justify-center  gap-8 sm:mb-8 md:mb-12"></div>
 
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
-                <a
+                <Link
+                  to={"/casual-collection"}
                   data-aos="zoom-in-up"
-                  href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[30rem]"
                 >
                   <img
@@ -38,11 +39,11 @@ const Browse = () => {
                   <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
                     Casual
                   </span>
-                </a>
+                </Link>
 
-                <a
+                <Link
+                  to={"/formal-collection"}
                   data-aos="zoom-in-up"
-                  href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-[30rem]"
                 >
                   <img
@@ -57,11 +58,11 @@ const Browse = () => {
                   <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
                     Formal
                   </span>
-                </a>
+                </Link>
 
-                <a
+                <Link
+                  to={"/party-collection"}
                   data-aos="zoom-in-up"
-                  href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-[30rem]"
                 >
                   <img
@@ -76,11 +77,11 @@ const Browse = () => {
                   <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
                     Party
                   </span>
-                </a>
+                </Link>
 
-                <a
+                <Link
+                  to={"/gym-collection"}
                   data-aos="zoom-in-up"
-                  href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[30rem]"
                 >
                   <img
@@ -95,7 +96,7 @@ const Browse = () => {
                   <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
                     Gym
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

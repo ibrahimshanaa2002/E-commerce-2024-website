@@ -4,8 +4,8 @@ import { ProductContext } from "../../context/productContext/productContextProvi
 import Loader from "../../components/Loader/Loader";
 
 const Formal = () => {
-  const { newArrivals, loading } = useContext(ProductContext);
-
+  const { filterProductsForFormal, loading } = useContext(ProductContext);
+  const data = filterProductsForFormal()
   // Display loader while fetching data
   if (loading) {
     return (
@@ -19,11 +19,11 @@ const Formal = () => {
     <div className="w-full py-16">
       <div className="flex flex-col items-center w-full gap-8 px-5 h-full">
         {/* Title */}
-        <div className="text-4xl font-bold">NEW ARRIVALS</div>
+        <div className="text-4xl font-bold">Formal's Collection</div>
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
-          {newArrivals.map((item) => (
+          {data.map((item) => (
             <ProductCard
               key={item._id}
               _id={item._id}

@@ -20,13 +20,80 @@ const AddProduct = () => {
     "fall",
     "spring",
   ]);
+  const [styles, setStyles] = useState(["Casual", "Formal", "Party", "Gym"]);
+  const [Categories, setCategories] = useState([
+    "T-shirts",
+    "Dress",
+    "Jeans",
+    "Jackets",
+    "Skirts",
+    "Shorts",
+    "Sweaters",
+    "Hoodies",
+    "Blouses",
+    "Pants",
+    "Activewear",
+    "Suits",
+    "Swimwear",
+    "Lingerie",
+    "Coats",
+    "Sleepwear",
+    "Formalwear",
+    "Leggings",
+    "Cardigans",
+    "Blazers",
+    "Tunics",
+    "Jumpsuits",
+    "Rompers",
+    "Kimonos",
+    "Polo Shirts",
+    "Vests",
+    "Crop Tops",
+    "Sweatpants",
+    "Bodysuits",
+    "Turtlenecks",
+    "Tank Tops",
+    "Sneakers",
+    "Boots",
+    "Sandals",
+    "Flats",
+    "Heels",
+    "Loafers",
+    "Oxfords",
+    "Espadrilles",
+    "Wedges",
+    "Slippers",
+    "Accessories",
+    "Handbags",
+    "Belts",
+    "Hats",
+    "Scarves",
+    "Gloves",
+    "Sunglasses",
+    "Watches",
+    "Jewelry",
+    "Socks",
+    "Ties",
+    "Wallets",
+    "Backpacks",
+    "Umbrellas",
+    "Hair Accessories",
+    "Tights",
+    "Headbands",
+    "Face Masks",
+    "Keychains",
+    "Travel Accessories",
+  ]);
+
+  const [selectedstyles, setSelectedstyles] = useState("");
+  const [selectedSex, setSelectedSex] = useState("");
+  const [selectedCategories, setselectedCategories] = useState("");
   const [selectedSeason, setSelectedSeason] = useState(""); // State for selected season
   const [selectedColor, setSelectedColor] = useState(""); // State for selected color
   const [colorInput, setColorInput] = useState(""); // State for manual color input
   const [colorOptions] = useState(["#FF0000", "#00FF00", "#0000FF"]); // Predefined color options
-  const [style, setStyle] = useState("");
   const [sex, setSex] = useState(["Men", "Women", "Kids"]);
-  const [selectedSex, setSelectedSex] = useState("");
+
   const [uploading, setUploading] = useState(false);
 
   const handleClick = (e) => {
@@ -68,8 +135,8 @@ const AddProduct = () => {
         oldprice,
         color,
         size,
-        category,
-        style,
+        category: selectedCategories,
+        style: selectedstyles,
         sex: selectedSex,
         season: selectedSeason, // Pass selected season
         img: img,
@@ -83,8 +150,8 @@ const AddProduct = () => {
         setColor([]);
         setSize([]);
         setCategory("");
-        setStyle("")
         setSex([]);
+        setSelectedstyles(" Select Style...");
         setSelectedSeason(""); // Reset selected season
         setImgFile("");
       })
@@ -163,13 +230,23 @@ const AddProduct = () => {
             placeholder="Colors (separated by space)"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="Category"
+          <select
+            value={selectedCategories} // Bind selected season to the select element
+            onChange={(e) => setselectedCategories(e.target.value)} // Update selected season when changed
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
-          />
+          >
+            <option
+              value=""
+              className="focus:outline-none focus:border-blue-500"
+            >
+              Select a Categorie
+            </option>
+            {Categories.map((Categories) => (
+              <option key={Categories} value={Categories}>
+                {Categories}
+              </option>
+            ))}
+          </select>
           <select
             value={selectedSeason} // Bind selected season to the select element
             onChange={(e) => setSelectedSeason(e.target.value)} // Update selected season when changed
@@ -187,13 +264,23 @@ const AddProduct = () => {
               </option>
             ))}
           </select>
-          <input
-            type="text"
-            value={style}
-            onChange={(e) => setStyle(e.target.value)}
-            placeholder="Style"
+          <select
+            value={selectedstyles} // Bind selected season to the select element
+            onChange={(e) => setSelectedstyles(e.target.value)} // Update selected season when changed
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
-          />
+          >
+            <option
+              value=""
+              className="focus:outline-none focus:border-blue-500"
+            >
+              Select a Style
+            </option>
+            {styles.map((styles) => (
+              <option key={styles} value={styles}>
+                {styles}
+              </option>
+            ))}
+          </select>
           <select
             value={selectedSex} // Bind selected season to the select element
             onChange={(e) => setSelectedSex(e.target.value)} // Update selected season when changed

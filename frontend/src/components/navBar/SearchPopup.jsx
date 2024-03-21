@@ -20,18 +20,18 @@ const SearchPopup = () => {
   useEffect(() => {
     const filteredProducts = products.filter((product) => {
       // Search in multiple fields (title, description)
-      const fieldsToSearch = [product.title, product.desc];
+      const fieldsToSearch = [product.title, product.desc, product.category];
       const lowerCaseQuery = searchQuery.toLowerCase();
 
-      return fieldsToSearch.some((field) =>
-        field.toLowerCase().includes(lowerCaseQuery)
+      return fieldsToSearch.some(
+        (field) => field && field.toLowerCase().includes(lowerCaseQuery)
       );
     });
 
     // Sort the results based on relevance (exact matches first)
     const sortedResults = filteredProducts.sort((a, b) => {
-      const aTitle = a.title.toLowerCase();
-      const bTitle = b.title.toLowerCase();
+      const aTitle = (a.title || "").toLowerCase();
+      const bTitle = (b.title || "").toLowerCase();
       const query = searchQuery.toLowerCase();
 
       const aIndex = aTitle.indexOf(query);

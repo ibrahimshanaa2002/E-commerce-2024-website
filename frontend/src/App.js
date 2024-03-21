@@ -27,6 +27,10 @@ import CheckOut from "./Pages/CheckOut/CheckOut";
 import TermsConditions from "./Pages/FooterLists/Terms & Conditions/TermsConditions";
 import PrivacyPolicy from "./Pages/FooterLists/PrivacyPolicy/PrivacyPolicy";
 import Orders from "./components/Orders/Orders";
+import Gym from "./Pages/Browse/Gym";
+import Formal from "./Pages/Browse/Formal";
+import Party from "./Pages/Browse/Party";
+import Casual from "./Pages/Browse/Casual";
 
 library.add(fas);
 
@@ -54,22 +58,27 @@ function App() {
         <Route path="/product/:productId" element={<LayoutProduct />} />
         <Route path="/allProducts" element={<LayoutAllProducts />} />
         <Route path="/newArrivals" element={<LayoutArrivals />} />
+        {/* Browse pages */}
+        <Route path="/gym-collection" element={<Gym />} />
+        <Route path="/formal-collection" element={<Formal />} />
+        <Route path="/party-collection" element={<Party />} />
+        <Route path="/casual-collection" element={<Casual />} />
         {/* Products Categories */}
-        <Route path="/Women-Products" element={<Women />} />
-        <Route path="/Men-Products" element={<Man />} />
-        <Route path="/Kids-Product" element={<Kids />} />
+        <Route path="/women-products" element={<Women />} />
+        <Route path="/men-products" element={<Man />} />
+        <Route path="/kids-product" element={<Kids />} />
         {/* Admin And Users Routes */}
         <Route path="/admin" element={<LayoutAdmin />} />
-        <Route path="/Cart" element={<LayoutCart />} />
-        <Route path="/CheckOut" element={<CheckOut />} />
+        <Route path="/cart" element={<LayoutCart />} />
+        <Route path="/checkOut" element={<CheckOut />} />
         {/* Footers Lists */}
-        <Route path="/AboutUs" element={<AboutUs />} />
-        <Route path="/Features" element={<Feature />} />
-        <Route path="/ContactUs" element={<ContactUs />} />
-        <Route path="/Delivery-Details" element={<Delivery />} />
-        <Route path="/TermsConditions" element={<TermsConditions />} />
-        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/orders" element={<Orders/>}/>
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/features" element={<Feature />} />
+        <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/delivery-details" element={<Delivery />} />
+        <Route path="/termsConditions" element={<TermsConditions />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
     </BrowserRouter>
   );
