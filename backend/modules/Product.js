@@ -12,7 +12,7 @@ const ProductModel = mongoose.Schema(
     title: { type: String },
     desc: { type: String },
     img: { type: String },
-    categories: { type: String },//ma wslt
+    category: { type: String },//ma wslt
     size: { type: Array },
     season: {
       type: String,

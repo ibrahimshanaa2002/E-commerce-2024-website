@@ -83,6 +83,7 @@ const AddProduct = () => {
         setColor([]);
         setSize([]);
         setCategory("");
+        setStyle("")
         setSex([]);
         setSelectedSeason(""); // Reset selected season
         setImgFile("");
