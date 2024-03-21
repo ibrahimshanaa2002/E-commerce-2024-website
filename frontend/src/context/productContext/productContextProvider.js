@@ -9,6 +9,7 @@ const ProductContextProvider = (props) => {
   // State for products and new arrivals
   const [products, setProducts] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
+  const [ TopSellingProducts,setTopSellingProducts]=useState([])
 
   // Filtering functions
 
@@ -83,10 +84,24 @@ const ProductContextProvider = (props) => {
 
     fetchAllProducts();
   }, []);
+  useEffect(() => {
+    const fetchTopSellingProducts = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4001/api/product/topSelling"
+        );
+        setTopSellingProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching top selling products:", error);
+      }
+    };
 
+    fetchTopSellingProducts();
+  }, []);
   const contextValue = {
     products: products,
     newArrivals: newArrivals,
+    TopSellingProducts: TopSellingProducts,
     filterProductsForWomen: filterProductsForWomen,
     filterProductsForMen: filterProductsForMen,
     filterProductsForKids: filterProductsForKids,

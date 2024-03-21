@@ -64,42 +64,15 @@ const newArrivals = asyncHandler(async (req, res) => {
 // top selling
 const topSelling = asyncHandler(async (req, res) => {
   try {
-    // Perform aggregation to sum up the total quantity sold for each product
-    const topSellingProducts = await Sale.aggregate([
-      {
-        $group: {
-          _id: "$product",
-          totalQuantitySold: { $sum: "$quantity" },
-        },
-      },
-      {
-        $lookup: {
-          from: "products",
-          localField: "_id",
-          foreignField: "_id",
-          as: "productInfo",
-        },
-      },
-      {
-        $unwind: "$productInfo", // Unwind to flatten the productInfo array
-      },
-      {
-        $sort: { totalQuantitySold: -1 }, // Sort by total quantity sold in descending order
-      },
-      {
-        $project: {
-          _id: "$productInfo._id",
-          title: "$productInfo.title",
-          totalQuantitySold: 1,
-        },
-      },
-    ]);
+    // Find products sorted by totalQuantitySold in descending order
+    const topSellingProducts = await Product.find().sort({ totalQuantitySold: -1 }).limit(14);
 
     res.status(200).json(topSellingProducts);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 const allProducts = asyncHandler(async (req, res) => {
   const productId = req.params;
 

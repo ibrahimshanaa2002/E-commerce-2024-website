@@ -20,7 +20,7 @@ const SearchPopup = () => {
   useEffect(() => {
     const filteredProducts = products.filter((product) => {
       // Search in multiple fields (title, description)
-      const fieldsToSearch = [product.title, product.desc];
+      const fieldsToSearch = [product.title, product.desc,product.season,product.style];
       const lowerCaseQuery = searchQuery.toLowerCase();
 
       return fieldsToSearch.some((field) =>

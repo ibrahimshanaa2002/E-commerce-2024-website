@@ -105,3 +105,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZjBjMWExZ
 ###
 GET http://localhost:4001/api/get-orders
 Content-Type: application/json
+###
+GET http://localhost:4001/api/product/topSelling
+Content-Type: application/json
