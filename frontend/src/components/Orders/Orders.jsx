@@ -3,7 +3,7 @@ import axios from "axios";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-
+  
   useEffect(() => {
     // Fetch orders from the API
     axios
@@ -83,7 +83,9 @@ const Orders = () => {
                         {new Date(order.createdAt).toLocaleDateString()}
                       </td>
                       <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-                        <img src={order.products[0].img} alt="" />{}
+                        {order.products.length > 0 && order.products[0].img ? (
+                          <img src={order.products[0].img} alt="" />
+                        ) : null}
                       </td>
                       <td className="whitespace-no-wrap font-bold py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
                         {order.name}
@@ -99,13 +101,13 @@ const Orders = () => {
                       </td>
                       <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
                         {/* Assuming each order has only one product */}
-                        {order.products[0].title}
+                        {order.products.length > 0 ? order.products[0].title : ""}
                       </td>
                       <td className="whitespace-no-wrap font-bold py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-                        {order.color[0]}
+                        {order.products.length > 0 ? order.products[0].color[0] : ""}
                       </td>
                       <td className="whitespace-no-wrap py-4 font-bold text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-                        {order.size[0]}
+                        {order.products.length > 0 ? order.products[0].size[0] : ""}
                       </td>
                       <td className="whitespace-no-wrap py-4 font-extrabold text-left text-sm text-gray-600 sm:px-3 lg:text-left">
                         {/* Assuming each order has only one product */}
@@ -126,7 +128,7 @@ const Orders = () => {
               </table>
             </div>
           </div>
-        </div>s
+        </div>
       </div>
     </div>
   );

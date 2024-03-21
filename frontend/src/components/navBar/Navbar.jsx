@@ -21,11 +21,13 @@ import { CartContext } from "../../context/CartContext/cartContextProvider";
 import { Dropdown } from "flowbite-react";
 import { IoIosTrendingUp } from "react-icons/io";
 import Aos from "aos";
+import { UserContext } from "../../context/userContext/userContextProvider";
 
 const Navbar = () => {
   const [mobileNav, setMobileNav] = useState(false);
   const { itemCount } = useContext(CartContext);
   const navbarRef = useRef(null);
+  const { user, logoutUser } = useContext(UserContext);
 
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
@@ -109,9 +111,15 @@ const Navbar = () => {
                 </span>
               )}
             >
-              <Dropdown.Item>Sign In</Dropdown.Item>
-              <Dropdown.Item>Sign Up</Dropdown.Item>
-              <Dropdown.Item>Sign Out</Dropdown.Item>
+              {user ? (
+                <div>
+                  <Dropdown.Item onClick={logoutUser}>Sign Out</Dropdown.Item>
+                </div>
+              ) : (
+                <div>
+                  <Link to={"authentication"}><Dropdown.Item >Sign Up</Dropdown.Item></Link>
+                </div>
+              )}
             </Dropdown>
           </div>
         </div>

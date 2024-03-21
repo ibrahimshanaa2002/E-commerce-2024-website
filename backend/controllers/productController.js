@@ -13,14 +13,12 @@ const addProduct = asyncHandler(async (req, res) => {
       sizeString.split(" ").map((size) => size.trim())
     );
 
-    // Create a new product instance with split color and size arrays
     const newProduct = new Product({
       ...req.body,
-      color: colors.flat(), // Flatten the array to remove nested arrays
-      size: sizes.flat(), // Flatten the array to remove nested arrays
+      color: colors.flat(), 
+      size: sizes.flat(), 
     });
 
-    // Save the product to the database
     const savedProduct = await newProduct.save();
     res.status(200).json(savedProduct);
   } catch (err) {
