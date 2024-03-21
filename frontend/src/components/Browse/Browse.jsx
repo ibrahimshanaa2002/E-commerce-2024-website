@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import b1 from "../../assets/Browse/b1.png";
 import b2 from "../../assets/Browse/b2.png";
 import b3 from "../../assets/Browse/b3.png";
 import b4 from "../../assets/Browse/b4.png";
+import Aos from "aos";
 const Browse = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
     <div className="px-5 " id="browse-by-dress">
       <div className="w-full py-4 ">
@@ -18,6 +22,7 @@ const Browse = () => {
 
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
                 <a
+                  data-aos="zoom-in-up"
                   href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[30rem]"
                 >
@@ -36,6 +41,7 @@ const Browse = () => {
                 </a>
 
                 <a
+                  data-aos="zoom-in-up"
                   href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-[30rem]"
                 >
@@ -54,6 +60,7 @@ const Browse = () => {
                 </a>
 
                 <a
+                  data-aos="zoom-in-up"
                   href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-[30rem]"
                 >
@@ -72,6 +79,7 @@ const Browse = () => {
                 </a>
 
                 <a
+                  data-aos="zoom-in-up"
                   href="#"
                   className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-[30rem]"
                 >

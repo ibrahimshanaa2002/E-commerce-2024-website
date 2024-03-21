@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import LB from "../../assets/Flags/LB.png";
 import { MdAlternateEmail, MdOutlinePhoneIphone } from "react-icons/md";
-import axios from "axios"; // Import axios for making HTTP requests
+import axios from "axios";
 import { UserContext } from "../../context/userContext/userContextProvider";
 import { useLocation } from "react-router-dom";
+import { FiCheckCircle } from "react-icons/fi";
 
 const CheckOut = () => {
   const governorates = [
@@ -25,6 +27,7 @@ const CheckOut = () => {
   const [street, setStreet] = useState("");
   const [selectedGovernorate, setSelectedGovernorate] = useState("");
   const [zip, setZip] = useState("");
+  const [orderSuccess, setOrderSuccess] = useState(false);
 
   const handleSelectChange = (event) => {
     setSelectedGovernorate(event.target.value);
@@ -50,35 +53,31 @@ const CheckOut = () => {
         quantity:totalQuantity
       };
 
-      // Place the order
       const response = await axios.post(
         "http://localhost:4001/api/create-order",
         orderData
       );
 
-      // If the order is placed successfully, clear the cart
       const userData = JSON.parse(localStorage.getItem("user"));
       const userToken = userData ? userData.token : null;
-      const clearTheCart = await axios.delete("http://localhost:4001/api/cart/deleteAllFromTheCart", {
-        headers: {
-          Authorization: `Bearer ${userToken}` // Replace your_token_here with the actual token
+      await axios.delete(
+        "http://localhost:4001/api/cart/deleteAllFromTheCart",
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
         }
-      });
+      );
 
-      // Reset state variables
-      alert("Ordered successfully");
+      setOrderSuccess(true);
       setPhoneNumber("");
       setZip("");
       setSelectedGovernorate("");
       setStreet("");
-      
-      // Reload the page to clear the displayed data
-      window.location.reload();
 
       console.log("Order placed successfully:", response.data);
     } catch (error) {
       console.error("Error placing order:", error);
-      // Handle error scenarios (e.g., display error message to user)
     }
   };
 
@@ -179,7 +178,7 @@ const CheckOut = () => {
             <select
               type="text"
               name="billing-governorate"
-              value={selectedGovernorate} // Bind the selected value to the state
+              value={selectedGovernorate}
               onChange={handleSelectChange}
               className="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus
               :border-blue-500 focus:ring-blue-500"
@@ -210,7 +209,10 @@ const CheckOut = () => {
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Quantity</p>
               <p className="font-semibold text-gray-900">
-                {cartItems.reduce((total, product) => total + product.quantity, 0)}
+                {cartItems.reduce(
+                  (total, product) => total + product.quantity,
+                  0
+                )}
               </p>
             </div>
           </div>
@@ -222,11 +224,35 @@ const CheckOut = () => {
         </div>
         <button
           className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white hover:bg-orange-500 duration-300"
-          onClick={handleSubmit} 
+          onClick={handleSubmit}
         >
           Place Order
         </button>
       </div>
+      {orderSuccess && (
+        <div className="absolute inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50">
+          <div className="bg-white p-8 rounded-md flex flex-col  justify-center items-center w-full h-full">
+            <FiCheckCircle className="text-8xl text-green-700 mb-4" />
+
+            <p className="text-2xl font-semibold text-black mb-4">
+              Order Placed Successfully!
+            </p>
+            <p className=" text-black mb-4 text-center text-opacity-50">
+              Thank you for your trust in us! We're committed to ensuring your
+              order reaches you swiftly. We hope to deliver it to you in the
+              fastest time possible, ensuring your satisfaction every step of
+              the way. Thank you again for choosing us!
+            </p>
+
+            <Link
+              to="/"
+              className="bg-black text-white px-4 py-2 rounded-md hover:bg-orange-500 duration-300"
+            >
+              Go to Home
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

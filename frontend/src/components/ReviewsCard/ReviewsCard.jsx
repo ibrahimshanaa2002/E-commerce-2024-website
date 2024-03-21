@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReviewsCardHeader from "./ReviewsCardHeader";
 import { RatingContext } from "../../context/ratingContext/ratingContextProvider";
+import Aos from "aos";
 
 const ReviewsCard = () => {
   const [reviews, setReviews] = useState([]);
@@ -11,6 +12,9 @@ const ReviewsCard = () => {
     setReviews(allRatings);
   }, [allRatings]);
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   const handleViewAllReviews = () => {
     setShowAllReviews(!showAllReviews);
   };
@@ -26,6 +30,8 @@ const ReviewsCard = () => {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
         {reviewsToRender.map((review) => (
           <div
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
             key={review._id}
             className="rounded-md shadow-lg bg-white p-5 flex flex-col"
           >
@@ -52,7 +58,6 @@ const ReviewsCard = () => {
             <p className="text-sm font-medium leading-5 text-gray-500 mb-2">
               {review.date}
             </p>
-
             <h3 className="font-semibold text-gray-800 mb-auto">
               {review.title}
             </h3>
@@ -63,7 +68,7 @@ const ReviewsCard = () => {
               <span className="text-sm font-semibold leading-5 text-gray-900">
                 {review.name}
               </span>
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 animate-pulse">
                 <svg
                   className="w-5 h-5 text-green-600"
                   fill="currentColor"

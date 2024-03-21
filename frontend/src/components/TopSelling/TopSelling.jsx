@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import ProductCard from "../Cards/ProductCard";
 import { ProductContext } from "../../context/productContext/productContextProvider";
-import { Link } from "react-router-dom";
 
 const NewArrivals = () => {
   const { newArrivals } = useContext(ProductContext); // Destructure newArrivals from context
@@ -26,12 +25,6 @@ const NewArrivals = () => {
             />
           ))}
         </div>
-        <Link
-          to={"/newArrivals"}
-          className="px-16 py-3 rounded-full hover:bg-gray-500 hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black"
-        >
-          View All
-        </Link>
       </div>
     </div>
   );

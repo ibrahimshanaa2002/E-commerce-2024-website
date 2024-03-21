@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import star1 from "../../assets/star_icon.png";
 import star2 from "../../assets/star_dull_icon.png";
 import { MdModeEdit } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Card.css";
+import Aos from "aos";
 
 const ProductCard = (props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,6 +19,9 @@ const ProductCard = (props) => {
     setIsEditing(!isEditing);
   };
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   const handleSave = async () => {
     setIsSaving(true);
     try {
@@ -160,6 +164,7 @@ const ProductCard = (props) => {
         <Link
           to={`/product/${props._id}`}
           className="flex flex-col items-start  w-full h-full border border-gray-200 rounded-lg overflow-hidden"
+          data-aos="zoom-in-down"
         >
           <div className={`w-full relative img-hover-zoom h-auto`}>
             <img
