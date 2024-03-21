@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineMail } from "react-icons/md";
 import axios from "axios";
 import "./NewsLetter.css";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
@@ -26,15 +28,26 @@ const NewsLetter = () => {
     setError(""); // Clear error when input field is focused
   };
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     <div>
       <div className="sides flex justify-between items-center bg-black py-3 px-10 rounded-2xl mx-9">
-        <div className="left-side text-5xl font-bold text-white">
+        <div
+          className="left-side text-5xl font-bold text-white"
+          data-aos="fade-right"
+        >
           <h1 className="">STAY UP TO DATE ABOUT</h1>
           <h2>OUR LATEST OFFERS</h2>
         </div>
         <div className="right-side flex flex-col gap-2 w-1/3">
-          <div className="EmailInput">
+          <div
+            className="EmailInput"
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
+          >
             <div className="relative ">
               <input
                 value={email}
@@ -75,6 +88,8 @@ const NewsLetter = () => {
             </div>
           </div>
           <div
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
             onClick={handleSubmitt}
             className="subscribe text-black font-semibold bg-white rounded-3xl flex justify-center items-center py-3 cursor-pointer duration-300 hover:text-white hover:bg-orange-500"
           >

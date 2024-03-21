@@ -2,18 +2,25 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Sidebar } from "flowbite-react";
+import { MdOutlineStyle } from "react-icons/md";
+
+import { HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
+import { TiHomeOutline } from "react-icons/ti";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { TbProgressAlert } from "react-icons/tb";
+import { BiCategory } from "react-icons/bi";
+
+import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import ShopDropDown from "./ShopDropDown";
 import "./Navbar.css";
 import CategoriesDropDown from "./CategoriesDropDown";
 import SearchPopup from "./SearchPopup";
 import { CartContext } from "../../context/CartContext/cartContextProvider";
-import { FaRegCircleDot } from "react-icons/fa6";
-import { FaArrowTrendUp } from "react-icons/fa6";
-import { BiShoppingBag } from "react-icons/bi";
-import { TbMoodKid, TbPlaneArrival, TbProgressAlert } from "react-icons/tb";
-import { IoHomeOutline } from "react-icons/io5";
-import { LiaFemaleSolid, LiaMaleSolid } from "react-icons/lia";
+import { Dropdown } from "flowbite-react";
+import { IoIosTrendingUp } from "react-icons/io";
+import Aos from "aos";
 
 const Navbar = () => {
   const [mobileNav, setMobileNav] = useState(false);
@@ -23,6 +30,10 @@ const Navbar = () => {
   const handleMobileNav = () => {
     setMobileNav(!mobileNav);
   };
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -44,14 +55,14 @@ const Navbar = () => {
 
   return (
     <div className="relative" ref={navbarRef}>
-      <div className="flex flex-row items-center lg:pl-12 md:pl-4 pl-2 py-4 justify-between md:gap-6 ">
+      <div className="flex flex-row items-center px-3 py-4 justify-between md:gap-6 lg:px-8 md:px-8">
         <div className="flex items-center gap-5">
           <RxHamburgerMenu
             onClick={handleMobileNav}
             size={20}
             className="md:hidden"
           />
-          <Link to={"/"}>
+          <Link to={"/"} data-aos="fade-right">
             <h1 className="lg:text-3xl md:text-2xl text-lg font-extrabold">
               SHOP.CO
             </h1>
@@ -72,7 +83,7 @@ const Navbar = () => {
           </li>
         </ul>
         <SearchPopup />
-        <div className="flex gap-4  items-center justify-center px-8 ">
+        <div className="flex gap-4  items-center justify-center  pl-8 ">
           <Link to={"/Cart"}>
             <div className="relative ">
               <FiShoppingCart
@@ -84,76 +95,133 @@ const Navbar = () => {
               </div>
             </div>
           </Link>
-          <FaRegUserCircle
-            size={22}
-            className="hover:text-red-900 duration-200 cursor-pointer"
-          />
+          <div>
+            <Dropdown
+              label=""
+              dismissOnClick={false}
+              renderTrigger={() => (
+                <span>
+                  {" "}
+                  <FaRegUserCircle
+                    size={22}
+                    className="hover:text-red-900 duration-200 cursor-pointer"
+                  />
+                </span>
+              )}
+            >
+              <Dropdown.Item>Sign In</Dropdown.Item>
+              <Dropdown.Item>Sign Up</Dropdown.Item>
+              <Dropdown.Item>Sign Out</Dropdown.Item>
+            </Dropdown>
+          </div>
         </div>
       </div>
       {mobileNav && (
         <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 w-fit"></div>
       )}
       <div
-        className={`md:hidden inset-y-0 left-0 w-2/3 bg-white z-50 transition-transform transform absolute h-screen top-16 ${
+        className={`md:hidden inset-y-0 left-0 w-2/3 z-50 transition-transform transform absolute h-screen top-16 ${
           mobileNav ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="mobileNav-container p-5">
-          <ul>
-            <Link to={"/"}>
-              <li class="py-3 flex items-center gap-2">
-                <IoHomeOutline />
-                Home
-              </li>
-            </Link>
-            <li class="py-3 flex items-center gap-2 font-bold">
-              <FaRegCircleDot />
-              Shop
-            </li>
-            <Link to={"/allProducts"}>
-              <li class="py-3 flex items-center gap-2">
-                <BiShoppingBag />
-                All Products
-              </li>
-            </Link>
-            <Link to={"/newArrivals"}>
-              <li class="py-3 flex items-center gap-2">
-                <TbPlaneArrival />
-                New Arrivals
-              </li>
-            </Link>
-            <li class="py-3 flex items-center gap-2" targetId="top-selling">
-              <FaArrowTrendUp />
-              Top Selling
-            </li>
-            <li class="py-3 flex items-center gap-2">
-              <TbProgressAlert />
-              On Sale
-            </li>
-            <li class="py-3 flex items-center gap-2 font-bold">
-              <FaRegCircleDot />
-              Categories
-            </li>
-            <Link to={"/Men-Products"}>
-              <li class="py-3 flex items-center gap-2">
-                <LiaMaleSolid />
-                Men
-              </li>
-            </Link>
-            <Link to={"/Women-Products"}>
-              <li class="py-3 flex items-center gap-2">
-                <LiaFemaleSolid />
-                Women
-              </li>
-            </Link>
-            <Link to={"/Kids-Product"}>
-              <li class="py-3 flex items-center gap-2">
-                <TbMoodKid />
-                Kids
-              </li>
-            </Link>
-          </ul>
-        </div>
+        <Sidebar
+          aria-label="Sidebar with multi-level dropdown example"
+          className="w-[full]"
+        >
+          <Sidebar.Items>
+            <Sidebar.ItemGroup>
+              <Link to={"/"}>
+                <Sidebar.Item icon={TiHomeOutline}>Home</Sidebar.Item>
+              </Link>
+              <Sidebar.Collapse
+                icon={HiOutlineShoppingBag}
+                label="Shop"
+                renderChevronIcon={(theme, open) => {
+                  const IconComponent = open
+                    ? HiOutlineMinusSm
+                    : HiOutlinePlusSm;
+
+                  return (
+                    <IconComponent
+                      aria-hidden
+                      className={twMerge(
+                        theme.label.icon.open[open ? "on" : "off"]
+                      )}
+                    />
+                  );
+                }}
+              >
+                <Link to={"/allProducts"}>
+                  <Sidebar.Item>All Products</Sidebar.Item>
+                </Link>
+                <Link to={"/newArrivals"}>
+                  <Sidebar.Item>New Arrivals</Sidebar.Item>
+                </Link>
+
+                <Sidebar.Collapse
+                  icon={MdOutlineStyle}
+                  label="Browse By Dress Style"
+                  renderChevronIcon={(theme, open) => {
+                    const IconComponent = open
+                      ? HiOutlineMinusSm
+                      : HiOutlinePlusSm;
+
+                    return (
+                      <IconComponent
+                        aria-hidden
+                        className={twMerge(
+                          theme.label.icon.open[open ? "on" : "off"]
+                        )}
+                      />
+                    );
+                  }}
+                >
+                  <Sidebar.Item href="#">Casual</Sidebar.Item>
+                  <Sidebar.Item href="#">Formal</Sidebar.Item>
+                  <Sidebar.Item href="#">Party</Sidebar.Item>
+                  <Sidebar.Item href="#">Gym</Sidebar.Item>
+                </Sidebar.Collapse>
+              </Sidebar.Collapse>
+              <Sidebar.Item href="#" icon={TbProgressAlert}>
+                On Sale
+              </Sidebar.Item>
+
+              <Sidebar.Item href="#" icon={IoIosTrendingUp}>
+                Top Selling
+              </Sidebar.Item>
+              <Sidebar.Collapse
+                icon={BiCategory}
+                label="Categories"
+                renderChevronIcon={(theme, open) => {
+                  const IconComponent = open
+                    ? HiOutlineMinusSm
+                    : HiOutlinePlusSm;
+
+                  return (
+                    <IconComponent
+                      aria-hidden
+                      className={twMerge(
+                        theme.label.icon.open[open ? "on" : "off"]
+                      )}
+                    />
+                  );
+                }}
+              >
+                <Link to={"/Men-Products"}>
+                  {" "}
+                  <Sidebar.Item>Men's</Sidebar.Item>
+                </Link>
+                <Link to={"/Women-Products"}>
+                  <Sidebar.Item>Women's</Sidebar.Item>
+                </Link>
+                <Link to={"/Kids-Product"}>
+                  {" "}
+                  <Sidebar.Item>Kid's</Sidebar.Item>
+                </Link>
+              </Sidebar.Collapse>
+            </Sidebar.ItemGroup>
+          </Sidebar.Items>
+        </Sidebar>
       </div>
     </div>
   );
