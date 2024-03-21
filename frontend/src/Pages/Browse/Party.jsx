@@ -3,7 +3,7 @@ import ProductCard from "../../components/Cards/ProductCard";
 import { ProductContext } from "../../context/productContext/productContextProvider";
 import Loader from "../../components/Loader/Loader";
 
-const NewArrivalsPage = () => {
+const Party = () => {
   const { newArrivals, loading } = useContext(ProductContext);
 
   // Display loader while fetching data
@@ -40,4 +40,4 @@ const NewArrivalsPage = () => {
   );
 };
 
-export default NewArrivalsPage;
+export default Party;
