@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import ProductCard from "../Cards/ProductCard";
 import { ProductContext } from "../../context/productContext/productContextProvider";
 
-const NewArrivals = () => {
-  const { newArrivals } = useContext(ProductContext); // Destructure newArrivals from context
+const TopSelling = () => {
+  const { TopSellingProducts } = useContext(ProductContext); // Destructure newArrivals from context
 
   // Slice the newArrivals array to retrieve only the first 4 items
-  const limitedNewArrivals = newArrivals.slice(0, 4);
+  const limitedNewArrivals = TopSellingProducts.slice(0, 4);
 
   return (
     <div className="w-full  py-16">
@@ -30,4 +30,4 @@ const NewArrivals = () => {
   );
 };
 
-export default NewArrivals;
+export default TopSelling;

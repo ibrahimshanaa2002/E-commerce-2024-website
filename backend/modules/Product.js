@@ -31,7 +31,7 @@ const ProductModel = mongoose.Schema(
       enum: ["Men", "Women", "Kids"],
       required: true,
     },
-    totalQuantitySold: { type: Number, default: 0 },// ma st3malnagha bs ymkn n3taza bl top sellings
+    totalQuantitySold: { type: Number, default: 0 },// ma st3malnaha bs ymkn n3taza bl top sellings
   },
   {
     timestamps: true,
