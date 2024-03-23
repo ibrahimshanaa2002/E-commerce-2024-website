@@ -9,12 +9,14 @@ const {
   SendMail,
   saveFeedback,
   resetPassword,
+  createAdmin,
 } = require("../controllers/userController");
 
 router.post("/login", authUser);
 router.post("/signup", registerUser);
 router.post("/SendMail", SendMail);
 router.post("/feedback", saveFeedback);
+router.post("/createAdmin",createAdmin)
 router.get("/feedback", async (req, res) => {
   try {
     let feedback;

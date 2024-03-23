@@ -26,7 +26,6 @@ import Delivery from "./Pages/FooterLists/Delivery/Delivery";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import TermsConditions from "./Pages/FooterLists/Terms & Conditions/TermsConditions";
 import PrivacyPolicy from "./Pages/FooterLists/PrivacyPolicy/PrivacyPolicy";
-import Orders from "./components/Orders/Orders";
 import Gym from "./Pages/Browse/Gym";
 import Formal from "./Pages/Browse/Formal";
 import Party from "./Pages/Browse/Party";
@@ -42,6 +41,11 @@ function ScrollToTop() {
   }, [pathname]);
 
   return null;
+}
+
+function isAdmin() {
+  const userData = JSON.parse(localStorage.getItem("user"));
+  return userData && userData.isAdmin;
 }
 
 function App() {
@@ -68,7 +72,7 @@ function App() {
         <Route path="/men-products" element={<Man />} />
         <Route path="/kids-product" element={<Kids />} />
         {/* Admin And Users Routes */}
-        <Route path="/admin" element={<LayoutAdmin />} />
+        {isAdmin() && <Route path="/admin" element={<LayoutAdmin />} />}
         <Route path="/cart" element={<LayoutCart />} />
         <Route path="/checkOut" element={<CheckOut />} />
         {/* Footers Lists */}
@@ -78,7 +82,6 @@ function App() {
         <Route path="/delivery-details" element={<Delivery />} />
         <Route path="/termsConditions" element={<TermsConditions />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/orders" element={<Orders />} />
       </Routes>
     </BrowserRouter>
   );

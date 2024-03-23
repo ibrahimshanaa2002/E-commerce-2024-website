@@ -35,21 +35,35 @@ const registerUser = asyncHandler(async (req, res) => {
 const authUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username }); //take email from the inputs and take the email from the db and check them if they match
+  const user = await User.findOne({ username });
+
   if (user && (await user.matchedPassword(password))) {
-    res.status(200).json({
-      message: `welcome ${user.username}`,
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+    // Check if the user is an admin
+    if (user.isAdmin) {
+      // If admin, return admin response
+      res.status(200).json({
+        message: `Welcome Admin ${user.username}`,
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+    } else {
+      // If not admin, return regular user response
+      res.status(200).json({
+        message: `Welcome ${user.username}`,
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+    }
   } else {
-    res.status(400);
-    throw new Error("invalid email and password");
+    res.status(400).json({ message: "Invalid email or password" });
   }
 });
-
 const SendMail = async (req, res, next) => {
   try {
     const { Email } = req.body;
@@ -160,10 +174,37 @@ const sendResetPasswordEmail = async (email, resetLink) => {
   await transporter.sendMail(mailOptions);
 };
 
+
+
+const createAdmin = asyncHandler(async (req, res) => {
+  const { username, email, password } = req.body;
+
+  // Check if the email is already in use
+  const userExist = await User.findOne({ email });
+  if (userExist) {
+    return res.status(400).json({ message: "Email is already in use" });
+  }
+
+  // Create the admin user
+  const admin = await User.create({ username, email, password, isAdmin: true });
+
+  if (admin) {
+    return res.status(201).json({
+      _id: admin._id,
+      username: admin.username,
+      email: admin.email,
+      isAdmin: admin.isAdmin,
+      token: generateToken(admin._id),
+    });
+  } else {
+    return res.status(500).json({ message: "Failed to create admin user" });
+  }
+});
 module.exports = {
   registerUser,
   authUser,
   SendMail,
   saveFeedback,
   resetPassword,
+  createAdmin
 };

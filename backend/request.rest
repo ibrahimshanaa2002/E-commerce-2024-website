@@ -108,3 +108,14 @@ Content-Type: application/json
 ###
 GET http://localhost:4001/api/product/topSelling
 Content-Type: application/json
+
+
+###
+POST http://localhost:4001/api/user/createAdmin
+Content-Type: application/json
+
+{
+  "username": "ibrahim-Admin",
+  "email": "ibrahim@admin.com",
+  "password": "admin123"
+}
