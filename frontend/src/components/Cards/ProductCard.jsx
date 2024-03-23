@@ -174,17 +174,17 @@ const ProductCard = (props) => {
               style={{ maxWidth: "100%" }}
             />
           </div>
-          <div className="p-4 flex flex-col gap-9 justify-between h-1/2">
+          <div className="p-4 flex flex-col justify-start ">
             <div
               className="text-sm sm:text-base md:text-lg font-bold titles"
               style={{ height: "4rem" }}
             >
               {props.title}
             </div>
-            <div className="text-sm sm:text-base md:text-lg overflow-hidden  descriptions ">
+            <div className="text-sm sm:text-base md:text-lg overflow-hidden  descriptions h-[3rem] line-clamp-2">
               {props.desc}
             </div>
-            <div className="flex items-center mb-2 py-2 justify-start">
+            <div className="flex items-center mb-2 py-4 justify-start">
               <img src={star1} className="w-4 h-4 mr-1" alt="Star" />
               <img src={star1} className="w-4 h-4 mr-1" alt="Star" />
               <img src={star1} className="w-4 h-4 mr-1" alt="Star" />

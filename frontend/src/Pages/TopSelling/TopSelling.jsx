@@ -3,19 +3,17 @@ import ProductCard from "../../components/Cards/ProductCard";
 import { ProductContext } from "../../context/productContext/productContextProvider";
 import Loader from "../../components/Loader/Loader";
 
-const AllProducts = () => {
-  const { products, loading } = useContext(ProductContext);
+const TopSelling = () => {
+  const { TopSellingProducts, loading } = useContext(ProductContext);
   const [shuffledProducts, setShuffledProducts] = useState([]);
 
   useEffect(() => {
-    // Shuffle the products array when it changes
-    if (products.length > 0) {
-      const shuffled = shuffleArray(products);
+    if (!loading) {
+      const shuffled = shuffleArray(TopSellingProducts);
       setShuffledProducts(shuffled);
     }
-  }, [products]);
+  }, [TopSellingProducts, loading]);
 
-  // Function to shuffle the array
   const shuffleArray = (array) => {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -24,6 +22,8 @@ const AllProducts = () => {
     }
     return newArray;
   };
+
+  // Display loader while fetching data
   if (loading) {
     return (
       <div className="h-screen flex w-full justify-center items-center">
@@ -35,7 +35,10 @@ const AllProducts = () => {
   return (
     <div className="w-full py-16">
       <div className="flex flex-col items-center w-full gap-8 px-5 h-full">
-        <div className="text-4xl font-bold uppercase">All Products</div>
+        {/* Title */}
+        <div className="text-4xl font-bold uppercase">Top Selling</div>
+
+        {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
           {shuffledProducts.map((item) => (
             <ProductCard
@@ -54,4 +57,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default TopSelling;

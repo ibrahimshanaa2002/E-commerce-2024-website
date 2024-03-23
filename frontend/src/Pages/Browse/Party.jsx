@@ -1,11 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "../../components/Cards/ProductCard";
 import { ProductContext } from "../../context/productContext/productContextProvider";
 import Loader from "../../components/Loader/Loader";
 
 const Party = () => {
   const { filterProductsForParty, loading } = useContext(ProductContext);
-  const data = filterProductsForParty()
+  const [shuffledData, setShuffledData] = useState([]);
+
+  useEffect(() => {
+    if (!loading) {
+      const data = filterProductsForParty();
+      const shuffled = shuffleArray(data);
+      setShuffledData(shuffled);
+    }
+  }, [filterProductsForParty, loading]);
+
+  const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   // Display loader while fetching data
   if (loading) {
     return (
@@ -23,7 +41,7 @@ const Party = () => {
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
-          {data.map((item) => (
+          {shuffledData.map((item) => (
             <ProductCard
               key={item._id}
               _id={item._id}

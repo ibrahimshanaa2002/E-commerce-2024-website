@@ -27,10 +27,11 @@ import CheckOut from "./Pages/CheckOut/CheckOut";
 import TermsConditions from "./Pages/FooterLists/Terms & Conditions/TermsConditions";
 import PrivacyPolicy from "./Pages/FooterLists/PrivacyPolicy/PrivacyPolicy";
 import Orders from "./components/Orders/Orders";
-import Gym from "./Pages/Browse/Gym";
-import Formal from "./Pages/Browse/Formal";
-import Party from "./Pages/Browse/Party";
-import Casual from "./Pages/Browse/Casual";
+import LayoutTopSelling from "./Layout/LayoutTopSelling";
+import LayoutCasual from "./Layout/LayoutCasual";
+import LayoutParty from "./Layout/LayoutParty";
+import LayoutFormal from "./Layout/LayoutFormal";
+import LayoutGym from "./Layout/LayoutGym";
 
 library.add(fas);
 
@@ -58,11 +59,12 @@ function App() {
         <Route path="/product/:productId" element={<LayoutProduct />} />
         <Route path="/allProducts" element={<LayoutAllProducts />} />
         <Route path="/newArrivals" element={<LayoutArrivals />} />
+        <Route path="/topSelling" element={<LayoutTopSelling />} />
         {/* Browse pages */}
-        <Route path="/gym-collection" element={<Gym />} />
-        <Route path="/formal-collection" element={<Formal />} />
-        <Route path="/party-collection" element={<Party />} />
-        <Route path="/casual-collection" element={<Casual />} />
+        <Route path="/gym-collection" element={<LayoutGym />} />
+        <Route path="/formal-collection" element={<LayoutFormal />} />
+        <Route path="/party-collection" element={<LayoutParty />} />
+        <Route path="/casual-collection" element={<LayoutCasual />} />
         {/* Products Categories */}
         <Route path="/women-products" element={<Women />} />
         <Route path="/men-products" element={<Man />} />

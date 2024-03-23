@@ -15,8 +15,8 @@ const addProduct = asyncHandler(async (req, res) => {
 
     const newProduct = new Product({
       ...req.body,
-      color: colors.flat(), 
-      size: sizes.flat(), 
+      color: colors.flat(),
+      size: sizes.flat(),
     });
 
     const savedProduct = await newProduct.save();
@@ -52,7 +52,7 @@ const updatedProduct = asyncHandler(async (req, res) => {
 // arrivals
 const newArrivals = asyncHandler(async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 }).limit(14);
+    const products = await Product.find().sort({ createdAt: -1 }).limit(16);
 
     res.status(200).json(products);
   } catch (err) {
@@ -63,7 +63,9 @@ const newArrivals = asyncHandler(async (req, res) => {
 const topSelling = asyncHandler(async (req, res) => {
   try {
     // Find products sorted by totalQuantitySold in descending order
-    const topSellingProducts = await Product.find().sort({ totalQuantitySold: -1 }).limit(14);
+    const topSellingProducts = await Product.find()
+      .sort({ totalQuantitySold: -1 })
+      .limit(16);
 
     res.status(200).json(topSellingProducts);
   } catch (err) {

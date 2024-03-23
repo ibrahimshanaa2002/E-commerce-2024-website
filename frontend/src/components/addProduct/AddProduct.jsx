@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { IoCloudUploadOutline } from "react-icons/io5";
+import { IoClose, IoCloudUploadOutline } from "react-icons/io5";
 import { v4 } from "uuid";
 import { storage } from "../../firebase";
 
 const AddProduct = () => {
-  const [imgFile, setImgFile] = useState("");
+  const [imgFile, setImgFile] = useState(null);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [newprice, setNewPrice] = useState("");
@@ -83,7 +83,10 @@ const AddProduct = () => {
     "Face Masks",
     "Keychains",
     "Travel Accessories",
+    "Makeup",
+    "Perfume",
   ]);
+  const [sex, setSex] = useState(["Men", "Women", "Kids"]);
 
   const [selectedstyles, setSelectedstyles] = useState("");
   const [selectedSex, setSelectedSex] = useState("");
@@ -92,8 +95,7 @@ const AddProduct = () => {
   const [selectedColor, setSelectedColor] = useState(""); // State for selected color
   const [colorInput, setColorInput] = useState(""); // State for manual color input
   const [colorOptions] = useState(["#FF0000", "#00FF00", "#0000FF"]); // Predefined color options
-  const [sex, setSex] = useState(["Men", "Women", "Kids"]);
-
+  const sortedCategories = [...Categories].sort();
   const [uploading, setUploading] = useState(false);
 
   const handleClick = (e) => {
@@ -106,6 +108,21 @@ const AddProduct = () => {
     }
   };
 
+  // Function to handle changes in selected sizes
+  const handleSizeChange = (selectedSize) => {
+    // Check if the selected size is already in the array
+    const isSelected = size.includes(selectedSize);
+    // If it's selected, remove it, otherwise add it
+    if (isSelected) {
+      setSize(size.filter((size) => size !== selectedSize));
+    } else {
+      setSize([...size, selectedSize]);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImgFile(null); // Clear the selected image
+  };
   const uploadImage = (file) => {
     const imageRef = ref(storage, `image/${v4()}_${file.name}`);
     setUploading(true);
@@ -150,9 +167,9 @@ const AddProduct = () => {
         setColor([]);
         setSize([]);
         setCategory("");
-        setSex([]);
-        setSelectedstyles(" Select Style...");
-        setSelectedSeason(""); // Reset selected season
+        setSelectedSex("");
+        setSelectedstyles("");
+        setSelectedSeason("");
         setImgFile("");
       })
       .catch((error) => {
@@ -186,6 +203,12 @@ const AddProduct = () => {
                   alt="Selected Image"
                   className="w-full h-full object-cover"
                 />
+                <button
+                  onClick={handleRemoveImage} // Handle remove image
+                  className="absolute top-2 right-2 bg-black text-white rounded-full p-1 cursor-pointer hover:bg-red-800"
+                >
+                  <IoClose />
+                </button>
               </div>
             )}
             {!imgFile && (
@@ -215,13 +238,32 @@ const AddProduct = () => {
             placeholder="Description"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
-          <input
-            type="text"
-            value={size.join(" ")} // Joining array into a string
-            onChange={(e) => setSize(e.target.value.split(","))} // Splitting string into an array
-            placeholder="Sizes (separated by space)"
-            className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
-          />
+          <div className="mb-4">
+            <span className="mr-2">Sizes:</span>
+            {[
+              "XS",
+              "S",
+              "MD",
+              "LG",
+              "XL",
+              "2XL",
+              "3XL",
+              "4XL",
+              "5XL",
+              "6XL",
+            ].map((sizeOption, index) => (
+              <label key={index} className="inline-flex items-center mr-4">
+                <input
+                  type="checkbox"
+                  value={sizeOption}
+                  checked={size.includes(sizeOption)}
+                  onChange={() => handleSizeChange(sizeOption)}
+                  className="form-checkbox h-5 w-5 text-blue-500"
+                />
+                <span className="ml-2 text-gray-700">{sizeOption}</span>
+              </label>
+            ))}
+          </div>
 
           <input
             type="text"
@@ -241,7 +283,7 @@ const AddProduct = () => {
             >
               Select a Categorie
             </option>
-            {Categories.map((Categories) => (
+            {sortedCategories.map((Categories) => (
               <option key={Categories} value={Categories}>
                 {Categories}
               </option>
@@ -275,9 +317,9 @@ const AddProduct = () => {
             >
               Select a Style
             </option>
-            {styles.map((styles) => (
-              <option key={styles} value={styles}>
-                {styles}
+            {styles.map((style) => (
+              <option key={style} value={style}>
+                {style}
               </option>
             ))}
           </select>

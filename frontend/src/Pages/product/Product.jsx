@@ -203,7 +203,7 @@ const Product = () => {
         {/* Size selection */}
         <div className="size-container border-b-2 py-2">
           <h1>Select Size</h1>
-          <div className="sizes flex flex-wrap gap-2 md:gap-4 py-2">
+          <div className="sizes flex flex-wrap gap-2 md:gap-4 py-2 uppercase">
             {product.size.map((size, index) => (
               <div
                 key={index}

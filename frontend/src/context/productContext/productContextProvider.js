@@ -9,9 +9,31 @@ const ProductContextProvider = (props) => {
   // State for products and new arrivals
   const [products, setProducts] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
-  const [ TopSellingProducts,setTopSellingProducts]=useState([])
+  const [TopSellingProducts, setTopSellingProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  // Loading function
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productsResponse, newArrivalsResponse, topSellingResponse] =
+          await Promise.all([
+            axios.get("http://localhost:4001/api/product/allProducts"),
+            axios.get("http://localhost:4001/api/product/newArrivals"),
+            axios.get("http://localhost:4001/api/product/topSelling"),
+          ]);
 
-  // Filtering functions
+        setProducts(productsResponse.data);
+        setNewArrivals(newArrivalsResponse.data);
+        setTopSellingProducts(topSellingResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false); // Set loading state to false after data fetching is done
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // for sex
   const filterProductsForWomen = () => {
@@ -102,6 +124,7 @@ const ProductContextProvider = (props) => {
     products: products,
     newArrivals: newArrivals,
     TopSellingProducts: TopSellingProducts,
+    loading,
     filterProductsForWomen: filterProductsForWomen,
     filterProductsForMen: filterProductsForMen,
     filterProductsForKids: filterProductsForKids,
