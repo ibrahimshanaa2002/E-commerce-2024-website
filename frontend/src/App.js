@@ -26,19 +26,16 @@ import Delivery from "./Pages/FooterLists/Delivery/Delivery";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import TermsConditions from "./Pages/FooterLists/Terms & Conditions/TermsConditions";
 import PrivacyPolicy from "./Pages/FooterLists/PrivacyPolicy/PrivacyPolicy";
-<<<<<<< HEAD
 import Orders from "./components/Orders/Orders";
 import LayoutTopSelling from "./Layout/LayoutTopSelling";
 import LayoutCasual from "./Layout/LayoutCasual";
 import LayoutParty from "./Layout/LayoutParty";
 import LayoutFormal from "./Layout/LayoutFormal";
 import LayoutGym from "./Layout/LayoutGym";
-=======
 import Gym from "./Pages/Browse/Gym";
 import Formal from "./Pages/Browse/Formal";
 import Party from "./Pages/Browse/Party";
 import Casual from "./Pages/Browse/Casual";
->>>>>>> 3d1d5ad26e98a5a1de5e0df0c3ca89e345e3fcdb
 
 library.add(fas);
 

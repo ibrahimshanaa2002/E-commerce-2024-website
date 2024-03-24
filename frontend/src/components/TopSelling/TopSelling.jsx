@@ -12,7 +12,7 @@ const TopSelling = () => {
   return (
     <div className="w-full  py-16">
       <div className="flex flex-col items-center w-full gap-8 px-5 h-full">
-        <div className="text-4xl font-bold uppercase">Top Selling</div>
+        <div className="text-4xl font-[600] uppercase">Top Selling</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full h-full">
           {limitedNewArrivals.map((item) => (
             <ProductCard

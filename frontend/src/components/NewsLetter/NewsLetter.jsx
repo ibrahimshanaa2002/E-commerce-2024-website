@@ -91,7 +91,7 @@ const NewsLetter = () => {
             data-aos="fade-up"
             data-aos-anchor-placement="top-bottom"
             onClick={handleSubmitt}
-            className="subscribe text-black font-semibold bg-white rounded-3xl flex justify-center items-center py-3 cursor-pointer duration-300 hover:text-white hover:bg-orange-500"
+            className="subscribe text-black font-semibold bg-white rounded-3xl flex justify-center items-center py-3 cursor-pointer duration-300 transition ease-in-out hover:text-white hover:bg-orange-500"
           >
             <span className=" ">Subscribe To News Letter</span>
           </div>

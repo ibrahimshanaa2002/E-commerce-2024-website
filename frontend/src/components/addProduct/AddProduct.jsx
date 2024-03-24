@@ -34,6 +34,7 @@ const AddProduct = () => {
     "Pants",
     "Activewear",
     "Suits",
+    "Shoes",
     "Swimwear",
     "Lingerie",
     "Coats",
@@ -238,8 +239,8 @@ const AddProduct = () => {
             placeholder="Description"
             className="w-full px-4 py-2 border rounded-md mb-4 focus:outline-none focus:border-blue-500"
           />
-          <div className="mb-4">
-            <span className="mr-2">Sizes:</span>
+          <div className="mb-4 flex justify-start items-center flex-wrap border-b-2 pb-2">
+            <span className="mr-2">Clothes Sizes:</span>
             {[
               "XS",
               "S",
@@ -263,6 +264,75 @@ const AddProduct = () => {
                 <span className="ml-2 text-gray-700">{sizeOption}</span>
               </label>
             ))}
+          </div>
+          <div className="mb-4 flex justify-start items-center flex-wrap border-b-2 pb-2">
+            <span className="mr-2">Perfume Sizes:</span>
+            {[
+              "30ML",
+              "40ML",
+              "50ML",
+              "60ML",
+              "70ML",
+              "80ML",
+              "90ML",
+              "100ML",
+            ].map((sizeOption, index) => (
+              <label key={index} className="inline-flex items-center mr-4 ">
+                <input
+                  type="checkbox"
+                  value={sizeOption}
+                  checked={size.includes(sizeOption)}
+                  onChange={() => handleSizeChange(sizeOption)}
+                  className="form-checkbox h-5 w-5 text-blue-500"
+                />
+                <span className="ml-2 text-gray-700">{sizeOption}</span>
+              </label>
+            ))}
+          </div>
+          <div className="mb-4 flex justify-start items-center flex-wrap border-b-2 pb-2 ">
+            <span className="mr-2">Shoes Sizes:</span>
+            {[
+              "30",
+              "31",
+              "32",
+              "33",
+              "34",
+              "35",
+              "36",
+              "37",
+              "38",
+              "39",
+              "40",
+              "41",
+              "42",
+              "43",
+              "44",
+              "45",
+            ].map((sizeOption, index) => (
+              <label key={index} className="inline-flex items-center mr-4">
+                <input
+                  type="checkbox"
+                  value={sizeOption}
+                  checked={size.includes(sizeOption)}
+                  onChange={() => handleSizeChange(sizeOption)}
+                  className="form-checkbox h-5 w-5 text-blue-500"
+                />
+                <span className="ml-2 text-gray-700">{sizeOption}</span>
+              </label>
+            ))}
+          </div>
+          <div className="mb-4 flex justify-start items-center flex-wrap  ">
+            <span className="mr-2">No Sizes:</span>
+            <input
+              type="checkbox"
+              id="oneSizeCheckbox"
+              checked={size.includes("One-Size")}
+              onChange={() => handleSizeChange("One-Size")}
+              className="form-checkbox h-5 w-5 text-blue-500"
+            />
+            <label htmlFor="oneSizeCheckbox" className="ml-2 text-gray-700">
+              One Size
+            </label>
           </div>
 
           <input

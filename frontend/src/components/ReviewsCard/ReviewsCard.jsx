@@ -91,7 +91,7 @@ const ReviewsCard = () => {
     <div className="px-5 relative">
       <div className="w-full py-4">
         <div className="flex flex-col items-center w-full py-5">
-          <h1 className="text-4xl font-bold uppercase text-center">
+          <h1 className="text-4xl font-[600] uppercase text-center">
             OUR HAPPY CUSTOMERS
           </h1>
         </div>

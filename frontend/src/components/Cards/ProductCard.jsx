@@ -76,7 +76,9 @@ const ProductCard = (props) => {
 
   return (
     <div
-      className={`w-full sm:w-auto ${isAdminRoute ? "admin-product-card" : ""}`}
+      className={`w-full sm:w-auto border-[1px] rounded-lg border-opacity-30 border-black ${
+        isAdminRoute ? "admin-product-card" : ""
+      }`}
     >
       {isAdminRoute ? (
         <div className="w-full h-full border border-gray-200 justify-between rounded-lg overflow-hidden flex flex-col">
@@ -181,7 +183,7 @@ const ProductCard = (props) => {
             >
               {props.title}
             </div>
-            <div className="text-sm sm:text-base md:text-lg overflow-hidden  descriptions h-[3rem] line-clamp-2">
+            <div className="text-sm sm:text-base md:text-lg overflow-hidden  descriptions h-[3rem] line-clamp-2 text-gray-600 text-opacity-70">
               {props.desc}
             </div>
             <div className="flex items-center mb-2 py-4 justify-start">
@@ -193,7 +195,7 @@ const ProductCard = (props) => {
               <span className="text-xs ml-1">4/5</span>
             </div>
             <div className="flex items-center text-gray-400 gap-6">
-              <div className="font-bold text-xs sm:text-base md:text-lg">
+              <div className="font-bold text-xs sm:text-base md:text-lg text-black">
                 ${props.newprice}
               </div>
               <div className="font-bold text-xs sm:text-base md:text-lg line-through ">
