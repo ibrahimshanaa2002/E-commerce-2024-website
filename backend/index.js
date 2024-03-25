@@ -15,13 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: ["https://deploy-mern-1hwq.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-); // Mount userRoute
+// Mount userRoute
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
