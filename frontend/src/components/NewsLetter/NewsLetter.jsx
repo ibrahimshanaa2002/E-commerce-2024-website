@@ -43,11 +43,7 @@ const NewsLetter = () => {
           <h2>OUR LATEST OFFERS</h2>
         </div>
         <div className="right-side flex flex-col gap-2 w-1/3">
-          <div
-            className="EmailInput"
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
-          >
+          <div className="EmailInput">
             <div className="relative ">
               <input
                 value={email}
@@ -56,7 +52,7 @@ const NewsLetter = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="pl-10 pr-4 border py-3 rounded-3xl w-full"
+                className="pl-10 pr-4 border py-3 rounded-3xl w-full focus:border-transparent focus:ring-0"
                 placeholder="Enter your email"
               />
               <div
@@ -88,10 +84,8 @@ const NewsLetter = () => {
             </div>
           </div>
           <div
-            data-aos="fade-up"
-            data-aos-anchor-placement="top-bottom"
             onClick={handleSubmitt}
-            className="subscribe text-black font-semibold bg-white rounded-3xl flex justify-center items-center py-3 cursor-pointer duration-300 transition ease-in-out hover:text-white hover:bg-orange-500"
+            className="subscribe text-black font-semibold bg-white rounded-3xl flex justify-center items-center py-3 cursor-pointer duration-300  hover:text-white hover:bg-orange-500"
           >
             <span className=" ">Subscribe To News Letter</span>
           </div>

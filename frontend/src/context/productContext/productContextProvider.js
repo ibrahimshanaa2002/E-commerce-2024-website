@@ -73,6 +73,15 @@ const ProductContextProvider = (props) => {
     return products.filter((product) => product.style === "Gym");
   };
 
+  // Function to filter products by color
+const filterProductsByColor = (color) => {
+  return products.filter((product) => {
+    // Ensure that the color property is always a string before calling toLowerCase
+    const productColor = typeof product.color === "string" ? product.color : "";
+    return productColor.toLowerCase() === color.toLowerCase();
+  });
+};
+
   // Effect hook to fetch new arrivals
   useEffect(() => {
     const fetchNewArrivals = async () => {
@@ -125,6 +134,7 @@ const ProductContextProvider = (props) => {
     newArrivals: newArrivals,
     TopSellingProducts: TopSellingProducts,
     loading,
+    filterProductsByColor: filterProductsByColor,
     filterProductsForWomen: filterProductsForWomen,
     filterProductsForMen: filterProductsForMen,
     filterProductsForKids: filterProductsForKids,

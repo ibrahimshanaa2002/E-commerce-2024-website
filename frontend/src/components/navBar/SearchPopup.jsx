@@ -12,20 +12,29 @@ const SearchPopup = () => {
 
   // Function to handle search query change
   const handleSearchChange = (event) => {
-    const query = event.target.value.trim().toLowerCase();
+    const query = event.target.value; // Trim spaces from both ends of the query
     setSearchQuery(query);
     setIsOpen(true); // Open the popup when the user types in the search input
   };
 
   useEffect(() => {
-    const filteredProducts = products.filter((product) => {
-      // Search in multiple fields (title, description)
-      const fieldsToSearch = [product.title, product.desc, product.category];
-      const lowerCaseQuery = searchQuery.toLowerCase();
+    const queryWords = searchQuery.toLowerCase().split(/\s+/); // Split the search query into individual words
 
-      return fieldsToSearch.some(
-        (field) => field && field.toLowerCase().includes(lowerCaseQuery)
-      );
+    const filteredProducts = products.filter((product) => {
+      // Search in multiple fields (title, description, category)
+      const fieldsToSearch = [
+        (product.title || "").toLowerCase(),
+        (product.desc || "").toLowerCase(),
+        (product.sex || "").toLowerCase(),
+        (product.season || "").toLowerCase(),
+        (product.style || "").toLowerCase(),
+        (product.color || ""),
+      ];
+
+      return queryWords.every((word) => {
+        // Check if any of the fields contain all of the query words
+        return fieldsToSearch.some((field) => field.includes(word));
+      });
     });
 
     // Sort the results based on relevance (exact matches first)
@@ -47,7 +56,6 @@ const SearchPopup = () => {
 
     setSearchResults(sortedResults);
   }, [searchQuery, products]);
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -68,7 +76,7 @@ const SearchPopup = () => {
       <div className="bg-gray-100 flex justify-center items-center sm:flex w-full px-2 py-1 ml-5 placeholder:text-[10px] rounded-full ">
         <IoSearchOutline size={30} className="text-gray-500 " />
         <input
-          className="bg-transparent border-none rounded-none w-full outline-none px-4 focus:outline-none"
+          className="bg-transparent border-none rounded-none w-full outline-none px-4 focus:outline-none focus:border-transparent focus:ring-0"
           type="text"
           placeholder="Search For Products..."
           name=""

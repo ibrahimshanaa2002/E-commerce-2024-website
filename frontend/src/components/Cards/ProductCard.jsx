@@ -76,7 +76,7 @@ const ProductCard = (props) => {
 
   return (
     <div
-      className={`w-full sm:w-auto border-[1px] rounded-lg border-opacity-30 border-black ${
+      className={`w-full sm:w-auto border-[1px] rounded-lg border-opacity-30 border-black  ${
         isAdminRoute ? "admin-product-card" : ""
       }`}
     >

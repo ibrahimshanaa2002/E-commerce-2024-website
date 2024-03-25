@@ -12,6 +12,8 @@ const NewArrivals = () => {
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
+
+  
   return (
     <div className="w-full   py-16 ">
       <div className="flex flex-col items-center w-full gap-8 px-5 h-full">
@@ -31,8 +33,7 @@ const NewArrivals = () => {
         </div>
         <Link
           to={"/newArrivals"}
-          className="px-16 py-3 rounded-full hover:bg-gray-500 hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black"
-          data-aos="fade-up"
+          className="px-16 py-3 rounded-full hover:bg-black hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black"
         >
           View All
         </Link>

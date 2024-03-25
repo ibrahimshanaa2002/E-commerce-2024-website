@@ -28,8 +28,7 @@ const TopSelling = () => {
         </div>
         <Link
           to={"/topSelling"}
-          className="px-16 py-3 rounded-full hover:bg-gray-500 hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black"
-          data-aos="fade-up"
+          className="px-16 py-3 rounded-full hover:bg-black hover:text-white cursor-pointer duration-300 transition-all border-[0.3px] border-black"
         >
           View All
         </Link>

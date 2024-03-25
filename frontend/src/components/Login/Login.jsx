@@ -68,7 +68,7 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
                     }}
                     type="text"
                     placeholder="userName"
-                    className="outline-none rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
+                    className="outline-none rounded-2xl block w-full py-3 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer focus:border-black focus:ring-0"
                   />
                 </div>
               </div>
@@ -88,9 +88,9 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
                       }}
                       type={`${showpassword ? "text" : "password"}`}
                       placeholder="password"
-                      className="outline-none  rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
+                      className="rounded-2xl block w-full py-3 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer focus:border-black focus:ring-0"
                     />
-                    <div className="text-2xl cursor-pointer absolute right-0 duration-200 text-[#000700]">
+                    <div className="text-2xl cursor-pointer absolute right-2 duration-200 text-[#000700]">
                       {showpassword ? (
                         <IoIosEyeOff onClick={handlepassword} />
                       ) : (
@@ -111,7 +111,7 @@ const Login = ({ handleToggle, handlepassword, showpassword }) => {
             </span>
             <span
               onClick={handleSubmit}
-              className="login-button flex justify-center bg-black text-white p-5 rounded-3xl cursor-pointer"
+              className="login-button flex justify-center bg-black text-white p-5 rounded-3xl cursor-pointer hover:bg-orange-400 duration-300 "
             >
               Login
             </span>

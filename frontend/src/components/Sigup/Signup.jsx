@@ -71,9 +71,9 @@ const Signup = ({ handleToggle, handlepassword, showpassword }) => {
                         setUserName(e.target.value);
                       }}
                       required
-                      type="text"
+                      type="email"
                       placeholder="userName"
-                      className="outline-none rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
+                      className="outline-none rounded-2xl block w-full py-3  pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer focus:border-black focus:ring-0"
                     />
                   </div>
                 </div>
@@ -93,7 +93,7 @@ const Signup = ({ handleToggle, handlepassword, showpassword }) => {
                       }}
                       type="email"
                       placeholder="Email"
-                      className="outline-none rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
+                      className="outline-none focus:border-black focus:ring-0 rounded-2xl block w-full py-3  pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
                     />
                   </div>
                 </div>
@@ -114,9 +114,9 @@ const Signup = ({ handleToggle, handlepassword, showpassword }) => {
                         }}
                         type={`${showpassword ? "text" : "password"}`}
                         placeholder="password"
-                        className="outline-none  rounded-none block w-full py-1.5 pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
+                        className="outline-none focus:border-black focus:ring-0  rounded-2xl block w-full py-3  pl-10 pr-3 leading-tight text-gray-700 border-b border-gray-200 bg-transparent peer"
                       />
-                      <div className="text-2xl cursor-pointer absolute right-0 duration-200 text-[#000700]">
+                      <div className="text-2xl cursor-pointer absolute right-2 duration-200 text-[#000700]">
                         {showpassword ? (
                           <IoIosEyeOff onClick={handlepassword} />
                         ) : (
@@ -137,7 +137,7 @@ const Signup = ({ handleToggle, handlepassword, showpassword }) => {
               </span>
               <div
                 onClick={handleSubmit}
-                className="login-button flex justify-center bg-black text-white p-5 rounded-3xl cursor-pointer"
+                className="login-button flex justify-center bg-black text-white p-5 rounded-3xl cursor-pointer hover:bg-orange-400 duration-300"
               >
                 Sign up
               </div>
@@ -157,7 +157,7 @@ const Signup = ({ handleToggle, handlepassword, showpassword }) => {
                 onClick={handleToggle}
                 className="flex items-center justify-center py-2 "
               >
-                <span className="hover:font-semibold duration-300 cursor-pointer">
+                <span className="hover:font-semibold duration-300 cursor-pointer ">
                   Login
                 </span>
               </h1>

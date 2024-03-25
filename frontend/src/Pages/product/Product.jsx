@@ -22,6 +22,7 @@ const Product = () => {
   const [selectedColor, setSelectedColor] = useState(null); // State for selected color
   const [selectedSize, setSelectedSize] = useState(null); // State for selected size
   const [error, setError] = useState(""); // State for error messages
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Function to select color
   const selectColor = (color) => {
@@ -46,42 +47,60 @@ const Product = () => {
     }
   };
   // Function to add item to cart
-  const addToCart = async () => {
-    try {
-      // Validating selection and quantity
-      if (!selectedColor || !selectedSize || count <= 0) {
-        setError("Please select color, size, and quantity");
-        return;
-      }
-      // Getting user token from local storage
-      const userData = JSON.parse(localStorage.getItem("user"));
-      const userToken = userData ? userData.token : null;
-      if (!userToken) {
-        // Redirecting to authentication if user token is not available
-        window.location.href = "/authentication";
-        return;
-      }
-      // Data to send to the server
-      const data = {
-        quantity: count,
-        size: selectedSize,
-        color: selectedColor,
-      };
-      // Making POST request to add item to cart
-      await axios.post(
-        `http://localhost:4001/api/cart/addToCart/${productId}`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.error("Failed to add item to cart:", error);
+ const addToCart = async () => {
+  try {
+    // Validating selection and quantity
+    if (!selectedColor || !selectedSize || count <= 0) {
+      setError("Please select color, size, and quantity");
+      return;
     }
-  };
+
+    // Getting user token from local storage
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const userToken = userData ? userData.token : null;
+
+    // Ensure user token is available
+    if (!userToken) {
+      // Redirecting to authentication if user token is not available
+      window.location.href = "/authentication";
+      return;
+    }
+
+    // Data to send to the server
+    const data = {
+      quantity: count,
+      size: selectedSize,
+      color: selectedColor,
+    };
+
+    // Making POST request to add item to cart
+    await axios.post(
+      `http://localhost:4001/api/cart/addToCart/${productId}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Store cart data in local storage
+    const updatedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    updatedCart.push({
+      productId,
+      quantity: count,
+      size: selectedSize,
+      color: selectedColor,
+    });
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    setSuccessMessage("Product added to cart successfully");
+  } catch (error) {
+    console.error("Failed to add item to cart:", error);
+  }
+};
+
   // Loading spinner while product is loading
   if (!product) {
     return (
@@ -136,6 +155,10 @@ const Product = () => {
       <div className="right-container w-1/2 h-full flex flex-col  justify-center">
         {/* Error message */}
         {error && <span className="text-red-400 underline">*{error}*</span>}
+        {/* Success message */}
+        {successMessage && (
+          <span className="text-green-400">{successMessage}</span>
+        )}
         {/* Product title */}
         <h1 className="text-5xl font-extrabold uppercase title">
           {product.title}

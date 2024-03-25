@@ -3,18 +3,38 @@ import axios from "axios";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  
+
   useEffect(() => {
     // Fetch orders from the API
     axios
       .get("http://localhost:4001/api/get-orders")
       .then((response) => {
-        setOrders(response.data);
+        // Sort orders alphabetically by customer name and then by date
+        const sortedOrders = response.data.sort((a, b) => {
+          // First, compare by customer name
+          if (a.name < b.name) return -1;
+          if (a.name > b.name) return 1;
+          // If names are equal, compare by date (newest first)
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setOrders(sortedOrders);
       })
       .catch((error) => {
         console.error("Error fetching orders:", error);
       });
   }, []);
+
+  const handleStatusChange = (orderId, newStatus) => {
+    // Update the status of the order in the local state
+    const updatedOrders = orders.map((order) => {
+      if (order._id === orderId) {
+        return { ...order, status: newStatus };
+      } else {
+        return order;
+      }
+    });
+    setOrders(updatedOrders);
+  };
 
   return (
     <div>
@@ -34,48 +54,52 @@ const Orders = () => {
       <div className="w-screen bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-2 py-10">
           <div className="mt-4 w-full">
-            <div className="overflow-hidden rounded-xl bg-white px-6 shadow lg:px-4">
+            <div className="rounded-xl bg-white px-6 shadow lg:px-4">
               <table className="min-w-full border-collapse border-spacing-y-2 border-spacing-x-2">
                 <thead className="hidden border-b lg:table-header-group">
                   <tr className="">
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Order Date
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       image of product
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Customer Name
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Customer Email
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Customer Phone Number
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Customer Address
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Product Name
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Product Color
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Product Size
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Quantity
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Total
                     </th>
-                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
+                      Status
+                    </th>
+                    <th className="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3 justify-start text-start">
                       Status
                     </th>
                   </tr>
                 </thead>
+
                 <tbody className="bg-white lg:border-gray-300">
                   {orders.map((order) => (
                     <tr key={order._id} className="">
@@ -101,13 +125,19 @@ const Orders = () => {
                       </td>
                       <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
                         {/* Assuming each order has only one product */}
-                        {order.products.length > 0 ? order.products[0].title : ""}
+                        {order.products.length > 0
+                          ? order.products[0].title
+                          : ""}
                       </td>
                       <td className="whitespace-no-wrap font-bold py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-                        {order.products.length > 0 ? order.products[0].color[0] : ""}
+                        {order.products.length > 0
+                          ? order.products[0].color[0]
+                          : ""}
                       </td>
                       <td className="whitespace-no-wrap py-4 font-bold text-left text-sm text-gray-600 sm:px-3 lg:text-left">
-                        {order.products.length > 0 ? order.products[0].size[0] : ""}
+                        {order.products.length > 0
+                          ? order.products[0].size[0]
+                          : ""}
                       </td>
                       <td className="whitespace-no-wrap py-4 font-extrabold text-left text-sm text-gray-600 sm:px-3 lg:text-left">
                         {/* Assuming each order has only one product */}
@@ -116,11 +146,36 @@ const Orders = () => {
                       <td className="whitespace-no-wrap py-4 text-left font-bold text-sm text-gray-600 sm:px-3 lg:text-left">
                         ${order.total}
                       </td>
-                      <td
-                        className="whitespace-no-wrap py
--4 text-left text-sm text-gray-600 sm:px-3 lg:text-left"
-                      >
+                      <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left">
+                        {/* Status display */}
                         {order.status}
+                      </td>
+                      <td className="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left flex">
+                        {/* Buttons for changing status */}
+                        <button
+                          className="mr-2 px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                          onClick={() =>
+                            handleStatusChange(order._id, "Active")
+                          }
+                        >
+                          Active
+                        </button>
+                        <button
+                          className="mr-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                          onClick={() =>
+                            handleStatusChange(order._id, "Not Active")
+                          }
+                        >
+                          Not Active
+                        </button>
+                        <button
+                          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                          onClick={() =>
+                            handleStatusChange(order._id, "Complete")
+                          }
+                        >
+                          Complete
+                        </button>
                       </td>
                     </tr>
                   ))}

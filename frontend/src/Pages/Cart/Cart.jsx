@@ -98,7 +98,9 @@ const Cart = () => {
 
   // Function to navigate to checkout page with cart items data
   const handleCheckout = () => {
-    navigate("/checkout", { state: { cartItems: productsInCart, subtotal: subtotal , total: total } });
+    navigate("/checkout", {
+      state: { cartItems: productsInCart, subtotal: subtotal, total: total },
+    });
   };
 
   return (
@@ -106,7 +108,9 @@ const Cart = () => {
       {/* Cart title */}
       <div className="title px-5 py-5">
         {user ? (
-          <h1 className="text-5xl font-bold flex items-center">{user.username}</h1>
+          <h1 className="text-5xl font-bold flex items-center">
+            {user.username}
+          </h1>
         ) : (
           ""
         )}
@@ -233,9 +237,9 @@ const Cart = () => {
             </div>
             {/* Checkout button */}
             <div
-                className={`checkout flex justify-center items-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ${
-                  productsInCart.length === 0 ? "hidden" : ""
-                }`}
+              className={`checkout flex justify-center items-center bg-black text-white py-2 rounded-3xl cursor-pointer hover:bg-orange-500 duration-300 ${
+                productsInCart.length === 0 ? "hidden" : ""
+              }`}
               onClick={handleCheckout} // Call handleCheckout function onClick
             >
               <span>Go To Checkout</span>
